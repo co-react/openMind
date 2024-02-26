@@ -28,3 +28,8 @@
       format("truetype");
   font-display: swap;
 }
+
+* {
+  font-family: Pretendard;
+  font-style: normal;
+}
