@@ -1,5 +1,4 @@
 import { useState } from 'react';
-import styled from 'styled-components';
 
 import hateIcon from '../../assets/icons/thumbs-down.svg';
 
