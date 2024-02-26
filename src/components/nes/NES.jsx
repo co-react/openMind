@@ -1,8 +1,12 @@
 import Toast from "../toast/Toast"
+import Dropdown from "../dropdown/Dropdown"
 
 const NES = () => {
   return (
-    <Toast />
+    <div>
+      <Toast />
+      <Dropdown />
+    </div>
   )
 }
 
