@@ -1,4 +1,4 @@
-import messageIcon from "../../assets/svg/Icons/messageIcon.svg";
+import messageIcon from "../../assets/svg/icons/messageIcon.svg";
 import "./UserCard.css";
 
 //프로필 사진과 프로필의 이름,
