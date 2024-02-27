@@ -4,7 +4,7 @@ import likeIcon from '../../assets/icons/thumbs-up.svg';
 
 import './Like.css';
 
-const Like = ({counts}) => {
+function Like({counts}) {
   const [isReacted, setIsReacted] = useState(false);
 
   const handleClick = () => {

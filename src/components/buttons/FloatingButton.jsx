@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-const FloatingButton = () => {
+function FloatingButton() {
   return (
     <Button>
       <Text>질문 작성하기</Text>

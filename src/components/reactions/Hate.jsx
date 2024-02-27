@@ -4,7 +4,7 @@ import hateIcon from '../../assets/icons/thumbs-down.svg';
 
 import './Like.css';
 
-const Hate = () => {
+function Hate() {
   const [isReacted, setIsReacted] = useState(false);
 
   const handleClick = () => {
