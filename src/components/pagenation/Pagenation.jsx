@@ -41,7 +41,7 @@ const PagenationData = styled.p`
     `}
 `;
 
-function PGB({ isSelected }) {
+function Pagenation({ isSelected }) {
   return (
     <PagenationBox>
       <PagenationData isSelected={isSelected}>1</PagenationData>
@@ -49,4 +49,4 @@ function PGB({ isSelected }) {
   );
 }
 
-export default PGB;
+export default Pagenation;

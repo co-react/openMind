@@ -5,7 +5,7 @@ import arrowUpIcon from '../../assets/svg/Icons/arrowUp.svg';
 
 import './Dropdown.css'
 
-const Dropdown = () => {
+function Dropdown() {
   const [isOpened, setIsOpened] = useState(false);
 
   const handleClick = () => {
