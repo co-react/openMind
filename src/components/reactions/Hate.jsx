@@ -1,6 +1,7 @@
 import { useState } from "react";
+import styled, { css } from "styled-components";
 
-import hateIcon from "../../assets/svg/icons/thumbs-down.svg";
+import { ReactComponent as hateIcon } from "../../assets/svg/icons/thumbs-down.svg";
 
 import "./Like.css";
 
@@ -11,19 +12,45 @@ function Hate() {
     setIsReacted(!isReacted);
   };
 
-  const clickStyle = {
-    color: isReacted ? "#000" : "#818181",
-    filter: isReacted || "invert(56%) sepia(1%) saturate(1741%) hue-rotate(3deg) brightness(89%) contrast(86%)",
-  };
-
   return (
-    <div className="like" type="button" onClick={handleClick}>
-      <img src={hateIcon} alt="싫어요 아이콘" style={clickStyle} />
-      <span className="likeText" style={clickStyle}>
+    <Button isClicked={isReacted} onClick={handleClick}>
+      <ThumbsDown />
+      <ButtonText>
         싫어요
-      </span>
-    </div>
+      </ButtonText>
+    </Button>
   );
 }
 
 export default Hate;
+
+const ButtonText = styled.span`
+  color: var(--Grayscale-40, #818181);
+  font-feature-settings: 'clig' off, 'liga' off;
+  font-family: Pretendard;
+  font-size: 1.2rem;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 1.2rem;
+`
+
+const ThumbsDown = styled(hateIcon)`
+  filter: invert(54%) sepia(0%) saturate(9%) hue-rotate(156deg) brightness(93%) contrast(82%);
+`
+
+const Button = styled.button`
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  border: none;
+  background-color: #ffffff;
+  ${props => props.isClicked && css`
+    ${ButtonText} {
+      color: #000000;
+    }
+
+    ${ThumbsDown} {
+      filter: invert(0%) sepia(100%) saturate(7500%) hue-rotate(61deg) brightness(106%) contrast(109%);
+    }
+  `}
+`

@@ -1,6 +1,7 @@
 import { useState } from "react";
+import styled, { css } from "styled-components";
 
-import likeIcon from "../../assets/svg/icons/thumbs-up.svg";
+import { ReactComponent as likeIcon } from "../../assets/svg/icons/thumbs-up.svg";
 
 import "./Like.css";
 
@@ -11,25 +12,49 @@ function Like({ counts }) {
     setIsReacted(!isReacted);
   };
 
-  const clickStyle = {
-    color: isReacted ? "#1877F2" : "#818181",
-    filter: isReacted
-      ? "invert(48%) sepia(83%) saturate(6141%) hue-rotate(207deg) brightness(101%) contrast(90%)"
-      : "invert(56%) sepia(1%) saturate(1741%) hue-rotate(3deg) brightness(89%) contrast(86%)",
-  };
-
   return (
-    <div className="like" onClick={handleClick}>
-      <img src={likeIcon} alt="좋아요 아이콘" style={clickStyle} />
+    <Button isClicked={isReacted} onClick={handleClick}>
+      <ThumbsUp />
       {isReacted ? (
-        <span className="likeText" style={clickStyle}>
+        <ButtonText>
           좋아요 12{counts}
-        </span>
+        </ButtonText>
       ) : (
-        <span className="likeText">좋아요</span>
+        <ButtonText>좋아요</ButtonText>
       )}
-    </div>
+    </Button>
   );
 }
 
 export default Like;
+
+const ButtonText = styled.span`
+  color: var(--Grayscale-40, #818181);
+  font-feature-settings: 'clig' off, 'liga' off;
+  font-family: Pretendard;
+  font-size: 1.2rem;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 1.2rem;
+`
+
+const ThumbsUp = styled(likeIcon)`
+  filter: invert(54%) sepia(0%) saturate(9%) hue-rotate(156deg) brightness(93%) contrast(82%);
+`
+
+const Button = styled.button`
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  border: none;
+  background-color: #ffffff;
+  ${props => props.isClicked && css`
+    ${ButtonText} {
+      color: #1877F2;
+    }
+
+    ${ThumbsUp} {
+      filter: invert(48%) sepia(83%) saturate(6141%) hue-rotate(207deg) brightness(101%) contrast(90%)
+    }
+  `}
+`

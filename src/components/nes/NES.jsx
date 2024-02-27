@@ -16,8 +16,8 @@ const NES = () => {
 
   return (
     <div>
-      <Toast />
-      <Dropdown />
+      {/* <Toast /> */}
+      {/* <Dropdown /> */}
       <Like />
       <Hate />
       <FloatingButton />
