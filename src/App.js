@@ -7,6 +7,8 @@ import KYH from "./components/kyh/KYH";
 import PGB from "./components/pgb/PGB";
 import MainTest from "./pages/MainTest";
 
+import "./style/style.css";
+
 function App() {
   return (
     <BrowserRouter>
