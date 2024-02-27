@@ -2,6 +2,10 @@ import Toast from "../toast/Toast"
 import Dropdown from "../dropdown/Dropdown"
 import Like from "../reactions/Like"
 import Hate from "../reactions/Hate"
+import FloatingButton from "../buttons/FloatingButton"
+
+import '../../style/global.css';
+import '../../style/reset.css';
 
 const NES = () => {
 
@@ -16,6 +20,7 @@ const NES = () => {
       <Dropdown />
       <Like />
       <Hate />
+      <FloatingButton />
     </div>
   )
 }
