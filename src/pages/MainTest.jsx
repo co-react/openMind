@@ -1,13 +1,14 @@
+import "./MainTest.css";
+
 import { Link } from "react-router-dom";
 import KDH from "../components/kdh/KDH";
 import NES from "../components/nes/NES";
 import KYE from "../components/kye/KYE";
-import KYH from "../components/kyh/KYH";
 import PGB from "../components/pgb/PGB";
 
 function MainTest() {
   return (
-    <div>
+    <div className="mainTest">
       <Link to={`/kdh`} element={<KDH />}>
         동현
       </Link>
@@ -18,10 +19,6 @@ function MainTest() {
       <br />
       <Link to={`/kye`} element={<KYE />}>
         영은
-      </Link>
-      <br />
-      <Link to={`/kyh`} element={<KYH />}>
-        영현
       </Link>
       <br />
       <Link to={`/pgb`} element={<PGB />}>
