@@ -31,7 +31,7 @@
   line-height: 25px; /* 125% */
 }
 
-.proFile {
+.profile {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
