@@ -1,52 +1,98 @@
-import { styled, css } from "styled-components";
+import { styled } from "styled-components";
+import messageIcon from "../../assets/svg/icons/messageIcon.svg";
+import "../usercard/UserCard.css";
 
-const PagenationBox = styled.div`
+//프로필 사진과 프로필의 이름,
+//그리고 9개라고 적힌것은 props로 받아야 할 것 같습니다.
+
+const CardContainer = styled.div`
   display: flex;
-  width: 40px;
-  height: 40px;
+  width: 220px;
+  height: 187px;
+  padding: 20px;
   flex-direction: column;
-  justify-content: center;
-  align-items: center;
+  justify-content: space-between;
+  align-items: flex-start;
   flex-shrink: 0;
-
-  @media (max-width: 768px) {
-    width: 30px;
-    height: 30px;
-  }
+  border-radius: 16px;
+  border: 1px solid var(--Grayscale-40, #818181);
+  background: var(--Grayscale-10, #fff);
 `;
 
-const PagenationData = styled.p`
-  color: var(--Grayscale-40, #818181);
-  text-align: center;
+const ProfileContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 12px;
+  align-self: stretch;
+`;
+
+const ProfileImg = styled.img`
+  width: 60px;
+  height: 60px;
+  flex-shrink: 0;
+  border-radius: 60px;
+  background: lightgray 50% / cover no-repeat, #d9d9d9;
+`;
+
+const ProfileName = styled.p`
+  align-self: stretch;
+  color: var(--Grayscale-60, #000);
   font-feature-settings: "clig" off, "liga" off;
   font-family: Actor;
   font-size: 20px;
   font-style: normal;
   font-weight: 400;
   line-height: 25px; /* 125% */
-
-  @media (max-width: 768px) {
-    font-size: 16px;
-  }
-
-  &:hover {
-    // 호버 시 적용될 스타일
-    color: var(--Grayscale-60, #000);
-  }
-
-  ${({ isSelected }) =>
-    isSelected &&
-    css`
-      color: var(--Brown-40, #542f1a);
-    `}
 `;
 
-function PGB({ isSelected }) {
+const QuestionContainer = styled.div`
+  display: flex;
+  height: 22px;
+  justify-content: space-between;
+  align-items: center;
+  flex-shrink: 0;
+  align-self: stretch;
+`;
+
+const QuestionLabel = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+`;
+
+const MessageIcon = styled.img`
+  width: 18px;
+  height: 18px;
+`;
+
+const QuestionReceived = styled.p`
+  color: var(--Grayscale-40, #818181);
+  font-feature-settings: "clig" off, "liga" off;
+  font-family: Pretendard;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 22px; /* 137.5% */
+`;
+
+function UserCard({ profileImg, profileName, questionCount }) {
   return (
-    <PagenationBox>
-      <PagenationData isSelected={isSelected}>1</PagenationData>
-    </PagenationBox>
+    <CardContainer>
+      <ProfileContainer>
+        <ProfileImg src={profileImg} alt="프로필 사진" />
+        <ProfileName>화면 출력용{profileName}</ProfileName>
+      </ProfileContainer>
+      <QuestionContainer>
+        <QuestionLabel>
+          <MessageIcon src={messageIcon} alt="메시지 아이콘" />
+          <QuestionReceived>받은 질문</QuestionReceived>
+        </QuestionLabel>
+        <span>{questionCount}개</span>
+      </QuestionContainer>
+    </CardContainer>
   );
 }
 
-export default PGB;
+export default UserCard;
