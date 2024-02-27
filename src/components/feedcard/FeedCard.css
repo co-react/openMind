@@ -1,0 +1,50 @@
+.feedCard {
+  width: 684px;
+  padding: 32px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 32px;
+  background-color: bisque;
+
+  border-radius: 16px;
+  background: var(--Grayscale-10, #fff);
+  box-shadow: 0px 4px 4px 0px rgba(140, 140, 140, 0.25);
+}
+
+.feedTop {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+
+.feedFooter {
+  width: 100%;
+  padding-top: 24px;
+  border-top: 1px solid var(--Grayscale-30, #cfcfcf);
+}
+
+.feedFContainer {
+  display: flex;
+  gap: 32px;
+}
+
+.like,
+.hate {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--Grayscale-40, #818181);
+  font-size: 1.4rem;
+  font-weight: 400;
+  line-height: 128.571%;
+}
+
+.like img,
+.hate img {
+  filter: invert(49%) sepia(13%) saturate(7%) hue-rotate(24deg) brightness(100%) contrast(88%);
+}
+
+@media (max-width: 767px) {
+}

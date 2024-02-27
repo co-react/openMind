@@ -1,5 +1,11 @@
+import FeedCard from "../feedcard/FeedCard";
+
 function KDH() {
-  return <div>동현</div>;
+  return (
+    <div>
+      <FeedCard></FeedCard>
+    </div>
+  );
 }
 
 export default KDH;
