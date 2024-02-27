@@ -1,0 +1,39 @@
+.feedCardAns {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  width: 100%;
+}
+
+.feedCardAns img {
+  width: 48px;
+  height: 48px;
+}
+
+.feedAContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.feedATop {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.feedAName {
+  color: var(--Grayscale-60, #000);
+  font-size: 1.8rem;
+  line-height: 133.333%;
+}
+
+.feedADay {
+  font-size: 1.4rem;
+  line-height: 128.571%;
+}
+
+.feedADes {
+  font-size: 1.6rem;
+  line-height: 137.5%;
+}
