@@ -47,10 +47,10 @@
 
 :root {
   font-size: 62.5%;
+  font-family: Pretendard;
+  font-style: normal;
 }
 
 * {
   box-sizing: border-box;
-  font-family: Pretendard;
-  font-style: normal;
 }
