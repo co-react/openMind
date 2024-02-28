@@ -40,10 +40,10 @@ const Title = styled.span`
     "clig" off,
     "liga" off;
   font-family: Pretendard;
-  font-size: 0.8rem;
+  font-size: 1.4rem;
   font-style: normal;
   font-weight: 500;
-  line-height: 0.8rem;
+  line-height: 1.8rem;
 `;
 
 const Wrapper = styled.button`
