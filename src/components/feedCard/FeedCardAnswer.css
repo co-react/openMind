@@ -1,0 +1,49 @@
+.cardAnswer {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  width: 100%;
+}
+
+.cardAnswer img {
+  width: 48px;
+  height: 48px;
+}
+
+.answerContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  width: 100%;
+}
+
+.answerTop {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  width: 100%;
+}
+
+.answerName {
+  color: var(--Grayscale-60);
+  font-size: 1.8rem;
+  line-height: 133.333%;
+}
+
+.answerDate {
+  font-size: 1.4rem;
+  line-height: 128.571%;
+}
+
+.answerDescription {
+  font-size: 1.6rem;
+  line-height: 137.5%;
+}
+
+.answerResection {
+  color: var(--Red-50);
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 22px; /* 137.5% */
+}
