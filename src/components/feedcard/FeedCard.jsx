@@ -1,11 +1,11 @@
 import "./FeedCard.css";
-import FeedCardAnswer from "./FeedCardAnswer";
-import FeedCardQuestion from "./FeedCardQuestion";
-import profile from "../../assets/png/profile1.png";
 import more from "../../assets/svg/icons/more.svg";
+import profile from "../../assets/png/profile1.png";
 import AnswerButton from "../badge/AnswerButton";
-import Hate from "../reactions/Hate";
+import FeedCardQuestion from "./FeedCardQuestion";
+import FeedCardAnswer from "./FeedCardAnswer";
 import Like from "../reactions/Like";
+import Hate from "../reactions/Hate";
 
 function FeedCard({
   isAnswered = true,

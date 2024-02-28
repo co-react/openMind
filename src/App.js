@@ -1,8 +1,9 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import "./style/style.css";
+
 import KDH from "./components/kdh/KDH";
-import KYE from "./components/kye/KYE";
 import NES from "./components/nes/NES";
+import KYE from "./components/kye/KYE";
 import PGB from "./components/pgb/PGB";
 import MainTest from "./pages/MainTest";
 
