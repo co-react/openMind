@@ -3,8 +3,6 @@ import { useState } from "react";
 import arrowDownIcon from "../../assets/svg/icons/arrow-down.svg";
 import arrowUpIcon from "../../assets/svg/icons/arrow-up.svg";
 
-import "./Dropdown.css";
-
 function Dropdown() {
   const [isOpened, setIsOpened] = useState(false);
 
