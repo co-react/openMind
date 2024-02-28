@@ -1,5 +1,16 @@
 import styled from "styled-components";
 
+function FeedCardQuestion({ queDate, queDesc }) {
+  return (
+    <QuestionContainer>
+      <QuestionTitle>질문 · {queDate}</QuestionTitle>
+      <QuestionDescription>{queDesc}</QuestionDescription>
+    </QuestionContainer>
+  );
+}
+
+export default FeedCardQuestion;
+
 const QuestionContainer = styled.div`
   display: flex;
   flex-direction: column;
@@ -21,14 +32,3 @@ const QuestionDescription = styled.div`
   font-size: 1.8rem;
   line-height: 133.333%;
 `;
-
-function FeedCardQuestion({ queDate, queDesc }) {
-  return (
-    <QuestionContainer>
-      <QuestionTitle>질문 · {queDate}</QuestionTitle>
-      <QuestionDescription>{queDesc}</QuestionDescription>
-    </QuestionContainer>
-  );
-}
-
-export default FeedCardQuestion;
