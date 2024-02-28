@@ -12,16 +12,16 @@ export default Pagination;
 
 const PaginationBox = styled.div`
   display: flex;
-  width: 40px;
-  height: 40px;
+  width: 4rem;
+  height: 4rem;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   flex-shrink: 0;
 
   @media (max-width: 768px) {
-    width: 30px;
-    height: 30px;
+    width: 3rem;
+    height: 3rem;
   }
 `;
 
@@ -30,13 +30,13 @@ const PaginationData = styled.p`
   text-align: center;
   font-feature-settings: "clig" off, "liga" off;
   font-family: Actor;
-  font-size: 20px;
+  font-size: 2rem;
   font-style: normal;
   font-weight: 400;
-  line-height: 25px; /* 125% */
+  line-height: 2.5rem; /* 125% */
 
   @media (max-width: 768px) {
-    font-size: 16px;
+    font-size: 1.6rem;
   }
 
   &:hover {
