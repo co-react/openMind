@@ -1,0 +1,13 @@
+a {
+  font-size: 100px;
+}
+
+.mainTest {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  justify-content: center;
+  align-items: center;
+}
