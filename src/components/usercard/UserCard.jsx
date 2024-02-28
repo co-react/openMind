@@ -36,6 +36,10 @@ const CardContainer = styled.div`
   border-radius: 16px;
   border: 1px solid var(--Grayscale-40, #818181);
   background: var(--Grayscale-10, #fff);
+
+  @media (max-width: 768px) {
+    padding: 16px;
+  }
 `;
 
 const ProfileContainer = styled.div`
@@ -52,6 +56,11 @@ const ProfileImg = styled.img`
   flex-shrink: 0;
   border-radius: 60px;
   background: lightgray 50% / cover no-repeat, #d9d9d9;
+
+  @media (max-width: 768px) {
+    width: 48px;
+    height: 48px;
+  }
 `;
 
 const ProfileName = styled.p`
@@ -63,6 +72,11 @@ const ProfileName = styled.p`
   font-style: normal;
   font-weight: 400;
   line-height: 25px; /* 125% */
+
+  @media (max-width: 768px) {
+    font-size: 18px;
+    line-height: 24px;
+  }
 `;
 
 const QuestionContainer = styled.div`
