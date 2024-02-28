@@ -15,7 +15,7 @@ function Dropdown() {
     return (
       <Container>
         <Title>이름순</Title>
-        <ArrowUpIcon onClick={handleClick} alt="접기" />
+        <StyledArrowUpIcon onClick={handleClick} alt="접기" />
         <DropdownMenuContainer>
           <DropdownMenu>
             <Title>이름순</Title>
@@ -31,7 +31,7 @@ function Dropdown() {
   return (
     <Container>
       <Title>이름순</Title>
-      <ArrowDownIcon onClick={handleClick} alt="펼치기" />
+      <StyledArrowDownIcon onClick={handleClick} alt="펼치기" />
     </Container>
   );
 }
@@ -40,13 +40,13 @@ export default Dropdown;
 
 const Container = styled.div`
   display: flex;
-  padding: 8px 12px;
+  padding: 0.8rem 1.2rem;
   justify-content: center;
   align-items: center;
-  gap: 4px;
+  gap: 0.4rem;
   align-self: stretch;
-  border-radius: 8px;
-  border: 1px solid var(--Grayscale-60, #000);
+  border-radius: 0.8rem;
+  border: 0.1rem solid var(--Grayscale-60, #000);
   background: var(--Grayscale-10, #FFF);
   position: absolute;
 `
@@ -63,29 +63,29 @@ const Title = styled.span`
 
 const DropdownMenuContainer = styled.div`
   display: flex;
-  width: 79px;
-  padding: 4px 0px;
+  width: 7.9rem;
+  padding: 0.4rem 0rem;
   flex-direction: column;
   justify-content: center;
   align-items: center;
 
-  border-radius: 8px;
-  border: 1px solid var(--Grayscale-30, #CFCFCF);
+  border-radius: 0.8rem;
+  border: 0.1rem solid var(--Grayscale-30, #CFCFCF);
   background: var(--Grayscale-10, #FFF);
 
   /* 1pt */
   box-shadow: 0px 4px 4px 0px rgba(140, 140, 140, 0.25);
 
   position: absolute;
-  bottom: -72px;
+  bottom: -7.2rem;
 `
 
 const DropdownMenu = styled.div`
   display: flex;
-  padding: 6px 16px;
+  padding: 0.6rem 1.6rem;
   justify-content: center;
   align-items: center;
-  gap: 8px;
+  gap: 0.8rem;
   align-self: stretch;
   &:hover {
     ${Title} {
@@ -94,4 +94,12 @@ const DropdownMenu = styled.div`
       transition: 0.5s;
     }
   }
+`
+
+const StyledArrowDownIcon = styled(ArrowDownIcon)`
+  cursor: pointer;
+`
+
+const StyledArrowUpIcon = styled(ArrowUpIcon)`
+  cursor: pointer;
 `
