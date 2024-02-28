@@ -4,6 +4,8 @@ import styled from "styled-components";
 import { ReactComponent as ArrowDownIcon } from "../../assets/svg/icons/arrow-down.svg";
 import { ReactComponent as ArrowUpIcon } from "../../assets/svg/icons/arrow-up.svg";
 
+//import "./Dropdown.css";
+
 function Dropdown() {
   const [isOpened, setIsOpened] = useState(false);
 
@@ -47,19 +49,19 @@ const Container = styled.div`
   align-self: stretch;
   border-radius: 0.8rem;
   border: 0.1rem solid var(--Grayscale-60, #000);
-  background: var(--Grayscale-10, #FFF);
+  background: var(--Grayscale-10, #fff);
   position: absolute;
-`
+`;
 
 const Title = styled.span`
   color: var(--Grayscale-40, #818181);
-  font-feature-settings: 'clig' off, 'liga' off;
+  font-feature-settings: "clig" off, "liga" off;
   font-family: Pretendard;
   font-size: 1.4rem;
   font-style: normal;
   font-weight: 500;
-  line-height: 1.8rem; 
-`
+  line-height: 1.8rem;
+`;
 
 const DropdownMenuContainer = styled.div`
   display: flex;
@@ -70,15 +72,15 @@ const DropdownMenuContainer = styled.div`
   align-items: center;
 
   border-radius: 0.8rem;
-  border: 0.1rem solid var(--Grayscale-30, #CFCFCF);
-  background: var(--Grayscale-10, #FFF);
+  border: 0.1rem solid var(--Grayscale-30, #cfcfcf);
+  background: var(--Grayscale-10, #fff);
 
   /* 1pt */
   box-shadow: 0px 4px 4px 0px rgba(140, 140, 140, 0.25);
 
   position: absolute;
   bottom: -7.2rem;
-`
+`;
 
 const DropdownMenu = styled.div`
   display: flex;
@@ -94,12 +96,12 @@ const DropdownMenu = styled.div`
       transition: 0.5s;
     }
   }
-`
+`;
 
 const StyledArrowDownIcon = styled(ArrowDownIcon)`
   cursor: pointer;
-`
+`;
 
 const StyledArrowUpIcon = styled(ArrowUpIcon)`
   cursor: pointer;
-`
+`;

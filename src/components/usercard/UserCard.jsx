@@ -26,32 +26,41 @@ export default UserCard;
 
 const CardContainer = styled.div`
   display: flex;
-  width: 220px;
-  height: 187px;
-  padding: 20px;
+  width: 22rem;
+  height: 18.7rem;
+  padding: 2rem;
   flex-direction: column;
   justify-content: space-between;
   align-items: flex-start;
   flex-shrink: 0;
-  border-radius: 16px;
-  border: 1px solid var(--Grayscale-40, #818181);
+  border-radius: 1.6rem;
+  border: 0.1rem solid var(--Grayscale-40, #818181);
   background: var(--Grayscale-10, #fff);
+
+  @media (max-width: 768px) {
+    padding: 1.6rem;
+  }
 `;
 
 const ProfileContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  gap: 12px;
+  gap: 1.2rem;
   align-self: stretch;
 `;
 
 const ProfileImg = styled.img`
-  width: 60px;
-  height: 60px;
+  width: 6rem;
+  height: 6rem;
   flex-shrink: 0;
-  border-radius: 60px;
+  border-radius: 6rem;
   background: lightgray 50% / cover no-repeat, #d9d9d9;
+
+  @media (max-width: 768px) {
+    width: 4.8rem;
+    height: 4.8rem;
+  }
 `;
 
 const ProfileName = styled.p`
@@ -59,15 +68,20 @@ const ProfileName = styled.p`
   color: var(--Grayscale-60, #000);
   font-feature-settings: "clig" off, "liga" off;
   font-family: Actor;
-  font-size: 20px;
+  font-size: 2rem;
   font-style: normal;
   font-weight: 400;
-  line-height: 25px; /* 125% */
+  line-height: 2.5rem; /* 125% */
+
+  @media (max-width: 768px) {
+    font-size: 1.8rem;
+    line-height: 2.4rem;
+  }
 `;
 
 const QuestionContainer = styled.div`
   display: flex;
-  height: 22px;
+  height: 2.2rem;
   justify-content: space-between;
   align-items: center;
   flex-shrink: 0;
@@ -78,30 +92,30 @@ const QuestionDiv = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 5px;
+  gap: 0.5rem;
 `;
 
 const MessageIcon = styled.img`
-  width: 18px;
-  height: 18px;
+  width: 1.8rem;
+  height: 1.8rem;
 `;
 
 const QuestionReceived = styled.p`
   color: var(--Grayscale-40, #818181);
   font-feature-settings: "clig" off, "liga" off;
   font-family: Pretendard;
-  font-size: 16px;
+  font-size: 1.6rem;
   font-style: normal;
   font-weight: 400;
-  line-height: 22px; /* 137.5% */
+  line-height: 2.2rem; /* 137.5% */
 `;
 
 const QuestionCount = styled.span`
   color: var(--Grayscale-40, #818181);
   font-feature-settings: "clig" off, "liga" off;
   font-family: Pretendard;
-  font-size: 16px;
+  font-size: 1.6rem;
   font-style: normal;
   font-weight: 400;
-  line-height: 22px; /* 137.5% */
+  line-height: 2.2rem; /* 137.5% */
 `;
