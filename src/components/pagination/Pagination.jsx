@@ -1,6 +1,16 @@
 import { styled, css } from "styled-components";
 
-const PagenationBox = styled.div`
+function Pagination({ isSelected }) {
+  return (
+    <PaginationBox>
+      <PaginationData isSelected={isSelected}>1</PaginationData>
+    </PaginationBox>
+  );
+}
+
+export default Pagination;
+
+const PaginationBox = styled.div`
   display: flex;
   width: 40px;
   height: 40px;
@@ -15,7 +25,7 @@ const PagenationBox = styled.div`
   }
 `;
 
-const PagenationData = styled.p`
+const PaginationData = styled.p`
   color: var(--Grayscale-40, #818181);
   text-align: center;
   font-feature-settings: "clig" off, "liga" off;
@@ -40,13 +50,3 @@ const PagenationData = styled.p`
       color: var(--Brown-40, #542f1a);
     `}
 `;
-
-function Pagenation({ isSelected }) {
-  return (
-    <PagenationBox>
-      <PagenationData isSelected={isSelected}>1</PagenationData>
-    </PagenationBox>
-  );
-}
-
-export default Pagenation;
