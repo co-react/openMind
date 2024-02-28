@@ -1,6 +1,6 @@
 import "./FeedCardAnswer.css";
-import InputTextArea from "../input/InputTextArea";
 import Button from "../buttons/Button";
+import InputTextArea from "../input/InputTextArea";
 
 function FeedCardAnswer({ profile, ansName, ansDate, ansDesc, state }) {
   return (
