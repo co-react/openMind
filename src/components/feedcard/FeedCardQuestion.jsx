@@ -1,11 +1,33 @@
-import "./FeedCardQuestion.css";
+import styled from "styled-components";
 
-function FeedCardQuestion({ queDay, queDes }) {
+const QuestionContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 4px;
+  flex: 1 0 0;
+  width: 100%;
+`;
+
+const QuestionTitle = styled.div`
+  font-size: 1.4rem;
+  line-height: 18px;
+  color: var(--Grayscale-40, #818181);
+`;
+
+const QuestionDescription = styled.div`
+  width: 100%;
+  word-wrap: break-word;
+  font-size: 1.8rem;
+  line-height: 133.333%;
+`;
+
+function FeedCardQuestion({ queDate, queDesc }) {
   return (
-    <div className="feedQuestion">
-      <div className="feedQTitle">질문 · {queDay}</div>
-      <div className="feedQDes">{queDes}</div>
-    </div>
+    <QuestionContainer>
+      <QuestionTitle>질문 · {queDate}</QuestionTitle>
+      <QuestionDescription>{queDesc}</QuestionDescription>
+    </QuestionContainer>
   );
 }
 

@@ -1,4 +1,4 @@
-import FeedCard from "../feedcard/FeedCard";
+import FeedCard from "../feedCard/FeedCard";
 
 function KDH() {
   return (
