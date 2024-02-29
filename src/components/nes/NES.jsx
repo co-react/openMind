@@ -3,17 +3,19 @@ import { useCallback, useEffect } from 'react'
 import axios from "../../apis/axios";
 import requests from "../../apis/request";
 
-import Toast from "../toast/Toast";
-import Dropdown from "../dropdown/Dropdown";
-import EditDropdownMenu from "../dropdown/EditDropdownMenu";
-import Like from "../reactions/Like";
-import Hate from "../reactions/Hate";
-import FloatingButton from "../buttons/FloatingButton";
+//import Toast from "../toast/Toast";
+//import Dropdown from "../dropdown/Dropdown";
+//import EditDropdownMenu from "../dropdown/EditDropdownMenu";
+//import Like from "../reactions/Like";
+//import Hate from "../reactions/Hate";
+//import FloatingButton from "../buttons/FloatingButton";
+import CreateQuestionCard from '../../domain/CreateQuestionCard';
 
 const NES = () => {
   const fetchData = useCallback(async () => {
     const response = await axios.get(requests.SUBJECTS);
-    console.log(response)
+    //console.log(response)
+    return response;
   },[])
 
   useEffect(() => {
@@ -24,11 +26,12 @@ const NES = () => {
   return (
     <div>
       {/* <Toast /> */}
-      <Dropdown />
+      {/* <Dropdown /> */}
       {/* <Like /> */}
       {/* <Hate /> */}
-      <FloatingButton />
-      <EditDropdownMenu />
+      {/* <FloatingButton /> */}
+      {/* <EditDropdownMenu /> */}
+      <CreateQuestionCard />
     </div>
   );
 };
