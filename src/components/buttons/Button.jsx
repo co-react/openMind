@@ -1,8 +1,8 @@
 import styled from "styled-components";
 
-function BaseButton({ color, onClick, children }) {
+function BaseButton({ color, onClick, children, disabled }) {
   return (
-    <Button type="button" color={color} onClick={onClick}>
+    <Button type="button" color={color} onClick={onClick} disabled={disabled}>
       {children}
     </Button>
   );

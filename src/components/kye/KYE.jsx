@@ -11,7 +11,7 @@ function KYE() {
       <Form>
         <InputField placeholder="이름을 입력하세요" />
         <InputTextArea placeholder="이름을 입력하세요" />
-        <BaseButton color="brown">
+        <BaseButton color="brown" disabled="true">
           브라운버튼
           <NextArrow fill="#fff" />
         </BaseButton>
