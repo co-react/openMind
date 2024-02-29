@@ -1,7 +1,3 @@
-a {
-  font-size: 100px;
-}
-
 .mainTest {
   width: 100vw;
   height: 100vh;
@@ -10,4 +6,5 @@ a {
   gap: 30px;
   justify-content: center;
   align-items: center;
+  font-size: 100px;
 }
