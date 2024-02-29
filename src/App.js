@@ -1,5 +1,4 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-// import "./style/style.css";
 import GlobalStyles from "./style/GlobalStyles";
 
 import KDH from "./components/kdh/KDH";

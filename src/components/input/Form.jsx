@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { BoxShadow1 } from "../../style/commonStyles";
 
 const Form = styled.form`
   ${BoxShadow1}
