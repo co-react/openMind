@@ -5,9 +5,6 @@ import Like from "../reactions/Like";
 import Hate from "../reactions/Hate";
 import FloatingButton from "../buttons/FloatingButton";
 
-import "../../style/global.css";
-import "../../style/reset.css";
-
 const NES = () => {
   // const containerStyle = {
   //   display: 'flex',

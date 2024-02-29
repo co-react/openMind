@@ -1,6 +1,7 @@
 import styled from "styled-components";
 
 const InputTextArea = styled.textarea`
+  font-family: "Pretendard";
   padding: 1.6rem;
   font-size: 1.6rem;
   outline: none;
