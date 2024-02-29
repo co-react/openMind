@@ -1,8 +1,15 @@
+import { useState } from "react";
 import styled from "styled-components";
 import InputTextArea from "../input/InputTextArea";
 import Button from "../buttons/Button";
 
 function FeedCardAnswer({ profile, ansName, ansDate, ansDesc, state }) {
+  const [inputValue, setInputValue] = useState("");
+
+  const handleInputChange = (event) => {
+    setInputValue(event.target.value);
+  };
+
   return (
     <CardAnswerContainer>
       <ProfileImage src={profile} alt="" />
@@ -13,8 +20,12 @@ function FeedCardAnswer({ profile, ansName, ansDate, ansDesc, state }) {
         </AnswerTop>
         {state === "Empty" ? (
           <>
-            <InputTextArea placeholder="답변을 입력해주세요" />
-            <Button color="brown" disabled="true">
+            <InputTextArea
+              placeholder="답변을 입력해주세요"
+              value={inputValue}
+              onChange={handleInputChange}
+            />
+            <Button color="brown" disabled={inputValue.trim() === ""}>
               답변완료
             </Button>
           </>
