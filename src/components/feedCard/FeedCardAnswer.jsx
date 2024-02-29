@@ -44,33 +44,40 @@ export default FeedCardAnswer;
 const CardAnswerContainer = styled.div`
   display: flex;
   align-items: flex-start;
-  gap: 12px;
+  gap: 1.2rem;
   width: 100%;
 `;
 
 const ProfileImage = styled.img`
-  width: 48px;
-  height: 48px;
+  width: 3.2rem;
+  height: 3.2rem;
+  @media (min-width: 768px) {
+    width: 4.8rem;
+    height: 4.8rem;
+  }
 `;
 
 const AnswerContainer = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 4px;
+  gap: 0.4rem;
   width: 100%;
 `;
 
 const AnswerTop = styled.div`
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 0.8rem;
   width: 100%;
 `;
 
 const AnswerName = styled.div`
   color: var(--Grayscale-60);
-  font-size: 1.8rem;
+  font-size: 1.4rem;
   line-height: 133.333%;
+  @media (min-width: 768px) {
+    font-size: 1.8rem;
+  }
 `;
 
 const AnswerDate = styled.div`
@@ -85,8 +92,8 @@ const AnswerDescription = styled.div`
 
 const AnswerResection = styled.div`
   color: var(--Red-50);
-  font-size: 16px;
+  font-size: 1.6rem;
   font-style: normal;
   font-weight: 400;
-  line-height: 22px; /* 137.5% */
+  line-height: 137.5%;
 `;
