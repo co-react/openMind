@@ -6,13 +6,14 @@ import NES from "./components/nes/NES";
 import KYE from "./components/kye/KYE";
 import PGB from "./components/pgb/PGB";
 import MainTest from "./pages/MainTest";
+import ListPage from "./pages/ListPage";
 
 function App() {
   return (
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<MainTest />}></Route>
-        <Route path="/list"></Route>
+        <Route path="/list" element={<ListPage />}></Route>
         <Route path="/post">
           <Route path=":id"></Route>
           <Route path=":id/answer"></Route>
