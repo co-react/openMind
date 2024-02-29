@@ -1,3 +1,8 @@
+import { useCallback, useEffect } from 'react'
+
+import axios from "../../apis/axios";
+import requests from "../../apis/request";
+
 import Toast from "../toast/Toast";
 import Dropdown from "../dropdown/Dropdown";
 import EditDropdownMenu from "../dropdown/EditDropdownMenu";
@@ -6,10 +11,15 @@ import Hate from "../reactions/Hate";
 import FloatingButton from "../buttons/FloatingButton";
 
 const NES = () => {
-  // const containerStyle = {
-  //   display: 'flex',
-  //   gap : '10px'
-  // }
+  const fetchData = useCallback(async () => {
+    const response = await axios.get(requests.SUBJECTS);
+    console.log(response)
+  },[])
+
+  useEffect(() => {
+    fetchData();
+  })
+
 
   return (
     <div>
