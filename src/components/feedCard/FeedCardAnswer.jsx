@@ -1,7 +1,7 @@
 import { useState } from "react";
 import styled from "styled-components";
-import InputTextArea from "../input/InputTextArea";
 import Button from "../buttons/Button";
+import InputTextArea from "../input/InputTextArea";
 
 function FeedCardAnswer({ profile, ansName, ansDate, ansDesc, state }) {
   const [inputValue, setInputValue] = useState("");
