@@ -15,7 +15,7 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<MainTest />}></Route>
-          <Route path="/list"></Route>
+          <Route path="/list" element={<ListPage />}></Route>
           <Route path="/post">
             <Route path=":id"></Route>
             <Route path=":id/answer"></Route>

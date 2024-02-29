@@ -1,9 +1,9 @@
 import { Link } from "react-router-dom";
 import { styled } from "styled-components";
+import logo from "../assets/svg/icons/logo.svg";
 import { ReactComponent as NextArrow } from "../assets/svg/icons/next.svg";
 import BaseButton from "../components/buttons/Button";
 import Dropdown from "../components/dropdown/Dropdown";
-import logo from "../assets/svg/icons/logo.svg";
 import KDH from "../components/kdh/KDH";
 
 function ListPage() {
@@ -19,11 +19,11 @@ function ListPage() {
             <NextArrow fill="#542F1A" />
           </BaseButton>
         </Header>
-        <div>
-          <Title>누구에게 질문할까요?</Title>
-          <Dropdown />
-        </div>
       </HeaderDiv>
+      <TitleDiv>
+        <Title>누구에게 질문할까요?</Title>
+        <Dropdown />
+      </TitleDiv>
     </Container>
   );
 }
@@ -34,6 +34,14 @@ const Container = styled.div`
   width: 100%;
   height: 832px;
   background: var(--Grayscale-20, #f9f9f9);
+`;
+
+const TitleDiv = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 50px;
 `;
 
 const HeaderDiv = styled.div`
