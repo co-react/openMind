@@ -14,7 +14,7 @@ function FeedCardAnswer({ profile, ansName, ansDate, ansDesc, state }) {
         {state === "Empty" ? (
           <>
             <InputTextArea placeholder="답변을 입력해주세요" />
-            <Button color="brown" disabled>
+            <Button color="brown" disabled="true">
               답변완료
             </Button>
           </>
