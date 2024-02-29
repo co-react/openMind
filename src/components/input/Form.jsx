@@ -4,6 +4,7 @@ import { BoxShadow1 } from "../../style/commonStyles";
 const Form = styled.form`
   ${BoxShadow1}
   display: flex;
+  justify-content: center;
   width: 32.7rem;
   padding: 2.4rem;
   flex-direction: column;
