@@ -4,6 +4,7 @@ import Form from "../input/Form";
 import InputField from "../input/InputField";
 import InputTextArea from "../input/InputTextArea";
 import { ReactComponent as NextArrow } from "../../assets/svg/icons/next.svg";
+import ShareButton from "../buttons/ShareButton";
 
 function KYE() {
   return (
@@ -19,6 +20,7 @@ function KYE() {
           베이지버튼
           <NextArrow fill="var(--Brown-40)" />
         </BaseButton>
+        <ShareButton />
       </Form>
       <FloatingButton />
     </>
