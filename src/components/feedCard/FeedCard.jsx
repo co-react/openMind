@@ -2,7 +2,7 @@ import styled from "styled-components";
 import moreIcon from "../../assets/svg/icons/more.svg";
 import profileImage from "../../assets/png/profile1.png";
 import AnswerButton from "../badge/AnswerButton";
-// import FeedCardQuestion from "./FeedCardQuestion";
+import FeedCardQuestion from "./FeedCardQuestion";
 import FeedCardAnswer from "./FeedCardAnswer";
 import Like from "../reactions/Like";
 import Hate from "../reactions/Hate";
@@ -22,8 +22,14 @@ function FeedCard({
         <AnswerButton isAnswered={isAnswered} />
         <img src={moreIcon} alt="" />
       </CardTopContainer>
-      {/* <FeedCardQuestion queDate={queDate} queDesc={queDesc} /> */}
-      <FeedCardAnswer profile={profileImage} ansName={ansName} ansDate={ansDate} ansDesc={ansDesc} state={state} />
+      <FeedCardQuestion queDate={queDate} queDesc={queDesc} />
+      <FeedCardAnswer
+        profile={profileImage}
+        ansName={ansName}
+        ansDate={ansDate}
+        ansDesc={ansDesc}
+        state={state}
+      />
       <CardFooter>
         <CardFooterContainer>
           <Like />
