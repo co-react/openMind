@@ -1,10 +1,13 @@
+import { Link } from "react-router-dom";
+import { ReactComponent as NextArrow } from "../../assets/svg/icons/next.svg";
+
+import Main from "../../pages/Main";
 import BaseButton from "../buttons/Button";
 import FloatingButton from "../buttons/FloatingButton";
+import ShareButton from "../buttons/ShareButton";
 import Form from "../input/Form";
 import InputField from "../input/InputField";
 import InputTextArea from "../input/InputTextArea";
-import { ReactComponent as NextArrow } from "../../assets/svg/icons/next.svg";
-import ShareButton from "../buttons/ShareButton";
 
 function KYE() {
   return (
@@ -12,7 +15,7 @@ function KYE() {
       <Form>
         <InputField placeholder="이름을 입력하세요" />
         <InputTextArea placeholder="이름을 입력하세요" />
-        <BaseButton color="brown" disabled="true">
+        <BaseButton color="brown" disabled={true}>
           브라운버튼
           <NextArrow fill="#fff" />
         </BaseButton>
@@ -23,6 +26,10 @@ function KYE() {
         <ShareButton />
       </Form>
       <FloatingButton />
+
+      <Link to={`/main`} element={<Main />}>
+        메인페이지 가기
+      </Link>
     </>
   );
 }

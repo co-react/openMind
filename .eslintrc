@@ -1,13 +1,13 @@
 {
-  "extends": ["eslint:recommended", "prettier"],
+  "extends": ["eslint:recommended"],
   "env": { "browser": true, "node": true, "es6": true },
   "parser": "@typescript-eslint/parser",
   "parserOptions": {
     "sourceType": "module",
     "ecmaFeatures": {
-      "jsx": true,
+      "jsx": true
     },
-    "ecmaVersion": "latest",
+    "ecmaVersion": "latest"
   },
   "plugins": ["import"],
   "rules": {
@@ -23,20 +23,20 @@
           {
             "pattern": "react+(|-native)",
             "group": "builtin",
-            "position": "before",
+            "position": "before"
           },
           {
             "pattern": "@**",
             "group": "external",
-            "position": "after",
-          },
+            "position": "after"
+          }
         ],
         "alphabetize": {
           "order": "asc",
-          "caseInsensitive": true,
+          "caseInsensitive": true
         },
-        "pathGroupsExcludedImportTypes": ["builtin"],
-      },
-    ],
-  },
+        "pathGroupsExcludedImportTypes": ["builtin"]
+      }
+    ]
+  }
 }

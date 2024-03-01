@@ -1,12 +1,14 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import GlobalStyles from "./style/GlobalStyles";
-
 import KDH from "./components/kdh/KDH";
-import NES from "./components/nes/NES";
 import KYE from "./components/kye/KYE";
+import NES from "./components/nes/NES";
 import PGB from "./components/pgb/PGB";
-import MainTest from "./pages/MainTest";
+
 import ListPage from "./pages/ListPage";
+import Main from "./pages/Main";
+import MainTest from "./pages/MainTest";
+
+import GlobalStyles from "./style/GlobalStyles";
 
 function App() {
   return (
@@ -15,6 +17,8 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<MainTest />}></Route>
+          <Route path="/main" element={<Main />}></Route>
+          <Route path="/list"></Route>
           <Route path="/list" element={<ListPage />}></Route>
           <Route path="/post">
             <Route path=":id"></Route>
