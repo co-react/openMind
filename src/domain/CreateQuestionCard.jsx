@@ -19,6 +19,7 @@ function CreateQuestionCard() {
       const response = await axios.post(requests.SUBJECTS, {
         name: answerer
       });
+      console.log(response);
     } catch (error) {
       console.error('에러 발생:', error);
     }
@@ -27,8 +28,7 @@ function CreateQuestionCard() {
   return (
     <Form>
       <InputField placeholder="이름을 입력하세요" onChange={handleChange}/>
-      <button type="button" onClick={handleClick}>임시 버튼</button>
-      <BaseButton color="brown" disabled="false" onClick={handleClick}>질문 받기</BaseButton>
+      <BaseButton color="brown" disabled={false} onClick={handleClick}>질문 받기</BaseButton>
     </Form>
   )
 }
