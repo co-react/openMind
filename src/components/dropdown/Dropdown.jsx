@@ -46,11 +46,11 @@ const Container = styled.div`
   justify-content: center;
   align-items: center;
   gap: 0.4rem;
-  align-self: stretch;
+  //align-self: stretch;
   border-radius: 0.8rem;
   border: 0.1rem solid var(--Grayscale-60, #000);
   background: var(--Grayscale-10, #fff);
-  position: absolute;
+  position: relative;
 `;
 
 const Title = styled.span`
