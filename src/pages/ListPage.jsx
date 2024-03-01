@@ -5,6 +5,8 @@ import { ReactComponent as NextArrow } from "../assets/svg/icons/next.svg";
 import BaseButton from "../components/buttons/Button";
 import Dropdown from "../components/dropdown/Dropdown";
 import KDH from "../components/kdh/KDH";
+import Pagination from "../components/pagination/Pagination";
+import UserCard from "../components/userCard/UserCard";
 
 function ListPage() {
   return (
@@ -24,6 +26,21 @@ function ListPage() {
         <Title>누구에게 질문할까요?</Title>
         <Dropdown />
       </TitleDiv>
+      <CardListDiv>
+        <UserCard />
+        <UserCard />
+        <UserCard />
+        <UserCard />
+        <UserCard />
+        <UserCard />
+        <UserCard />
+      </CardListDiv>
+      <PaginationDiv>
+        <Pagination />
+        <Pagination />
+        <Pagination />
+        <Pagination />
+      </PaginationDiv>
     </Container>
   );
 }
@@ -32,7 +49,7 @@ export default ListPage;
 
 const Container = styled.div`
   width: 100%;
-  height: 832px;
+  height: 100vh;
   background: var(--Grayscale-20, #f9f9f9);
 `;
 
@@ -41,12 +58,30 @@ const TitleDiv = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  gap: 50px;
+  gap: 30px;
+`;
+
+const CardListDiv = styled.div`
+  width: 100%;
+  display: grid;
+  place-content: center;
+  grid-template-rows: 1fr 1fr;
+  grid-template-columns: repeat(4, 22rem);
+  gap: 2rem;
+  margin-top: 3rem;
+`;
+
+const PaginationDiv = styled.div`
+  margin-top: 80px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
 `;
 
 const HeaderDiv = styled.div`
   display: flex;
-  padding: 40px 130px 40px 130px;
+  padding: 40px 130px 45px 130px;
   flex-direction: column;
   align-items: center;
   gap: 8px;

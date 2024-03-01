@@ -1,5 +1,6 @@
 import { styled } from "styled-components";
-import messageIcon from "../../assets/svg/icons/messageIcon.svg";
+import messageIcon from "../../assets/svg/icons/messages.svg";
+//messageIcon.svg 삭제
 
 //프로필 사진과 프로필의 이름,
 //그리고 9개라고 적힌것은 props로 받아야 할 것 같습니다.
