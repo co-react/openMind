@@ -9,7 +9,8 @@ import requests from "../../apis/request";
 //import Like from "../reactions/Like";
 //import Hate from "../reactions/Hate";
 //import FloatingButton from "../buttons/FloatingButton";
-import CreateQuestionCard from '../../domain/CreateQuestionCard';
+//import CreateQuestionCard from '../../domain/CreateQuestionCard';
+import Logo from '../logo/Logo';
 
 const NES = () => {
   const fetchData = useCallback(async () => {
@@ -25,13 +26,14 @@ const NES = () => {
 
   return (
     <div>
+      <Logo />
       {/* <Toast /> */}
       {/* <Dropdown /> */}
       {/* <Like /> */}
       {/* <Hate /> */}
       {/* <FloatingButton /> */}
       {/* <EditDropdownMenu /> */}
-      <CreateQuestionCard />
+      {/* <CreateQuestionCard /> */}
     </div>
   );
 };
