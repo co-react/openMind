@@ -13,7 +13,7 @@ function Like({ counts }) {
   };
 
   return (
-    <Button isClicked={isReacted} onClick={handleClick}>
+    <Button type="button" $isClicked={isReacted} onClick={handleClick}>
       <ThumbsUp />
       {isReacted ? <ButtonText>좋아요 12{counts}</ButtonText> : <ButtonText>좋아요</ButtonText>}
     </Button>
@@ -45,7 +45,7 @@ const Button = styled.button`
   border: none;
   background-color: #ffffff;
   ${(props) =>
-    props.isClicked &&
+    props.$isClicked &&
     css`
       ${ButtonText} {
         color: #1877f2;

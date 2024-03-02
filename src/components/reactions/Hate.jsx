@@ -13,7 +13,7 @@ function Hate() {
   };
 
   return (
-    <Button isClicked={isReacted} onClick={handleClick}>
+    <Button $isClicked={isReacted} onClick={handleClick}>
       <ThumbsDown />
       <ButtonText>싫어요</ButtonText>
     </Button>
@@ -45,7 +45,7 @@ const Button = styled.button`
   border: none;
   background-color: #ffffff;
   ${(props) =>
-    props.isClicked &&
+    props.$isClicked &&
     css`
       ${ButtonText} {
         color: #000000;
