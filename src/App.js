@@ -18,7 +18,6 @@ function App() {
         <Routes>
           <Route path="/" element={<MainTest />}></Route>
           <Route path="/main" element={<Main />}></Route>
-          <Route path="/list"></Route>
           <Route path="/list" element={<ListPage />}></Route>
           <Route path="/post">
             <Route path=":id"></Route>
