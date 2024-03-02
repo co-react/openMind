@@ -6,7 +6,7 @@ import BaseButton from "../components/buttons/Button";
 import Dropdown from "../components/dropdown/Dropdown";
 import KDH from "../components/kdh/KDH";
 import Pagination from "../components/pagination/Pagination";
-import UserCard from "../components/usercard/UserCard";
+import UserCard from "../components/userCard/UserCard";
 
 function ListPage() {
   return (
