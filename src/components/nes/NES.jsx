@@ -9,8 +9,8 @@ import CardPage from '../../pages/CardPage';
 const NES = () => {
   const fetchData = useCallback(async () => {
     try {
-      const response = await axios.get(requests.SUBJECTS);
-      console.log(response)
+      await axios.get(requests.SUBJECTS);
+      //console.log(response)
     } catch (error) {
       console.error('에러 발생:', error);
     }

@@ -1,4 +1,4 @@
-import styled from "styled-components"
+import styled, { css } from "styled-components"
 
 import emptyCard from "../../assets/png/letter.png"
 import { ReactComponent as MessageIcon } from "../../assets/svg/icons/messages.svg"
@@ -6,7 +6,7 @@ import FeedCard from "../feedCard/FeedCard"
 
 function FeedCardContainer({questions}) {
   return (
-    <Container>
+    <Container $isQuestion={questions.length}>
       <QuestionContainer>
         <MessageIcon />
         <QuestionsCountText>
@@ -14,7 +14,19 @@ function FeedCardContainer({questions}) {
         </QuestionsCountText>
       </QuestionContainer>
       {questions.length ? (
-        <FeedCard /> 
+        <FeedCardList>
+          {questions.map(({id, answer, content, createdAt, like, dislike, subjectId}) => ( 
+            <FeedCard
+              key={id}
+              answer={answer}
+              content={content}
+              createdAt={createdAt}
+              like={like}
+              dislike={dislike}
+              subjectId={subjectId}
+            />
+          ))}
+        </FeedCardList>
       ) : (
         <StyledEmptyCard src={emptyCard} /> 
       )}
@@ -36,6 +48,11 @@ const Container = styled.div`
   border-radius: 1.6rem;
   border: 1px solid var(--Brown-20, #E4D5C9);
   background: var(--Brown-10, #F5F1EE);
+
+  ${(props) => !props.$isQuestion && css`
+    height: 33rem;
+    gap: 8rem;
+  `}
 
   @media (min-width: 768px) {
     width: 70.4rem;
@@ -62,4 +79,10 @@ const QuestionsCountText = styled.span`
   font-style: normal;
   font-weight: 400;
   line-height: 2.4rem;
+`
+
+const FeedCardList = styled.ul`
+  display: flex;
+  flex-direction: column;
+  gap: 2.0rem
 `

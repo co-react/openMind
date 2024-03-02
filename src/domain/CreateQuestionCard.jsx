@@ -16,10 +16,11 @@ function CreateQuestionCard() {
 
   const handleClick = async () => {
     try {
-      const response = await axios.post(requests.SUBJECTS, {
+      await axios.post(requests.SUBJECTS, {
         name: answerer
       });
-      console.log(response);
+      // 페이지 이동 적용
+      
     } catch (error) {
       console.error('에러 발생:', error);
     }

@@ -8,7 +8,12 @@ import Hate from "../reactions/Hate";
 import Like from "../reactions/Like";
 
 function FeedCard({
-  isAnswered = true,
+  answer,
+  //content,
+  //createdAt,
+  like,
+  dislike,
+  //subjectId,
   queDate = "2주전",
   queDesc = "좋아하는 동물은?좋아하는 동물은?좋아하는 동물은? 좋아하동 물은?",
   ansName = "아초는고양이",
@@ -19,7 +24,7 @@ function FeedCard({
   return (
     <FeedCardContainer>
       <CardTopContainer>
-        <AnswerButton isAnswered={isAnswered} />
+        <AnswerButton isAnswered={answer} />
         <img src={moreIcon} alt="" />
       </CardTopContainer>
       <FeedCardQuestion queDate={queDate} queDesc={queDesc} />
@@ -32,8 +37,8 @@ function FeedCard({
       />
       <CardFooter>
         <CardFooterContainer>
-          <Like />
-          <Hate />
+          <Like counts={like}/>
+          <Hate isDislike={dislike}/>
         </CardFooterContainer>
       </CardFooter>
     </FeedCardContainer>
@@ -56,7 +61,7 @@ const FeedCardContainer = styled.div`
 
   @media (min-width: 768px) {
     width: 68.4rem;
-    padding: 3.2rem
+    padding: 3.2rem;
     gap: 3.2rem;
   }
 `;
