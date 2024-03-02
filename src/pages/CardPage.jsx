@@ -9,9 +9,11 @@ import { ReactComponent as LogoIcon } from "../assets/svg/icons/logo.svg";
 import FloatingButton from "../components/buttons/FloatingButton";
 import ShareButton from "../components/buttons/ShareButton";
 import FeedCardContainer from "../components/feedCard/FeedCardContainer";
+import Modal from "../components/modal/Modal";
 
 function CardPage({name, id=3856}) { // 현재 id는 하드 코딩
   const [isMobile, setIsMobile] = useState(false);
+  const [isOpenModal, setIsOpenModal] = useState(false);
   const [questions, setQuestions] = useState([]);
 
   const fetchData = useCallback(async () => {
@@ -24,6 +26,10 @@ function CardPage({name, id=3856}) { // 현재 id는 하드 코딩
       console.error('에러 발생:', error);
     }
   },[])
+
+  const handleClick = () => {
+    setIsOpenModal((isOpenModal) => !isOpenModal);
+  }
 
   useEffect(() => {
     fetchData();
@@ -58,8 +64,11 @@ function CardPage({name, id=3856}) { // 현재 id는 하드 코딩
       <ShareButton />
       <FeedCardContainer questions={questions}/>
       <FloatingButtonLayout>
-        <FloatingButton isMobile={isMobile}/>
+        <FloatingButton isMobile={isMobile} onClick={handleClick}/>
       </FloatingButtonLayout>
+      {isOpenModal && 
+        <Modal onClose={handleClick}/>
+      }
     </Layout>
   )
 }

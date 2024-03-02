@@ -1,8 +1,8 @@
 import styled from 'styled-components';
 
-function FloatingButton({isMobile}) {
+function FloatingButton({isMobile , onClick}) {
   return (
-    <Button>
+    <Button onClick={onClick}>
       <Text>
       {isMobile ? "질문 작성" : "질문 작성하기"}
       </Text>
