@@ -2,22 +2,23 @@ import styled from "styled-components"
 
 import emptyCard from "../../assets/png/letter.png"
 import { ReactComponent as MessageIcon } from "../../assets/svg/icons/messages.svg"
+import FeedCard from "../feedCard/FeedCard"
 
 function FeedCardContainer({questions}) {
-  if (!questions.length) {
-    return (
-      <Container>
-        <QuestionContainer>
-          <MessageIcon />
-          <QuestionsCountText>아직 질문이 없습니다</QuestionsCountText>
-        </QuestionContainer>
-        <StyledEmptyCard src={emptyCard} />
-      </Container>
-    )
-  }
-
   return (
-    <Container></Container>
+    <Container>
+      <QuestionContainer>
+        <MessageIcon />
+        <QuestionsCountText>
+          {questions.length ? `${questions.length}개의 질문이 있습니다` : "아직 질문이 없습니다"}
+        </QuestionsCountText>
+      </QuestionContainer>
+      {questions.length ? (
+        <FeedCard /> 
+      ) : (
+        <StyledEmptyCard src={emptyCard} /> 
+      )}
+    </Container>
   )
 }
 
@@ -29,13 +30,16 @@ const Container = styled.div`
   flex-direction: column;
   align-items: center;
   width: 32.0rem;
-  height: 33.0rem;
   padding: 1.6rem 2.0rem;
-  gap: 8.0rem;
+  gap: 1.6rem;
   flex-shrink: 0;
   border-radius: 1.6rem;
   border: 1px solid var(--Brown-20, #E4D5C9);
   background: var(--Brown-10, #F5F1EE);
+
+  @media (min-width: 768px) {
+    width: 70.4rem;
+  }
 `
 
 const StyledEmptyCard = styled.img`
