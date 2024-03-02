@@ -33,7 +33,7 @@ function Modal({ onClose }) {
             <ProfileImg src={profile} />
             아초는고양이
           </Profile>
-          <InputTextArea
+          <ModalInputTextArea
             placeholder="질문을 입력해주세요"
             value={inputValue}
             onChange={handleInputChange}
@@ -64,16 +64,22 @@ const ModalContainer = styled.div`
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  width: 612px;
-  height: 454px;
-  padding: 40px;
-  border-radius: 24px;
+  width: 32.7rem;
+  height: 56.8rem;
+  padding: 4.0rem;
+  flex-shrink: 0;
+  border-radius: 2.4rem;
   background: var(--Grayscale-10, #fff);
-  box-shadow: 0px 16px 20px 0px rgba(48, 48, 48, 0.62);
+  box-shadow: 0rem 1.6rem 2.0rem 0rem rgba(48, 48, 48, 0.62);
   cursor: default;
   display: flex;
   flex-direction: column;
-  gap: 24px;
+  gap: 3.4rem;
+
+  @media screen and (min-width: 768px) {
+    width: 61.2rem;
+    height: 45.4rem;
+  }
 `;
 
 const ModalTop = styled.div`
@@ -84,27 +90,41 @@ const ModalTop = styled.div`
 const Title = styled.div`
   display: flex;
   gap: 0.8rem;
-  font-size: 2.4rem;
+  font-size: 2.0rem;
   font-style: normal;
   font-weight: 400;
   line-height: 125%;
+
+  @media screen and (min-width: 768px) {
+    font-size: 2.4rem;
+  }
 `;
 
 const CloseIcon = styled.img`
-  width: 2.8rem;
-  height: 2.8rem;
+  width: 2.2rem;
+  height: 2.2rem;
   cursor: pointer;
+
+  @media screen and (min-width: 768px) {
+    width: 2.8rem;
+    height: 2.8rem;
+  }
 `;
 
 const MessageIcon = styled.img`
-  width: 2.8rem;
-  height: 2.8rem;
+  width: 2.2rem;
+  height: 2.2rem;
+
+  @media screen and (min-width: 768px) {
+    width: 2.8rem;
+    height: 2.8rem;
+  }
 `;
 
 const ModalContents = styled.div`
   display: flex;
   flex-direction: column;
-  height: 320px;
+  width: 100%;
   gap: 8px;
 `;
 
@@ -112,7 +132,7 @@ const Profile = styled.div`
   display: flex;
   font-size: 1.8rem;
   font-weight: 400;
-  line-height: 133.333%;
+  line-height: 133%;
   align-items: center;
 `;
 
@@ -121,3 +141,11 @@ const ProfileImg = styled.img`
   height: 2.8rem;
   margin: 0 4px 0 4px;
 `;
+
+const ModalInputTextArea = styled(InputTextArea)`
+  height: 35.8rem;
+
+  @media screen and (min-width: 768px) {
+    height: 18.0rem;
+  }
+`
