@@ -4,7 +4,7 @@ import styled from "styled-components";
 import axios from "../apis/axios";
 import requests from "../apis/request";
 import profileAvatar from "../assets/png/profile1.png";
-import { ReactComponent as LogoIcon } from "../assets/svg/logo.svg";
+import { ReactComponent as LogoIcon } from "../assets/svg/icons/logo.svg";
 
 import FloatingButton from "../components/buttons/FloatingButton";
 import ShareButton from "../components/buttons/ShareButton";
