@@ -6,10 +6,12 @@ import requests from "../apis/request";
 import profileAvatar from "../assets/png/profile1.png";
 import { ReactComponent as LogoIcon } from "../assets/svg/logo.svg";
 
+import FloatingButton from "../components/buttons/FloatingButton";
 import ShareButton from "../components/buttons/ShareButton";
 import FeedCardContainer from "../components/feedCard/FeedCardContainer";
 
 function CardPage({name, id=3856}) { // 현재 id는 하드 코딩
+  const [isMobile, setIsMobile] = useState(false);
   const [questions, setQuestions] = useState([]);
 
   const fetchData = useCallback(async () => {
@@ -26,6 +28,27 @@ function CardPage({name, id=3856}) { // 현재 id는 하드 코딩
     fetchData();
   }, [])
 
+  useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth <= 768) {
+        setIsMobile(() => true);
+      } else {
+        setIsMobile(() => false);
+      }
+    };
+
+    // 최초 호출
+    handleResize();
+
+    // 창 크기가 변경될 때마다 핸들러 호출
+    window.addEventListener('resize', handleResize);
+
+    // 컴포넌트가 언마운트될 때 이벤트 리스너 제거
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, []); 
+
   return (
     <Layout>
       <SmallStyledLogo />
@@ -33,6 +56,9 @@ function CardPage({name, id=3856}) { // 현재 id는 하드 코딩
       <NameTitle>{name}</NameTitle>
       <ShareButton />
       <FeedCardContainer questions={questions}/>
+      <FloatingButtonLayout>
+        <FloatingButton isMobile={isMobile}/>
+      </FloatingButtonLayout>
     </Layout>
   )
 }
@@ -45,7 +71,6 @@ const Layout = styled.div`
   align-items: center;
   flex-direction: column;
   gap: 1.2rem;
-
 `
 
 const SmallStyledLogo = styled(LogoIcon)`
@@ -68,4 +93,10 @@ const NameTitle = styled.span`
   font-style: normal;
   font-weight: 400;
   line-height: 3.0rem;
+`
+
+const FloatingButtonLayout = styled.div`
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
 `
