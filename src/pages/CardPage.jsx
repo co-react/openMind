@@ -67,7 +67,7 @@ function CardPage({name, id=3856}) { // 현재 id는 하드 코딩
         <FloatingButton isMobile={isMobile} onClick={handleClick}/>
       </FloatingButtonLayout>
       {isOpenModal && 
-        <Modal onClose={handleClick}/>
+        <Modal onClose={handleClick} id={id}/>
       }
     </Layout>
   )

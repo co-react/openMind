@@ -1,12 +1,16 @@
 import { useState } from "react";
 import styled from "styled-components";
+
+import axios from "../../apis/axios";
+import requests from "../../apis/request";
+
 import profile from "../../assets/png/profile1.png";
 import close from "../../assets/svg/icons/close.svg";
 import messages from "../../assets/svg/icons/messages.svg";
 import Button from "../buttons/Button";
 import InputTextArea from "../input/InputTextArea";
 
-function Modal({ onClose }) {
+function Modal({ onClose, id }) {
   const [inputValue, setInputValue] = useState("");
 
   const handleBackgroundClick = () => {
@@ -16,6 +20,18 @@ function Modal({ onClose }) {
   const handleInputChange = (event) => {
     setInputValue(event.target.value);
   };
+
+  const handleClick = async () => {
+    try {
+      await axios.post(`${requests.SUBJECTS}${id}/questions/`, {
+        content: inputValue
+      });
+
+      onClose(); // 완료되면 닫음.
+    } catch (error) {
+      console.error('에러 발생:', error);
+    }
+  }
 
   return (
     <Background onClick={handleBackgroundClick}>
@@ -38,7 +54,7 @@ function Modal({ onClose }) {
             value={inputValue}
             onChange={handleInputChange}
           />
-          <Button color="brown" disabled={inputValue.trim() === ""}>
+          <Button color="brown" disabled={inputValue.trim() === ""} onClick={handleClick}>
             질문 보내기
           </Button>
         </ModalContents>
