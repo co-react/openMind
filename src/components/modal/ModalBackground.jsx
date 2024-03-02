@@ -8,7 +8,7 @@ function ModalBackground({ onClose }) {
 
   return (
     <Background onClick={handleBackgroundClick}>
-      <Modal></Modal>
+      <Modal />
     </Background>
   );
 }
