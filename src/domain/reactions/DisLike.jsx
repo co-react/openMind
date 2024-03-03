@@ -9,8 +9,8 @@ function DisLike({ questionId }) {
 
   const handleClick = async () => {
     try {
-      await axios.post(`/question/${questionId}/reaction/`, {
-        type: "like",
+      await axios.post(`/questions/${questionId}/reaction/`, {
+        type: "dislike",
       });
 
       await axios.get(`/questions/${questionId}/`);

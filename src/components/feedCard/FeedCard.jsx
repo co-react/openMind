@@ -34,8 +34,8 @@ function FeedCard({
       )}
       <CardFooter>
         <CardFooterContainer>
-          <Like counts={like} questionId={questionId}/>
-          <DisLike />
+          <Like counts={like} questionId={questionId} />
+          <DisLike questionId={questionId} />
         </CardFooterContainer>
       </CardFooter>
     </FeedCardContainer>

@@ -11,7 +11,7 @@ function Like({ counts, questionId }) {
 
   const handleClick = async () => {
     try {
-      await axios.post(`/question/${questionId}/reaction/`, {
+      await axios.post(`/questions/${questionId}/reaction/`, {
         type: "like",
       });
 
