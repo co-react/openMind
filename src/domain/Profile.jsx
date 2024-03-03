@@ -12,7 +12,7 @@ function Profile({subjectId}) {
       const response = await axios.get(`${requests.SUBJECTS}${subjectId}/`);
       const data = response.data;
 
-      setUser(data)
+      setUser(data);
     } catch (error) {
       console.error('에러 발생:', error);
     }
