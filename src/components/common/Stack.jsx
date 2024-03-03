@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { FlexCenter } from "../../style/commonStyles";
 
 function Stack({ className, gap, children }) {
   return (
@@ -11,9 +12,7 @@ export default Stack;
 
 const StyledStack = styled.div`
   position: relative;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  ${FlexCenter}
   flex-direction: column;
   gap: ${(props) => props.gap * 0.1}rem;
 `;
