@@ -9,7 +9,7 @@ import messages from "../../assets/svg/icons/messages.svg";
 import Button from "../../components/buttons/Button";
 import InputTextArea from "../../components/input/InputTextArea";
 
-function Modal({ onClose, id, userName, imageSource }) {
+function QuestionModal({ onClose, id, userName, imageSource }) {
   const [inputValue, setInputValue] = useState("");
 
   const handleBackgroundClick = () => {
@@ -62,7 +62,7 @@ function Modal({ onClose, id, userName, imageSource }) {
   );
 }
 
-export default Modal;
+export default QuestionModal;
 
 const Background = styled.div`
   position: fixed;

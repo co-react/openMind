@@ -1,7 +1,7 @@
 import { useState } from "react";
 import styled from "styled-components";
 import FeedCard from "../feedCard/FeedCard";
-import Modal from "../../domain/modal/Modal";
+import QuestionModal from "../../domain/modal/QuestionModal";
 // import ModalBackground from "../modal/ModalBackground";
 
 function KDH() {
@@ -14,7 +14,7 @@ function KDH() {
     <div>
       <FeedCard></FeedCard>
       <br />
-      {isModalOpen && <Modal onClose={handleClick} />}
+      {isModalOpen && <QuestionModal onClose={handleClick} />}
       <Button onClick={handleClick}>클릭</Button>
     </div>
   );
