@@ -1,8 +1,6 @@
-import { useState, useCallback, useEffect } from "react";
 import styled, { css } from "styled-components"
 
-import axios from "../apis/axios";
-import requests from "../apis/request";
+import { useFetchQuestions } from "../hooks/useFetchQuestions";
 import emptyCard from "../assets/png/letter.png"
 import { ReactComponent as MessageIcon } from "../assets/svg/icons/messages.svg"
 
@@ -21,22 +19,7 @@ function FeedCardContainer({id, questionCount}) {
     )
   }
 
-  const [questions, setQuestions] = useState([]);
-
-  const fetchData = useCallback(async () => {
-    try {
-      const response = await axios.get(`${requests.SUBJECTS}${id}/questions/`);
-      const data = response.data;
-
-      setQuestions(data.results);
-    } catch (error) {
-      console.error('에러 발생:', error);
-    }
-  },[questionCount])
-
-  useEffect(() => {
-    fetchData();
-  }, [questionCount])
+  const questions = useFetchQuestions(id, questionCount)
 
   return (
     <Container $questionCount={questionCount}>
