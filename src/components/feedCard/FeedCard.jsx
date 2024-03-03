@@ -1,8 +1,7 @@
 import styled from "styled-components";
 
-import { calculateDateDifference } from "../../utils/dateCalculate"
-
 import moreIcon from "../../assets/svg/icons/more.svg";
+import { calculateDateDifference } from "../../utils/dateCalculate"
 
 import FeedCardAnswer from "./FeedCardAnswer";
 import FeedCardQuestion from "./FeedCardQuestion";
