@@ -3,9 +3,7 @@ import styled, { css } from "styled-components";
 
 import { ReactComponent as hateIcon } from "../../assets/svg/icons/thumbs-down.svg";
 
-import "./Like.css";
-
-function Hate(isDisliked) {
+function DisLike(isDisliked) {
   const [isReacted, setIsReacted] = useState(false);
 
   const handleClick = () => {
@@ -21,7 +19,7 @@ function Hate(isDisliked) {
   );
 }
 
-export default Hate;
+export default DisLike;
 
 const ButtonText = styled.span`
   color: var(--Grayscale-40, #818181);

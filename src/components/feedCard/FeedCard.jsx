@@ -6,7 +6,7 @@ import { calculateDateDifference } from "../../utils/dateCalculate"
 import FeedCardAnswer from "./FeedCardAnswer";
 import FeedCardQuestion from "./FeedCardQuestion";
 import AnswerButton from "../badge/AnswerButton";
-import Hate from "../reactions/Hate";
+import DisLike from "../reactions/DisLike";
 import Like from "../reactions/Like";
 
 function FeedCard({
@@ -35,7 +35,7 @@ function FeedCard({
       <CardFooter>
         <CardFooterContainer>
           <Like counts={like}/>
-          <Hate isDislike={dislike}/>
+          <DisLike isDislike={dislike}/>
         </CardFooterContainer>
       </CardFooter>
     </FeedCardContainer>
