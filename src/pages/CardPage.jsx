@@ -90,6 +90,11 @@ const SmallStyledLogo = styled(LogoIcon)`
   justify-content: center;
   align-items: center;
   flex-shrink: 0;
+
+  @media (min-width: 768px) {
+    width: 17rem;
+    height: 6.7rem;
+  }
 `
 
 const FloatingButtonLayout = styled.div`
