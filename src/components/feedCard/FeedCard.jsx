@@ -27,7 +27,7 @@ function FeedCard({
         <img src={moreIcon} alt="" />
       </CardTopContainer>
       <FeedCardQuestion queDate={queDate} content={content} />
-      {answer ? (
+      {answer && (
         <FeedCardAnswer
         answer={answer}
         profile={profileImage}
@@ -36,8 +36,6 @@ function FeedCard({
         ansDesc={ansDesc}
         state={state}
       />
-      ) : (
-        <></>
       )}
       <CardFooter>
         <CardFooterContainer>
