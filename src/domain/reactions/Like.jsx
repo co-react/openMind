@@ -3,8 +3,6 @@ import styled, { css } from "styled-components";
 
 import { ReactComponent as likeIcon } from "../../assets/svg/icons/thumbs-up.svg";
 
-import "./Like.css";
-
 function Like({ counts }) {
   const [isReacted, setIsReacted] = useState(false);
 
