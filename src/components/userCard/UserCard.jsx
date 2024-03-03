@@ -10,7 +10,7 @@ function UserCard({ profileImg, profileName, questionCount }) {
     <CardContainer>
       <ProfileContainer>
         <ProfileImg src={profileImg} alt="프로필 사진" />
-        <ProfileName>화면 출력용{profileName}</ProfileName>
+        <ProfileName>{profileName}</ProfileName>
       </ProfileContainer>
       <QuestionContainer>
         <QuestionDiv>

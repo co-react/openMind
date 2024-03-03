@@ -1,9 +1,11 @@
 import { styled, css } from "styled-components";
 
-function Pagination({ isSelected }) {
+function Pagination({ isSelected, children, onClick }) {
   return (
     <PaginationBox>
-      <PaginationData isSelected={isSelected}>1</PaginationData>
+      <PaginationData onClick={onClick} isSelected={isSelected}>
+        {children}
+      </PaginationData>
     </PaginationBox>
   );
 }
