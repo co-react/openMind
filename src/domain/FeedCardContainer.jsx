@@ -28,7 +28,6 @@ function FeedCardContainer({id, questionCount}) {
       const response = await axios.get(`${requests.SUBJECTS}${id}/questions/`);
       const data = response.data;
 
-      console.log(data);
       setQuestions(data.results);
     } catch (error) {
       console.error('에러 발생:', error);

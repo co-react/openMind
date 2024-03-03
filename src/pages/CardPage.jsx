@@ -1,8 +1,10 @@
-import { useState, useCallback ,useEffect } from "react";
+import { useState } from "react";
 import styled from "styled-components";
 
-import axios from "../apis/axios";
-import requests from "../apis/request";
+//import axios from "../apis/axios";
+//import requests from "../apis/request";
+import { useFetchQuestions } from "../hooks/useFetchQuestions";
+import { useMediaQueryForMobile } from "../hooks/useMediaQueryForMobile";
 
 import { ReactComponent as LogoIcon } from "../assets/svg/icons/logo.svg";
 
@@ -12,49 +14,13 @@ import FeedCardContainer from "../domain/FeedCardContainer";
 import QuestionModal from "../domain/modal/QuestionModal";
 
 function CardPage({id=3856}) { // 현재 id는 하드 코딩
-  const [isMobile, setIsMobile] = useState(false);
+  const isMobile = useMediaQueryForMobile();
+  const user = useFetchQuestions(id);
   const [isOpenModal, setIsOpenModal] = useState(false);
-  const [user, setUser] = useState({})
-
-  const fetchData = useCallback(async () => {
-    try {
-      const response = await axios.get(`${requests.SUBJECTS}${id}/`);
-      const data = response.data;
-
-      setUser(data);
-    } catch (error) {
-      console.error('에러 발생:', error);
-    }
-  },[])
 
   const handleClick = () => {
     setIsOpenModal((isOpenModal) => !isOpenModal);
   }
-
-  useEffect(() => {
-    fetchData();
-  }, [])
-
-  useEffect(() => {
-    const handleResize = () => {
-      if (window.innerWidth <= 768) {
-        setIsMobile(() => true);
-      } else {
-        setIsMobile(() => false);
-      }
-    };
-
-    // 최초 호출
-    handleResize();
-
-    // 창 크기가 변경될 때마다 핸들러 호출
-    window.addEventListener('resize', handleResize);
-
-    // 컴포넌트가 언마운트될 때 이벤트 리스너 제거
-    return () => {
-      window.removeEventListener('resize', handleResize);
-    };
-  }, []); 
 
   return (
     <Layout>
