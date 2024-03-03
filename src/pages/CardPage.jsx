@@ -1,7 +1,7 @@
 import { useState } from "react";
 import styled from "styled-components";
 
-import { useFetchQuestions } from "../hooks/useFetchQuestions";
+import { useFetchQuestionSubject } from "../hooks/useFetchQuestionSubject";
 import { useMediaQueryForMobile } from "../hooks/useMediaQueryForMobile";
 
 import { ReactComponent as LogoIcon } from "../assets/svg/icons/logo.svg";
@@ -15,7 +15,7 @@ function CardPage({id=3856}) { // 현재 id는 하드 코딩
   const [isPostedQuestion, setIsPostedQuestion] = useState(false);
   const isMobile = useMediaQueryForMobile();
   const [isOpenModal, setIsOpenModal] = useState(false);
-  const user = useFetchQuestions(id, isPostedQuestion, setIsPostedQuestion);
+  const user = useFetchQuestionSubject(id, isPostedQuestion, setIsPostedQuestion);
 
   const handleClick = () => {
     setIsOpenModal((isOpenModal) => !isOpenModal);
