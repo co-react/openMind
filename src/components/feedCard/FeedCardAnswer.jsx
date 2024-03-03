@@ -1,26 +1,43 @@
-import { useState } from "react";
+import { useState, useCallback, useEffect } from "react";
 import styled from "styled-components";
 
+import axios from "../../apis/axios";
+import requests from "../../apis/request";
 import { calculateDateDifference } from "../../utils/dateCalculate";
 
 import Button from "../buttons/Button";
 import InputTextArea from "../input/InputTextArea";
 
-function FeedCardAnswer({ answer, profile, ansName, ansDesc, state }) {
-  const {id, questionId, content, isRejected, createdAt} = answer;
-  console.log(id, questionId, content, isRejected, createdAt, ansDesc)
+function FeedCardAnswer({ subjectId, answer, state }) {
+  const {content, createdAt} = answer;
+
   const [inputValue, setInputValue] = useState("");
+  const [user, setUser] = useState({})
 
   const handleInputChange = (event) => {
     setInputValue(event.target.value);
   };
 
+  const fetchData = useCallback(async () => {
+    try {
+      const response = await axios.get(`${requests.SUBJECTS}${subjectId}/`);
+      const data = response.data;
+
+      setUser(data);
+    } catch (error) {
+      console.error('에러 발생:', error);
+    }
+  },[])
+
+  useEffect(() => {
+    fetchData();
+  }, [])
   return (
     <CardAnswerContainer>
-      <ProfileImage src={profile} alt="" />
+      <ProfileImage src={user.imageSource}/>
       <AnswerContainer>
         <AnswerTop>
-          <AnswerName>{ansName}</AnswerName>
+          <AnswerName>{user.name}</AnswerName>
           <AnswerDate>{calculateDateDifference(createdAt)}</AnswerDate>
         </AnswerTop>
         {state === "Empty" ? (
@@ -56,6 +73,8 @@ const CardAnswerContainer = styled.div`
 const ProfileImage = styled.img`
   width: 3.2rem;
   height: 3.2rem;
+  border-radius: 10rem;
+
   @media (min-width: 768px) {
     width: 4.8rem;
     height: 4.8rem;

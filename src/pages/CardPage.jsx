@@ -1,5 +1,8 @@
-import { useState, useEffect } from "react";
+import { useState, useCallback ,useEffect } from "react";
 import styled from "styled-components";
+
+import axios from "../apis/axios";
+import requests from "../apis/request";
 
 import { ReactComponent as LogoIcon } from "../assets/svg/icons/logo.svg";
 
@@ -7,16 +10,30 @@ import FloatingButton from "../components/buttons/FloatingButton";
 import ShareButton from "../components/buttons/ShareButton";
 import Modal from "../components/modal/Modal";
 import FeedCardContainer from "../domain/FeedCardContainer";
-import Profile from "../domain/Profile";
 
 function CardPage({id=3856}) { // 현재 id는 하드 코딩
   const [isMobile, setIsMobile] = useState(false);
   const [isOpenModal, setIsOpenModal] = useState(false);
-  const [questionCount, setQuestionCount] = useState(0);
+  const [user, setUser] = useState({})
+
+  const fetchData = useCallback(async () => {
+    try {
+      const response = await axios.get(`${requests.SUBJECTS}${id}/`);
+      const data = response.data;
+
+      setUser(data);
+    } catch (error) {
+      console.error('에러 발생:', error);
+    }
+  },[])
 
   const handleClick = () => {
     setIsOpenModal((isOpenModal) => !isOpenModal);
   }
+
+  useEffect(() => {
+    fetchData();
+  }, [])
 
   useEffect(() => {
     const handleResize = () => {
@@ -42,14 +59,15 @@ function CardPage({id=3856}) { // 현재 id는 하드 코딩
   return (
     <Layout>
       <SmallStyledLogo />
-      <Profile subjectId={id} setter={setQuestionCount}/>
+      <ProfileImg src={user.imageSource}/>
+      <NameTitle>{user.name}</NameTitle>
       <ShareButton />
-      <FeedCardContainer id={id} questionCount={questionCount}/>
+      <FeedCardContainer id={id} questionCount={user.questionCount}/>
       <FloatingButtonLayout>
         <FloatingButton isMobile={isMobile} onClick={handleClick}/>
       </FloatingButtonLayout>
       {isOpenModal && 
-        <Modal onClose={handleClick} id={id}/>
+        <Modal onClose={handleClick} id={id} userName={user.name} imageSource={user.imageSource}/>
       }
     </Layout>
   )
@@ -84,4 +102,30 @@ const FloatingButtonLayout = styled.div`
   position: fixed;
   bottom: 24px;
   right: 24px;
+`
+
+const NameTitle = styled.span`
+  color: var(--Grayscale-60, #000);
+  font-feature-settings: 'clig' off, 'liga' off;
+  font-family: Actor;
+  font-size: 2.4rem;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 3.0rem;
+
+  @media (min-width: 768px) {
+    font-size: 3.2rem;
+    line-height: 4.0rem;
+  }
+`
+
+const ProfileImg = styled.img`
+  border-radius: 10rem;
+  width: 10.4rem;
+  height: 10.4rem;
+
+  @media (min-width: 768px) {
+    width: 13.6rem;
+    height: 13.6rem;
+  }
 `
