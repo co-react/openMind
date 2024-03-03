@@ -104,6 +104,7 @@ const reset = css`
     display: block;
   }
   body {
+    background-color: var(--Grayscale-20);
     line-height: 1;
   }
   ol,
