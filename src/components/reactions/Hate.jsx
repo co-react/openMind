@@ -5,11 +5,12 @@ import { ReactComponent as hateIcon } from "../../assets/svg/icons/thumbs-down.s
 
 import "./Like.css";
 
-function Hate() {
+function Hate(isDisliked) {
   const [isReacted, setIsReacted] = useState(false);
 
   const handleClick = () => {
-    setIsReacted(!isReacted);
+    setIsReacted((isReacted) => !isReacted);
+    console.log(isDisliked)
   };
 
   return (

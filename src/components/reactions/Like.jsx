@@ -15,7 +15,7 @@ function Like({ counts }) {
   return (
     <Button type="button" $isClicked={isReacted} onClick={handleClick}>
       <ThumbsUp />
-      {isReacted ? <ButtonText>좋아요 12{counts}</ButtonText> : <ButtonText>좋아요</ButtonText>}
+      {isReacted ? <ButtonText>좋아요 {counts}</ButtonText> : <ButtonText>좋아요</ButtonText>}
     </Button>
   );
 }

@@ -4,13 +4,12 @@ import styled from "styled-components";
 import axios from "../../apis/axios";
 import requests from "../../apis/request";
 
-import profile from "../../assets/png/profile1.png";
 import close from "../../assets/svg/icons/close.svg";
 import messages from "../../assets/svg/icons/messages.svg";
 import Button from "../buttons/Button";
 import InputTextArea from "../input/InputTextArea";
 
-function Modal({ onClose, id }) {
+function Modal({ onClose, id, userName, imageSource }) {
   const [inputValue, setInputValue] = useState("");
 
   const handleBackgroundClick = () => {
@@ -46,8 +45,8 @@ function Modal({ onClose, id }) {
         <ModalContents>
           <Profile>
             To.
-            <ProfileImg src={profile} />
-            아초는고양이
+            <ProfileImg src={imageSource} />
+            {userName}
           </Profile>
           <ModalInputTextArea
             placeholder="질문을 입력해주세요"
@@ -156,6 +155,7 @@ const ProfileImg = styled.img`
   width: 2.8rem;
   height: 2.8rem;
   margin: 0 4px 0 4px;
+  border-radius: 10rem;
 `;
 
 const ModalInputTextArea = styled(InputTextArea)`

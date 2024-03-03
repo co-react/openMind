@@ -1,27 +1,27 @@
-import { useState, useCallback, useEffect } from "react";
+import { useState, useCallback ,useEffect } from "react";
 import styled from "styled-components";
 
 import axios from "../apis/axios";
 import requests from "../apis/request";
-import profileAvatar from "../assets/png/profile1.png";
+
 import { ReactComponent as LogoIcon } from "../assets/svg/icons/logo.svg";
 
 import FloatingButton from "../components/buttons/FloatingButton";
 import ShareButton from "../components/buttons/ShareButton";
-import FeedCardContainer from "../components/feedCard/FeedCardContainer";
 import Modal from "../components/modal/Modal";
+import FeedCardContainer from "../domain/FeedCardContainer";
 
-function CardPage({name, id=3856}) { // 현재 id는 하드 코딩
+function CardPage({id=3856}) { // 현재 id는 하드 코딩
   const [isMobile, setIsMobile] = useState(false);
   const [isOpenModal, setIsOpenModal] = useState(false);
-  const [questions, setQuestions] = useState([]);
+  const [user, setUser] = useState({})
 
   const fetchData = useCallback(async () => {
     try {
-      const response = await axios.get(`${requests.SUBJECTS}${id}/questions/`);
-      const data = response.data
-      setQuestions(data.results);
-      console.log(response);
+      const response = await axios.get(`${requests.SUBJECTS}${id}/`);
+      const data = response.data;
+
+      setUser(data);
     } catch (error) {
       console.error('에러 발생:', error);
     }
@@ -59,15 +59,15 @@ function CardPage({name, id=3856}) { // 현재 id는 하드 코딩
   return (
     <Layout>
       <SmallStyledLogo />
-      <ProfileAvatar src={profileAvatar} />
-      <NameTitle>{name}</NameTitle>
+      <ProfileImg src={user.imageSource}/>
+      <NameTitle>{user.name}</NameTitle>
       <ShareButton />
-      <FeedCardContainer questions={questions}/>
+      <FeedCardContainer id={id} questionCount={user.questionCount}/>
       <FloatingButtonLayout>
         <FloatingButton isMobile={isMobile} onClick={handleClick}/>
       </FloatingButtonLayout>
       {isOpenModal && 
-        <Modal onClose={handleClick} id={id}/>
+        <Modal onClose={handleClick} id={id} userName={user.name} imageSource={user.imageSource}/>
       }
     </Layout>
   )
@@ -91,22 +91,41 @@ const SmallStyledLogo = styled(LogoIcon)`
   justify-content: center;
   align-items: center;
   flex-shrink: 0;
-`
 
-const ProfileAvatar = styled.img``
-
-const NameTitle = styled.span`
-  color: var(--Grayscale-60, #000);
-  font-feature-settings: 'clig' off, 'liga' off;
-  font-family: Actor;
-  font-size: 2.0rem;
-  font-style: normal;
-  font-weight: 400;
-  line-height: 3.0rem;
+  @media (min-width: 768px) {
+    width: 17rem;
+    height: 6.7rem;
+  }
 `
 
 const FloatingButtonLayout = styled.div`
   position: fixed;
   bottom: 24px;
   right: 24px;
+`
+
+const NameTitle = styled.span`
+  color: var(--Grayscale-60, #000);
+  font-feature-settings: 'clig' off, 'liga' off;
+  font-family: Actor;
+  font-size: 2.4rem;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 3.0rem;
+
+  @media (min-width: 768px) {
+    font-size: 3.2rem;
+    line-height: 4.0rem;
+  }
+`
+
+const ProfileImg = styled.img`
+  border-radius: 10rem;
+  width: 10.4rem;
+  height: 10.4rem;
+
+  @media (min-width: 768px) {
+    width: 13.6rem;
+    height: 13.6rem;
+  }
 `

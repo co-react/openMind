@@ -9,8 +9,7 @@ import CardPage from '../../pages/CardPage';
 const NES = () => {
   const fetchData = useCallback(async () => {
     try {
-      const response = await axios.get(requests.SUBJECTS);
-      console.log(response)
+      await axios.get(requests.SUBJECTS);
     } catch (error) {
       console.error('에러 발생:', error);
     }
@@ -22,7 +21,7 @@ const NES = () => {
 
 
   return (
-    <CardPage name="아초는 고양이"/>
+    <CardPage />
   ); // 하드 코딩 -> 나중에 변경
 };
 
