@@ -171,10 +171,6 @@ ${reset}
 }
 
 :root {
-  font-size: 62.5%;
-  font-family: Pretendard;
-  font-style: normal;
-
   --Grayscale-10: #ffffff;
   --Grayscale-20: #f9f9f9;
   --Grayscale-30: #cfcfcf;
@@ -191,11 +187,15 @@ ${reset}
   --Red-50: #b93333;
 }
 
-* {
-  box-sizing: border-box;
+html {
+  font-size: 62.5%;
 }
 
-
+* {
+  box-sizing: border-box;
+  font-family: Pretendard;
+  font-style: normal;
+}
 `;
 
 export default GlobalStyles;
