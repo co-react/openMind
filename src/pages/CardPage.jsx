@@ -19,9 +19,9 @@ function CardPage({name, id=3856}) { // 현재 id는 하드 코딩
   const fetchData = useCallback(async () => {
     try {
       const response = await axios.get(`${requests.SUBJECTS}${id}/questions/`);
-      const data = response.data
+      const data = response.data;
+
       setQuestions(data.results);
-      console.log(data.results);
     } catch (error) {
       console.error('에러 발생:', error);
     }

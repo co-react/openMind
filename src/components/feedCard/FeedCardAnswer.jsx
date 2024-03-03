@@ -1,9 +1,12 @@
 import { useState } from "react";
 import styled from "styled-components";
+
+import { calculateDateDifference } from "../../utils/dateCalculate";
+
 import Button from "../buttons/Button";
 import InputTextArea from "../input/InputTextArea";
 
-function FeedCardAnswer({ answer, profile, ansName, ansDate, ansDesc, state }) {
+function FeedCardAnswer({ answer, profile, ansName, ansDesc, state }) {
   const {id, questionId, content, isRejected, createdAt} = answer;
   console.log(id, questionId, content, isRejected, createdAt, ansDesc)
   const [inputValue, setInputValue] = useState("");
@@ -18,7 +21,7 @@ function FeedCardAnswer({ answer, profile, ansName, ansDate, ansDesc, state }) {
       <AnswerContainer>
         <AnswerTop>
           <AnswerName>{ansName}</AnswerName>
-          <AnswerDate>{ansDate}</AnswerDate>
+          <AnswerDate>{calculateDateDifference(createdAt)}</AnswerDate>
         </AnswerTop>
         {state === "Empty" ? (
           <>
