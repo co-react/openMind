@@ -8,7 +8,7 @@ import { ReactComponent as LogoIcon } from "../assets/svg/icons/logo.svg";
 
 import FloatingButton from "../components/buttons/FloatingButton";
 import ShareButton from "../components/buttons/ShareButton";
-import Modal from "../components/modal/Modal";
+import Modal from "../domain/modal/Modal";
 import FeedCardContainer from "../domain/FeedCardContainer";
 
 function CardPage({id=3856}) { // 현재 id는 하드 코딩

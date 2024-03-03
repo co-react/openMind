@@ -6,8 +6,8 @@ import requests from "../../apis/request";
 
 import close from "../../assets/svg/icons/close.svg";
 import messages from "../../assets/svg/icons/messages.svg";
-import Button from "../buttons/Button";
-import InputTextArea from "../input/InputTextArea";
+import Button from "../../components/buttons/Button";
+import InputTextArea from "../../components/input/InputTextArea";
 
 function Modal({ onClose, id, userName, imageSource }) {
   const [inputValue, setInputValue] = useState("");
