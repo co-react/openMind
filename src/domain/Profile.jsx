@@ -4,7 +4,7 @@ import styled from "styled-components";
 import axios from "../apis/axios";
 import requests from "../apis/request";
 
-function Profile({subjectId}) {
+function Profile({subjectId, setter}) {
   const [user, setUser] = useState({})
 
   const fetchData = useCallback(async () => {
@@ -12,6 +12,7 @@ function Profile({subjectId}) {
       const response = await axios.get(`${requests.SUBJECTS}${subjectId}/`);
       const data = response.data;
 
+      setter(data.questionCount);
       setUser(data);
     } catch (error) {
       console.error('에러 발생:', error);

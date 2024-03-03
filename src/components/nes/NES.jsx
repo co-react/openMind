@@ -10,7 +10,6 @@ const NES = () => {
   const fetchData = useCallback(async () => {
     try {
       await axios.get(requests.SUBJECTS);
-      //console.log(response)
     } catch (error) {
       console.error('에러 발생:', error);
     }
