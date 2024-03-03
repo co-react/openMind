@@ -6,8 +6,8 @@ import { calculateDateDifference } from "../../utils/dateCalculate"
 import FeedCardAnswer from "./FeedCardAnswer";
 import FeedCardQuestion from "./FeedCardQuestion";
 import AnswerButton from "../badge/AnswerButton";
-import DisLike from "../reactions/DisLike";
-import Like from "../reactions/Like";
+import DisLike from "../../domain/reactions/DisLike";
+import Like from "../../domain/reactions/Like";
 
 function FeedCard({
   answer,
