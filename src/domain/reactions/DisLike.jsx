@@ -1,14 +1,24 @@
 import { useState } from "react";
 import styled, { css } from "styled-components";
 
+import axios from "../../apis/axios";
 import { ReactComponent as hateIcon } from "../../assets/svg/icons/thumbs-down.svg";
 
-function DisLike(isDisliked) {
+function DisLike({ questionId }) {
   const [isReacted, setIsReacted] = useState(false);
 
-  const handleClick = () => {
-    setIsReacted((isReacted) => !isReacted);
-    console.log(isDisliked)
+  const handleClick = async () => {
+    try {
+      await axios.post(`/question/${questionId}/reaction/`, {
+        type: "like",
+      });
+
+      await axios.get(`/questions/${questionId}/`);
+    } catch (error) {
+      console.error('에러 발생:', error);
+    }
+
+    setIsReacted(true); // 싫어요 취소 역시 api delete 기능이 없음.
   };
 
   return (

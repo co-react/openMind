@@ -1,20 +1,20 @@
 import styled from "styled-components";
 
-import moreIcon from "../../assets/svg/icons/more.svg";
 import { calculateDateDifference } from "../../utils/dateCalculate"
+import moreIcon from "../../assets/svg/icons/more.svg";
 
 import FeedCardAnswer from "./FeedCardAnswer";
 import FeedCardQuestion from "./FeedCardQuestion";
-import AnswerButton from "../badge/AnswerButton";
 import DisLike from "../../domain/reactions/DisLike";
 import Like from "../../domain/reactions/Like";
+import AnswerButton from "../badge/AnswerButton";
 
 function FeedCard({
+  questionId,
   answer,
   content,
   createdAt,
   like,
-  dislike,
   subjectId,
   state="sent"
 }) {
@@ -34,8 +34,8 @@ function FeedCard({
       )}
       <CardFooter>
         <CardFooterContainer>
-          <Like counts={like}/>
-          <DisLike isDislike={dislike}/>
+          <Like counts={like} questionId={questionId}/>
+          <DisLike />
         </CardFooterContainer>
       </CardFooter>
     </FeedCardContainer>

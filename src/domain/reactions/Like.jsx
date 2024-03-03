@@ -1,19 +1,35 @@
 import { useState } from "react";
 import styled, { css } from "styled-components";
 
+import axios from "../../apis/axios";
 import { ReactComponent as likeIcon } from "../../assets/svg/icons/thumbs-up.svg";
 
-function Like({ counts }) {
-  const [isReacted, setIsReacted] = useState(false);
 
-  const handleClick = () => {
-    setIsReacted(!isReacted);
+function Like({ counts, questionId }) {
+  const [isReacted, setIsReacted] = useState(false);
+  const [countLike, setCountLike] =useState(counts);
+
+  const handleClick = async () => {
+    try {
+      await axios.post(`/question/${questionId}/reaction/`, {
+        type: "like",
+      });
+
+      const response = await axios.get(`/questions/${questionId}/`);
+      const data = response.data;
+
+      setCountLike(data.like);
+    } catch (error) {
+      console.error('에러 발생:', error);
+    }
+
+    setIsReacted(true); // 좋아요 취소는 api delete 기능이 없어서 불가능.
   };
 
   return (
     <Button type="button" $isClicked={isReacted} onClick={handleClick}>
       <ThumbsUp />
-      {isReacted ? <ButtonText>좋아요 {counts}</ButtonText> : <ButtonText>좋아요</ButtonText>}
+      {isReacted ? <ButtonText>좋아요 {countLike}</ButtonText> : <ButtonText>좋아요</ButtonText>}
     </Button>
   );
 }
