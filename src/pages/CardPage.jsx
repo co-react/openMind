@@ -1,8 +1,6 @@
 import { useState } from "react";
 import styled from "styled-components";
 
-//import axios from "../apis/axios";
-//import requests from "../apis/request";
 import { useFetchQuestions } from "../hooks/useFetchQuestions";
 import { useMediaQueryForMobile } from "../hooks/useMediaQueryForMobile";
 
@@ -14,9 +12,10 @@ import FeedCardContainer from "../domain/FeedCardContainer";
 import QuestionModal from "../domain/modal/QuestionModal";
 
 function CardPage({id=3856}) { // 현재 id는 하드 코딩
+  const [isPostedQuestion, setIsPostedQuestion] = useState(false);
   const isMobile = useMediaQueryForMobile();
-  const user = useFetchQuestions(id);
   const [isOpenModal, setIsOpenModal] = useState(false);
+  const user = useFetchQuestions(id, isPostedQuestion, setIsPostedQuestion);
 
   const handleClick = () => {
     setIsOpenModal((isOpenModal) => !isOpenModal);
@@ -33,7 +32,13 @@ function CardPage({id=3856}) { // 현재 id는 하드 코딩
         <FloatingButton isMobile={isMobile} onClick={handleClick}/>
       </FloatingButtonLayout>
       {isOpenModal && 
-        <QuestionModal onClose={handleClick} id={id} userName={user.name} imageSource={user.imageSource}/>
+        <QuestionModal 
+          onClose={handleClick} 
+          id={id} 
+          userName={user.name} 
+          imageSource={user.imageSource}
+          setIsPostedQuestion={setIsPostedQuestion}
+        />
       }
     </Layout>
   )

@@ -9,7 +9,7 @@ import messages from "../../assets/svg/icons/messages.svg";
 import Button from "../../components/buttons/Button";
 import InputTextArea from "../../components/input/InputTextArea";
 
-function QuestionModal({ onClose, id, userName, imageSource }) {
+function QuestionModal({ onClose, id, userName, imageSource, setIsPostedQuestion }) {
   const [inputValue, setInputValue] = useState("");
 
   const handleBackgroundClick = () => {
@@ -26,6 +26,7 @@ function QuestionModal({ onClose, id, userName, imageSource }) {
         content: inputValue
       });
 
+      setIsPostedQuestion(true);
       onClose(); // 완료되면 닫음.
     } catch (error) {
       console.error('에러 발생:', error);

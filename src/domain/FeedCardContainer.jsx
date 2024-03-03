@@ -32,11 +32,11 @@ function FeedCardContainer({id, questionCount}) {
     } catch (error) {
       console.error('에러 발생:', error);
     }
-  },[])
+  },[questionCount])
 
   useEffect(() => {
     fetchData();
-  }, [])
+  }, [questionCount])
 
   return (
     <Container $questionCount={questionCount}>
