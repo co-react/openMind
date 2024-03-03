@@ -22,7 +22,7 @@ const NES = () => {
 
 
   return (
-    <CardPage name="아초는 고양이"/>
+    <CardPage />
   ); // 하드 코딩 -> 나중에 변경
 };
 

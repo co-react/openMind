@@ -3,15 +3,15 @@ import styled from "styled-components";
 
 import axios from "../apis/axios";
 import requests from "../apis/request";
-import profileAvatar from "../assets/png/profile1.png";
 import { ReactComponent as LogoIcon } from "../assets/svg/icons/logo.svg";
 
 import FloatingButton from "../components/buttons/FloatingButton";
 import ShareButton from "../components/buttons/ShareButton";
 import FeedCardContainer from "../components/feedCard/FeedCardContainer";
 import Modal from "../components/modal/Modal";
+import Profile from "../domain/Profile";
 
-function CardPage({name, id=3856}) { // 현재 id는 하드 코딩
+function CardPage({id=3856}) { // 현재 id는 하드 코딩
   const [isMobile, setIsMobile] = useState(false);
   const [isOpenModal, setIsOpenModal] = useState(false);
   const [questions, setQuestions] = useState([]);
@@ -20,7 +20,7 @@ function CardPage({name, id=3856}) { // 현재 id는 하드 코딩
     try {
       const response = await axios.get(`${requests.SUBJECTS}${id}/questions/`);
       const data = response.data;
-
+      console.log(data)
       setQuestions(data.results);
     } catch (error) {
       console.error('에러 발생:', error);
@@ -59,8 +59,7 @@ function CardPage({name, id=3856}) { // 현재 id는 하드 코딩
   return (
     <Layout>
       <SmallStyledLogo />
-      <ProfileAvatar src={profileAvatar} />
-      <NameTitle>{name}</NameTitle>
+      <Profile subjectId={id}/>
       <ShareButton />
       <FeedCardContainer questions={questions}/>
       <FloatingButtonLayout>
@@ -91,18 +90,6 @@ const SmallStyledLogo = styled(LogoIcon)`
   justify-content: center;
   align-items: center;
   flex-shrink: 0;
-`
-
-const ProfileAvatar = styled.img``
-
-const NameTitle = styled.span`
-  color: var(--Grayscale-60, #000);
-  font-feature-settings: 'clig' off, 'liga' off;
-  font-family: Actor;
-  font-size: 2.0rem;
-  font-style: normal;
-  font-weight: 400;
-  line-height: 3.0rem;
 `
 
 const FloatingButtonLayout = styled.div`

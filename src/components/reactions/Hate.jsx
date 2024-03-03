@@ -7,10 +7,10 @@ import "./Like.css";
 
 function Hate(isDisliked) {
   const [isReacted, setIsReacted] = useState(false);
-  console.log(isDisliked)
 
   const handleClick = () => {
     setIsReacted((isReacted) => !isReacted);
+    console.log(isDisliked)
   };
 
   return (
