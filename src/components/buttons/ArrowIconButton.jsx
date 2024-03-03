@@ -3,21 +3,13 @@ import { ReactComponent as NextArrow } from "../../assets/svg/icons/next.svg";
 import { BUTTON_STYLE } from "../../style/commonStyles";
 import Button from "../buttons/Button";
 
-function ArrowIconButton({
-  hasIcon,
-  buttonStyle,
-  children,
-  disabled,
-  ...rest
-}) {
+function ArrowIconButton({ hasIcon, variant, children, disabled, ...rest }) {
   return (
     <Button
       disabled={disabled}
-      buttonStyle={buttonStyle}
+      variant={variant}
       rightIcon={
-        hasIcon && (
-          <StyledNextArrow buttonStyle={buttonStyle} disabled={disabled} />
-        )
+        hasIcon && <StyledNextArrow variant={variant} disabled={disabled} />
       }
       {...rest}
     >
@@ -31,8 +23,8 @@ export default ArrowIconButton;
 const StyledNextArrow = styled(NextArrow)`
   fill: ${(props) =>
     props.disabled
-      ? BUTTON_STYLE[props.buttonStyle].disabledColor
-      : BUTTON_STYLE[props.buttonStyle].defaultColor};
+      ? BUTTON_STYLE[props.variant].disabledColor
+      : BUTTON_STYLE[props.variant].defaultColor};
   width: 18px;
   height: 18px;
 `;

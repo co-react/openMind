@@ -28,7 +28,7 @@ function CreateQuestionCard() {
   return (
     <MainForm>
       <InputField placeholder="이름을 입력하세요" onChange={handleChange} />
-      <Button buttonStyle="fill" onClick={handleClick}>
+      <Button variant="fill" onClick={handleClick}>
         질문 받기
       </Button>
     </MainForm>

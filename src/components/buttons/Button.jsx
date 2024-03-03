@@ -1,10 +1,10 @@
 import styled from "styled-components";
 import { BUTTON_STYLE } from "../../style/commonStyles";
 
-function Button({ buttonStyle, children, rightIcon, disabled, ...rest }) {
+function Button({ variant, children, rightIcon, disabled, ...rest }) {
   return (
     <StyledButton
-      buttonStyle={buttonStyle}
+      variant={variant}
       rightIcon={rightIcon}
       disabled={disabled}
       {...rest}
@@ -21,38 +21,37 @@ export default Button;
 const StyledButton = styled.button`
   display: flex;
   padding: ${(props) =>
-    props.buttonStyle === "outline" ? "0.8rem 1.2rem" : "1.2rem 2.4rem"};
+    props.variant === "outline" ? "0.8rem 1.2rem" : "1.2rem 2.4rem"};
   justify-content: center;
   align-items: center;
   gap: 0.4rem;
-  color: ${(props) => BUTTON_STYLE[props.buttonStyle].defaultColor};
+  color: ${(props) => BUTTON_STYLE[props.variant].defaultColor};
   font-size: 1.4rem;
   border-radius: 0.8rem;
   box-shadow: inset 0 0 0 0.1rem var(--Brown-40);
-  background-color: ${(props) =>
-    BUTTON_STYLE[props.buttonStyle].backgroundColor};
+  background-color: ${(props) => BUTTON_STYLE[props.variant].backgroundColor};
   box-sizing: border-box;
   border: none;
   outline: none;
 
   &:active {
     box-shadow: inset 0 0 0 0.2rem
-      ${(props) => BUTTON_STYLE[props.buttonStyle].activeBoxShadowColor};
+      ${(props) => BUTTON_STYLE[props.variant].activeBoxShadowColor};
     background-color: ${(props) =>
-      BUTTON_STYLE[props.buttonStyle].activeBackgroundColor};
+      BUTTON_STYLE[props.variant].activeBackgroundColor};
   }
 
   &:hover {
     box-shadow: inset 0 0 0 0.2rem
-      ${(props) => BUTTON_STYLE[props.buttonStyle].hover};
+      ${(props) => BUTTON_STYLE[props.variant].hover};
   }
 
   &:disabled {
-    color: ${(props) => BUTTON_STYLE[props.buttonStyle].disabledColor};
+    color: ${(props) => BUTTON_STYLE[props.variant].disabledColor};
     background-color: ${(props) =>
-      BUTTON_STYLE[props.buttonStyle].disabledBackgroundColor};
+      BUTTON_STYLE[props.variant].disabledBackgroundColor};
     box-shadow: inset 0 0 0 0.1rem
-      ${(props) => BUTTON_STYLE[props.buttonStyle].disabledBoxShadow};
+      ${(props) => BUTTON_STYLE[props.variant].disabledBoxShadow};
   }
 
   @media (min-width: 768px) {

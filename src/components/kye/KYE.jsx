@@ -10,24 +10,24 @@ function KYE() {
     <Form>
       <InputField placeholder="이름을 입력하세요" />
       <InputTextArea placeholder="이름을 입력하세요" />
-      <Button buttonStyle="fill">fill버튼</Button>
-      <Button buttonStyle="fill" hasIcon>
+      <Button variant="fill">fill버튼</Button>
+      <Button variant="fill" hasIcon>
         fill버튼 아이콘 O
       </Button>
-      <Button buttonStyle="fill" disabled>
+      <Button variant="fill" disabled>
         fill버튼 disabled
       </Button>
-      <Button buttonStyle="fill" hasIcon disabled>
+      <Button variant="fill" hasIcon disabled>
         fill버튼 disabled 아이콘 O
       </Button>
-      <Button buttonStyle="outline">outline버튼</Button>
-      <Button buttonStyle="outline" hasIcon>
+      <Button variant="outline">outline버튼</Button>
+      <Button variant="outline" hasIcon>
         outline버튼
       </Button>
-      <Button buttonStyle="outline" disabled>
+      <Button variant="outline" disabled>
         outline버튼 disabled
       </Button>
-      <Button buttonStyle="outline" disabled hasIcon>
+      <Button variant="outline" disabled hasIcon>
         outline버튼 disabled 아이콘 O
       </Button>
       <ShareButton />
