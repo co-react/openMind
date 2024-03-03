@@ -1,10 +1,10 @@
 import styled from "styled-components";
 
-function FeedCardQuestion({ queDate, queDesc }) {
+function FeedCardQuestion({ queDate, content }) {
   return (
     <QuestionContainer>
       <QuestionTitle>질문 · {queDate}</QuestionTitle>
-      <QuestionDescription>{queDesc}</QuestionDescription>
+      <QuestionDescription>{content}</QuestionDescription>
     </QuestionContainer>
   );
 }

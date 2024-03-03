@@ -9,13 +9,12 @@ import Like from "../reactions/Like";
 
 function FeedCard({
   answer,
-  //content,
+  content,
   //createdAt,
   like,
   dislike,
   //subjectId,
   queDate = "2주전",
-  queDesc = "좋아하는 동물은?좋아하는 동물은?좋아하는 동물은? 좋아하동 물은?",
   ansName = "아초는고양이",
   ansDate = "2주전",
   state = "Sent",
@@ -27,14 +26,19 @@ function FeedCard({
         <AnswerButton isAnswered={answer} />
         <img src={moreIcon} alt="" />
       </CardTopContainer>
-      <FeedCardQuestion queDate={queDate} queDesc={queDesc} />
-      <FeedCardAnswer
+      <FeedCardQuestion queDate={queDate} content={content} />
+      {answer ? (
+        <FeedCardAnswer
+        answer={answer}
         profile={profileImage}
         ansName={ansName}
         ansDate={ansDate}
         ansDesc={ansDesc}
         state={state}
       />
+      ) : (
+        <></>
+      )}
       <CardFooter>
         <CardFooterContainer>
           <Like counts={like}/>

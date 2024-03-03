@@ -3,7 +3,9 @@ import styled from "styled-components";
 import Button from "../buttons/Button";
 import InputTextArea from "../input/InputTextArea";
 
-function FeedCardAnswer({ profile, ansName, ansDate, ansDesc, state }) {
+function FeedCardAnswer({ answer, profile, ansName, ansDate, ansDesc, state }) {
+  const {id, questionId, content, isRejected, createdAt} = answer;
+  console.log(id, questionId, content, isRejected, createdAt, ansDesc)
   const [inputValue, setInputValue] = useState("");
 
   const handleInputChange = (event) => {
@@ -30,7 +32,7 @@ function FeedCardAnswer({ profile, ansName, ansDate, ansDesc, state }) {
             </Button>
           </>
         ) : state === "Sent" ? (
-          <AnswerDescription>{ansDesc}</AnswerDescription>
+          <AnswerDescription>{content}</AnswerDescription>
         ) : state === "Resection" ? (
           <AnswerResection>답변 거절</AnswerResection>
         ) : null}
