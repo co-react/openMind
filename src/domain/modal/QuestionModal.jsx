@@ -9,7 +9,13 @@ import messages from "../../assets/svg/icons/messages.svg";
 import Button from "../../components/buttons/Button";
 import InputTextArea from "../../components/input/InputTextArea";
 
-function QuestionModal({ onClose, id, userName, imageSource, setIsPostedQuestion }) {
+function QuestionModal({
+  onClose,
+  id,
+  userName,
+  imageSource,
+  setIsPostedQuestion,
+}) {
   const [inputValue, setInputValue] = useState("");
 
   const handleBackgroundClick = () => {
@@ -23,15 +29,15 @@ function QuestionModal({ onClose, id, userName, imageSource, setIsPostedQuestion
   const handleClick = async () => {
     try {
       await axios.post(`${requests.SUBJECTS}${id}/questions/`, {
-        content: inputValue
+        content: inputValue,
       });
 
       setIsPostedQuestion(true);
       onClose(); // 완료되면 닫음.
     } catch (error) {
-      console.error('에러 발생:', error);
+      console.error("에러 발생:", error);
     }
-  }
+  };
 
   return (
     <Background onClick={handleBackgroundClick}>
@@ -54,7 +60,11 @@ function QuestionModal({ onClose, id, userName, imageSource, setIsPostedQuestion
             value={inputValue}
             onChange={handleInputChange}
           />
-          <Button color="brown" disabled={inputValue.trim() === ""} onClick={handleClick}>
+          <Button
+            variant="fill"
+            disabled={inputValue.trim() === ""}
+            onClick={handleClick}
+          >
             질문 보내기
           </Button>
         </ModalContents>
@@ -82,11 +92,11 @@ const ModalContainer = styled.div`
   transform: translate(-50%, -50%);
   width: 32.7rem;
   height: 56.8rem;
-  padding: 4.0rem;
+  padding: 4rem;
   flex-shrink: 0;
   border-radius: 2.4rem;
   background: var(--Grayscale-10, #fff);
-  box-shadow: 0rem 1.6rem 2.0rem 0rem rgba(48, 48, 48, 0.62);
+  box-shadow: 0rem 1.6rem 2rem 0rem rgba(48, 48, 48, 0.62);
   cursor: default;
   display: flex;
   flex-direction: column;
@@ -106,7 +116,7 @@ const ModalTop = styled.div`
 const Title = styled.div`
   display: flex;
   gap: 0.8rem;
-  font-size: 2.0rem;
+  font-size: 2rem;
   font-style: normal;
   font-weight: 400;
   line-height: 125%;
@@ -163,6 +173,6 @@ const ModalInputTextArea = styled(InputTextArea)`
   height: 35.8rem;
 
   @media screen and (min-width: 768px) {
-    height: 18.0rem;
+    height: 18rem;
   }
-`
+`;
