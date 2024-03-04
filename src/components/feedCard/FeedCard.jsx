@@ -1,23 +1,14 @@
 import styled from "styled-components";
 
-import { calculateDateDifference } from "../../utils/dateCalculate"
-import moreIcon from "../../assets/svg/icons/more.svg";
-
 import FeedCardAnswer from "./FeedCardAnswer";
 import FeedCardQuestion from "./FeedCardQuestion";
+import moreIcon from "../../assets/svg/icons/more.svg";
 import DisLike from "../../domain/reactions/DisLike";
 import Like from "../../domain/reactions/Like";
+import { calculateDateDifference } from "../../utils/dateCalculate";
 import AnswerButton from "../badge/AnswerButton";
 
-function FeedCard({
-  questionId,
-  answer,
-  content,
-  createdAt,
-  like,
-  subjectId,
-  state="sent"
-}) {
+function FeedCard({ questionId, answer, content, createdAt, like, subjectId, state = "sent" }) {
   return (
     <FeedCardContainer>
       <CardTopContainer>
@@ -25,13 +16,7 @@ function FeedCard({
         <img src={moreIcon} alt="" />
       </CardTopContainer>
       <FeedCardQuestion createdAt={calculateDateDifference(createdAt)} content={content} />
-      {answer && (
-        <FeedCardAnswer
-        subjectId={subjectId}
-        answer={answer}
-        state={state}
-      />
-      )}
+      {answer && <FeedCardAnswer subjectId={subjectId} answer={answer} state={state} />}
       <CardFooter>
         <CardFooterContainer>
           <Like counts={like} questionId={questionId} />
@@ -46,7 +31,6 @@ export default FeedCard;
 
 const FeedCardContainer = styled.div`
   width: 100%;
-  height: 100%;
   padding: 2.4rem;
   display: flex;
   flex-direction: column;
@@ -55,6 +39,7 @@ const FeedCardContainer = styled.div`
   border-radius: 1.6rem;
   background: var(--Grayscale-10, #fff);
   box-shadow: 0px 4px 4px 0px rgba(140, 140, 140, 0.25);
+  background-color: ${(props) => props.theme.colors.colorBg};
 
   @media (min-width: 768px) {
     width: 68.4rem;
