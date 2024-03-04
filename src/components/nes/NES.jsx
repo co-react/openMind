@@ -7,20 +7,22 @@ import CardPage from '../../pages/CardPage';
 
 
 const NES = () => {
-  // const fetchData = useCallback(async () => {
-  //   const response = await axios.get(requests.SUBJECTS);
-  //   //console.log(response)
-  //   return response;
-  // },[])
+  const fetchData = useCallback(async () => {
+    try {
+      await axios.get(requests.SUBJECTS);
+    } catch (error) {
+      console.error('에러 발생:', error);
+    }
+  },[])
 
-  // useEffect(() => {
-  //   fetchData();
-  // })
+  useEffect(() => {
+    fetchData();
+  })
 
 
   return (
     <CardPage />
-  );
+  ); // 하드 코딩 -> 나중에 변경
 };
 
 export default NES;

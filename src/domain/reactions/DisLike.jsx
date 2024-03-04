@@ -1,26 +1,35 @@
 import { useState } from "react";
 import styled, { css } from "styled-components";
 
+import axios from "../../apis/axios";
 import { ReactComponent as hateIcon } from "../../assets/svg/icons/thumbs-down.svg";
 
-import "./Like.css";
-
-function Hate() {
+function DisLike({ questionId }) {
   const [isReacted, setIsReacted] = useState(false);
 
-  const handleClick = () => {
-    setIsReacted(!isReacted);
+  const handleClick = async () => {
+    try {
+      await axios.post(`/questions/${questionId}/reaction/`, {
+        type: "dislike",
+      });
+
+      await axios.get(`/questions/${questionId}/`);
+    } catch (error) {
+      console.error('에러 발생:', error);
+    }
+
+    setIsReacted(true); // 싫어요 취소 역시 api delete 기능이 없음.
   };
 
   return (
-    <Button isClicked={isReacted} onClick={handleClick}>
+    <Button $isClicked={isReacted} onClick={handleClick}>
       <ThumbsDown />
       <ButtonText>싫어요</ButtonText>
     </Button>
   );
 }
 
-export default Hate;
+export default DisLike;
 
 const ButtonText = styled.span`
   color: var(--Grayscale-40, #818181);
@@ -45,7 +54,7 @@ const Button = styled.button`
   border: none;
   background-color: #ffffff;
   ${(props) =>
-    props.isClicked &&
+    props.$isClicked &&
     css`
       ${ButtonText} {
         color: #000000;
