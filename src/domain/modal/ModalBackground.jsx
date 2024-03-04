@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import Modal from "./Modal.jsx";
+import QuestionModal from "./QuestionModal.jsx";
 
 function ModalBackground({ onClose }) {
   const handleBackgroundClick = () => {
@@ -8,7 +8,7 @@ function ModalBackground({ onClose }) {
 
   return (
     <Background onClick={handleBackgroundClick}>
-      <Modal></Modal>
+      <QuestionModal />
     </Background>
   );
 }
