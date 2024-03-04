@@ -15,13 +15,13 @@ function PGB() {
   const [pages, setPages] = useState(0); //총 페이지 수
   const [startPage, setStartPage] = useState(1); //시작 페이지
   const [endPage, setEndPage] = useState(2); //끝 페이지 (수정 필요)
-  const [clickedPage, setClickedPage] = useState(0); //누른 페이지 숫자
+  const [clickedPage, setClickedPage] = useState(1); //누른 페이지 숫자
   const [offset, setOffset] = useState(0);
   const [limit, setLimit] = useState(8);
 
-  //이름순 최신순을 위한 코드
-  //const sortTimeUrl = `&sort=time`;
-  const sortNameUrl = `&sort=name`;
+  //이름순 최신순을 위한 코드 api URL에 붙여줄 코드
+  const sortTimeUrl = `&sort=time`;
+  //const sortNameUrl = `&sort=name`;
 
   //오프셋 리미트를 위한 코드
   const offsetUrl = `?limit=${limit}&offset=${offset}`;
@@ -30,7 +30,7 @@ function PGB() {
     async function getCardList() {
       try {
         const response = await axios.get(
-          requests.SUBJECTS + offsetUrl + sortNameUrl
+          requests.SUBJECTS + offsetUrl + sortTimeUrl
         );
         setCardList(response.data);
         setNextUrl(response.data.next);
@@ -67,8 +67,6 @@ function PGB() {
     setOffset(8 * i - 8);
     setClickedPage(i);
     console.log(offset);
-    //console.log(cardList.results.length);
-    //const newOffset = cardList.results.length;
   };
 
   const handleBeforePage = () => {
@@ -77,6 +75,7 @@ function PGB() {
     }
     setStartPage(startPage - 2);
     setEndPage(endPage - 2);
+    setClickedPage(startPage - 2);
   };
 
   const handleAfterPage = () => {
@@ -84,7 +83,7 @@ function PGB() {
       return;
     }
     setStartPage(startPage + 2);
-
+    setClickedPage(startPage + 2);
     //이 케이스는 페이지네이션을 일정한 값을 더해가면서 넘기는데
     //기존의 총 페이지 수보다 클 경우를 대비
     if (endPage + 2 > pages) {
