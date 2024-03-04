@@ -1,9 +1,6 @@
 import { styled } from "styled-components";
 import messageIcon from "../../assets/svg/icons/messages.svg";
-//messageIcon.svg 삭제
-
-//프로필 사진과 프로필의 이름,
-//그리고 9개라고 적힌것은 props로 받아야 할 것 같습니다.
+import { BoxShadow2 } from "../../style/commonStyles";
 
 function UserCard({ profileImg, profileName, questionCount }) {
   return (
@@ -37,6 +34,12 @@ const CardContainer = styled.div`
   border-radius: 1.6rem;
   border: 0.1rem solid var(--Grayscale-40, #818181);
   background: var(--Grayscale-10, #fff);
+
+  &:hover {
+    ${BoxShadow2};
+    transform: translate(0px, -10%);
+    transition: 0.3s;
+  }
 
   @media (max-width: 768px) {
     padding: 1.6rem;
