@@ -19,7 +19,6 @@ function PGB() {
   const [clickedPage, setClickedPage] = useState(1); //누른 페이지 숫자
   const [offset, setOffset] = useState(0);
   const [limit, setLimit] = useState(8);
-  const [sortOption, setSortOption] = useState("최신순"); // 선택된 정렬 옵션을 상태로 관리
   const [sortUrl, setSortUrl] = useState("&sort=time");
 
   //이름순 최신순을 위한 코드 api URL에 붙여줄 코드
@@ -41,14 +40,16 @@ function PGB() {
         setPages(Math.ceil(cards / 8)); // 총 페이지 수 계산
         setLimit(8);
         //setOffset(8);
+        console.log(1);
       } catch (error) {
         console.error("에러 발생:", error);
       }
     }
 
     getCardList();
-  }, [offset, sortOption]);
+  }, [offset, sortUrl]);
 
+  //페이지네이션 랜더링 함수
   const renderPageNumbers = () => {
     const pageNumbers = [];
     for (let i = startPage; i <= endPage; i++) {
@@ -65,20 +66,23 @@ function PGB() {
     return pageNumbers;
   };
 
+  //이름순 최신순을 고르면 URL이 바뀌는 코드
+  //option값을 조건을 주어 sortUrl변경
   const handleSortOption = (option) => {
-    setSortOption(option); // 선택된 정렬 옵션을 상태로 업데이트
-    if (sortOption == "이름순") {
+    if (option == "이름순") {
       setSortUrl("&sort=name");
     } else {
       setSortUrl("&sort=time");
     }
   };
 
+  //페이지 네이션의 각 페이지 숫자를 클릭하면 실행되는 함수
   const handleClickPage = (i) => {
     setOffset(8 * i - 8);
     setClickedPage(i);
   };
 
+  //페이지 네이션의 왼쪽 화살표를 누르면 실행되는 함수
   const handleBeforePage = () => {
     if (startPage == 1) {
       return;
@@ -89,6 +93,7 @@ function PGB() {
     setOffset(8 * (startPage - 2) - 8);
   };
 
+  //페이지 네이션의 오른쪽 화살표를 누르면 실행되는 함수
   const handleAfterPage = () => {
     if (endPage == pages) {
       return;
