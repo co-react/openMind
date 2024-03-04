@@ -5,6 +5,7 @@ import axios from "../../apis/axios";
 import requests from "../../apis/request";
 import { ReactComponent as ArrowLeftIcon } from "../../assets/svg/icons/arrow-left.svg";
 import { ReactComponent as ArrowRightIcon } from "../../assets/svg/icons/arrow-right.svg";
+import Dropdown from "../dropdown/Dropdown";
 import Pagination from "../pagination/Pagination";
 import UserCard from "../userCard/UserCard";
 
@@ -18,9 +19,11 @@ function PGB() {
   const [clickedPage, setClickedPage] = useState(1); //누른 페이지 숫자
   const [offset, setOffset] = useState(0);
   const [limit, setLimit] = useState(8);
+  const [sortOption, setSortOption] = useState("최신순"); // 선택된 정렬 옵션을 상태로 관리
+  const [sortUrl, setSortUrl] = useState("&sort=time");
 
   //이름순 최신순을 위한 코드 api URL에 붙여줄 코드
-  const sortTimeUrl = `&sort=time`;
+  //const sortTimeUrl = `&sort=time`;
   //const sortNameUrl = `&sort=name`;
 
   //오프셋 리미트를 위한 코드
@@ -30,7 +33,7 @@ function PGB() {
     async function getCardList() {
       try {
         const response = await axios.get(
-          requests.SUBJECTS + offsetUrl + sortTimeUrl
+          requests.SUBJECTS + offsetUrl + sortUrl
         );
         setCardList(response.data);
         setNextUrl(response.data.next);
@@ -44,7 +47,7 @@ function PGB() {
     }
 
     getCardList();
-  }, [offset]);
+  }, [offset, sortOption]);
 
   const renderPageNumbers = () => {
     const pageNumbers = [];
@@ -62,11 +65,18 @@ function PGB() {
     return pageNumbers;
   };
 
+  const handleSortOption = (option) => {
+    setSortOption(option); // 선택된 정렬 옵션을 상태로 업데이트
+    if (sortOption == "이름순") {
+      setSortUrl("&sort=name");
+    } else {
+      setSortUrl("&sort=time");
+    }
+  };
+
   const handleClickPage = (i) => {
-    console.log(i);
     setOffset(8 * i - 8);
     setClickedPage(i);
-    console.log(offset);
   };
 
   const handleBeforePage = () => {
@@ -76,6 +86,7 @@ function PGB() {
     setStartPage(startPage - 2);
     setEndPage(endPage - 2);
     setClickedPage(startPage - 2);
+    setOffset(8 * (startPage - 2) - 8);
   };
 
   const handleAfterPage = () => {
@@ -84,6 +95,7 @@ function PGB() {
     }
     setStartPage(startPage + 2);
     setClickedPage(startPage + 2);
+    setOffset(8 * (startPage + 2) - 8);
     //이 케이스는 페이지네이션을 일정한 값을 더해가면서 넘기는데
     //기존의 총 페이지 수보다 클 경우를 대비
     if (endPage + 2 > pages) {
@@ -95,6 +107,7 @@ function PGB() {
 
   return (
     <div>
+      <Dropdown onSelect={handleSortOption} />
       {cardList.results &&
         cardList.results.map((item) => (
           <>

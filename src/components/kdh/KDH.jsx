@@ -1,7 +1,7 @@
 import { useState } from "react";
 import styled from "styled-components";
-import FeedCard from "../feedCard/FeedCard";
 import QuestionModal from "../../domain/modal/QuestionModal";
+import FeedCard from "../feedCard/FeedCard";
 // import ModalBackground from "../modal/ModalBackground";
 
 function KDH() {

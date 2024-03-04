@@ -1,12 +1,11 @@
 import styled from "styled-components";
 
-import { calculateDateDifference } from "../../utils/dateCalculate"
-import moreIcon from "../../assets/svg/icons/more.svg";
-
 import FeedCardAnswer from "./FeedCardAnswer";
 import FeedCardQuestion from "./FeedCardQuestion";
+import moreIcon from "../../assets/svg/icons/more.svg";
 import DisLike from "../../domain/reactions/DisLike";
 import Like from "../../domain/reactions/Like";
+import { calculateDateDifference } from "../../utils/dateCalculate";
 import AnswerButton from "../badge/AnswerButton";
 
 function FeedCard({
@@ -16,7 +15,7 @@ function FeedCard({
   createdAt,
   like,
   subjectId,
-  state="sent"
+  state = "sent",
 }) {
   return (
     <FeedCardContainer>
@@ -24,13 +23,12 @@ function FeedCard({
         <AnswerButton isAnswered={answer} />
         <img src={moreIcon} alt="" />
       </CardTopContainer>
-      <FeedCardQuestion createdAt={calculateDateDifference(createdAt)} content={content} />
-      {answer && (
-        <FeedCardAnswer
-        subjectId={subjectId}
-        answer={answer}
-        state={state}
+      <FeedCardQuestion
+        createdAt={calculateDateDifference(createdAt)}
+        content={content}
       />
+      {answer && (
+        <FeedCardAnswer subjectId={subjectId} answer={answer} state={state} />
       )}
       <CardFooter>
         <CardFooterContainer>

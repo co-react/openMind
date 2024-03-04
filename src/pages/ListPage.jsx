@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import { styled } from "styled-components";
 import logo from "../assets/svg/icons/logo.svg";
-import { ReactComponent as NextArrow } from "../assets/svg/icons/next.svg";
+//import { ReactComponent as NextArrow } from "../assets/svg/icons/next.svg";
 import BaseButton from "../components/buttons/Button";
 import Dropdown from "../components/dropdown/Dropdown";
 import KDH from "../components/kdh/KDH";
@@ -16,9 +16,8 @@ function ListPage() {
           <Link to={`/`} element={<KDH />}>
             <Logo src={logo} alt="로고 이미지" />
           </Link>
-          <BaseButton>
+          <BaseButton variant="outline" hasIcon>
             답변하러가기
-            <NextArrow fill="#542F1A" />
           </BaseButton>
         </Header>
       </HeaderDiv>

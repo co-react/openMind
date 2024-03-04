@@ -1,7 +1,7 @@
-// import { useCallback, useEffect } from 'react'
+import { useCallback, useEffect } from "react";
 
-// import axios from "../../apis/axios";
-// import requests from "../../apis/request";
+import axios from "../../apis/axios";
+import requests from "../../apis/request";
 
 import CardPage from "../../pages/CardPage";
 
