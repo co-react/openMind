@@ -1,9 +1,9 @@
 import { useState } from "react";
 import styled from "styled-components";
 import QuestionModal from "../../domain/modal/QuestionModal";
+import { ThemeModeButton } from "../buttons/ToggleButton";
 import FeedCard from "../feedCard/FeedCard";
 // import ModalBackground from "../modal/ModalBackground";
-import { ThemeModeButton } from "../buttons/ToggleButton";
 
 function KDH({ themeMode, toggleTheme }) {
   const [isModalOpen, setIsModalOpen] = useState(false);
