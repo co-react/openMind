@@ -25,20 +25,24 @@ function FeedCardContainer({ id, questionCount }) {
     <Container $questionCount={questionCount}>
       <QuestionContainer>
         <MessageIcon />
-        <QuestionsCountText>{questionCount}개의 질문이 있습니다</QuestionsCountText>
+        <QuestionsCountText>
+          {questionCount}개의 질문이 있습니다
+        </QuestionsCountText>
       </QuestionContainer>
       <FeedCardList>
-        {questions.map(({ id, answer, content, createdAt, like, subjectId }) => (
-          <FeedCard
-            key={id}
-            questionId={id}
-            answer={answer}
-            content={content}
-            createdAt={createdAt}
-            like={like}
-            subjectId={subjectId}
-          />
-        ))}
+        {questions.map(
+          ({ id, answer, content, createdAt, like, subjectId }) => (
+            <FeedCard
+              key={id}
+              questionId={id}
+              answer={answer}
+              content={content}
+              createdAt={createdAt}
+              like={like}
+              subjectId={subjectId}
+            />
+          )
+        )}
       </FeedCardList>
     </Container>
   );

@@ -10,7 +10,15 @@ import { calculateDateDifference } from "../../utils/dateCalculate";
 import AnswerButton from "../badge/AnswerButton";
 import EditDropdownMenu from "../dropdown/EditDropdownMenu";
 
-function FeedCard({ questionId, answer, content, createdAt, like, subjectId, state = "sent" }) {
+function FeedCard({
+  questionId,
+  answer,
+  content,
+  createdAt,
+  like,
+  subjectId,
+  state = "sent",
+}) {
   const [isEditMenuVisible, setEditMenuVisible] = useState(false);
 
   const handleClick = () => {
@@ -31,8 +39,13 @@ function FeedCard({ questionId, answer, content, createdAt, like, subjectId, sta
           )}
         </KebabContainer>
       </CardTopContainer>
-      <FeedCardQuestion createdAt={calculateDateDifference(createdAt)} content={content} />
-      {answer && <FeedCardAnswer subjectId={subjectId} answer={answer} state={state} />}
+      <FeedCardQuestion
+        createdAt={calculateDateDifference(createdAt)}
+        content={content}
+      />
+      {answer && (
+        <FeedCardAnswer subjectId={subjectId} answer={answer} state={state} />
+      )}
       <CardFooter>
         <CardFooterContainer>
           <Like counts={like} questionId={questionId} />

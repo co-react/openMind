@@ -1,9 +1,9 @@
 import { useState } from "react";
 import styled from "styled-components";
 import QuestionModal from "../../domain/modal/QuestionModal";
-// import ModalBackground from "../modal/ModalBackground";
 import { ThemeModeButton } from "../buttons/ToggleButton";
 import FeedCard from "../feedCard/FeedCard";
+// import ModalBackground from "../modal/ModalBackground";
 
 function KDH({ themeMode, toggleTheme }) {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -15,13 +15,18 @@ function KDH({ themeMode, toggleTheme }) {
   return (
     <KDHBackground>
       <KdhTextArea>
-        <h1>안녕하세요 감사해요 잘있어요 다시만나요 아침해가 뜨면~ 아침해가 뜨면~ </h1>
+        <h1>
+          안녕하세요 감사해요 잘있어요 다시만나요 아침해가 뜨면~ 아침해가 뜨면~{" "}
+        </h1>
       </KdhTextArea>
       <FeedCard1></FeedCard1>
       <br />
       {isModalOpen && <QuestionModal onClose={handleClick} />}
       <Button onClick={handleClick}>클릭</Button>
-      <ThemeModeButton themeMode={themeMode} toggleTheme={toggleTheme}></ThemeModeButton>
+      <ThemeModeButton
+        themeMode={themeMode}
+        toggleTheme={toggleTheme}
+      ></ThemeModeButton>
     </KDHBackground>
   );
 }

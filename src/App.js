@@ -18,7 +18,8 @@ function App() {
   const [themeMode, setThemeMode] = useState(localThemeMode);
 
   const toggleTheme = () => {
-    const newThemeMode = themeMode === "lightTheme" ? "darkTheme" : "lightTheme";
+    const newThemeMode =
+      themeMode === "lightTheme" ? "darkTheme" : "lightTheme";
     setThemeMode(newThemeMode);
     window.localStorage.setItem("theme", newThemeMode);
   };
@@ -33,7 +34,6 @@ function App() {
           <Routes>
             <Route path="/" element={<MainTest />}></Route>
             <Route path="/main" element={<Main />}></Route>
-            <Route path="/list"></Route>
             <Route path="/list" element={<ListPage />}></Route>
             <Route path="/post">
               <Route path=":id"></Route>
