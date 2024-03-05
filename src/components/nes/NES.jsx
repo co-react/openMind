@@ -3,7 +3,8 @@ import { useCallback, useEffect } from "react";
 import axios from "../../apis/axios";
 import requests from "../../apis/request";
 
-import CardPage from "../../pages/CardPage";
+import CardPage from '../../pages/CardPage';
+
 
 const NES = () => {
   const fetchData = useCallback(async () => {
@@ -18,7 +19,10 @@ const NES = () => {
     fetchData();
   });
 
-  return <CardPage />; // 하드 코딩 -> 나중에 변경
+
+  return (
+    <CardPage />
+  ); // 하드 코딩 -> 나중에 변경
 };
 
 export default NES;
