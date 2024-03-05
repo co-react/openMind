@@ -26,7 +26,7 @@ function FeedCardContainer({ id, questionCount }) {
       <QuestionContainer>
         <MessageIcon />
         <QuestionsCountText>
-          {questions.length}개의 질문이 있습니다
+          {questionCount}개의 질문이 있습니다
         </QuestionsCountText>
       </QuestionContainer>
       <FeedCardList>
