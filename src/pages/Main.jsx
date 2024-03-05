@@ -12,7 +12,7 @@ function Main() {
       <Link to="/main">
         <MainLogo />
       </Link>
-      <Link to="/link">
+      <Link to="/list">
         <GoToASK variant="outline" hasIcon>
           질문하러 가기
         </GoToASK>
