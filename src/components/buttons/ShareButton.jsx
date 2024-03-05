@@ -1,18 +1,32 @@
-import styled from "styled-components";
-import { ReactComponent as KakaoLogo } from "../../assets/svg/icons/Kakaotalk.svg";
-import { ReactComponent as FacebookLogo } from "../../assets/svg/icons/Facebook.svg";
-import { ReactComponent as LinkLogo } from "../../assets/svg/icons/link.svg";
 import { Link } from "react-router-dom";
+import styled from "styled-components";
 
-function LinkButton() {
-  
+import { ReactComponent as FacebookLogo } from "../../assets/svg/icons/Facebook.svg";
+import { ReactComponent as KakaoLogo } from "../../assets/svg/icons/Kakaotalk.svg";
+import { ReactComponent as LinkLogo } from "../../assets/svg/icons/link.svg";
+
+function LinkButton({ setIsOpenToast }) {
+  const handleClick = (text) => {
+    const $textarea = document.createElement("textarea");
+
+    document.body.appendChild($textarea);
+
+    $textarea.value = text;
+    $textarea.select();
+
+    document.execCommand("copy");
+    document.body.removeChild($textarea);
+
+    setIsOpenToast(true);
+  };
+
   return (
     <LinkList>
-      <Link to="/">
-        <LinkItem color="var(--Brown-40)">
+      <LinkItem color="var(--Brown-40)">
+        <Button onClick={() => {handleClick(window.location.href)}}>
           <LinkLogo fill="white" width={18} />
-        </LinkItem>
-      </Link>
+        </Button>
+      </LinkItem>
       <Link to="/">
         <LinkItem color="var(--Yellow-50)">
           <KakaoLogo width={18} />
@@ -47,6 +61,13 @@ export default LinkButton;
 //     </LinkList>
 //   );
 // }
+
+const Button = styled.button`
+  width: 4rem;
+  height: 4rem;
+  border-radius: 100%;
+  background-color: var(--Brown-40);
+`
 
 const LinkList = styled.ul`
   display: flex;

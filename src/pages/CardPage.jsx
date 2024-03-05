@@ -1,10 +1,14 @@
 import { useState } from "react";
 import styled from "styled-components";
 
+import { useFetchQuestionSubject } from "../hooks/useFetchQuestionSubject";
+import { useMediaQueryForMobile } from "../hooks/useMediaQueryForMobile";
+
 import { ReactComponent as LogoIcon } from "../assets/svg/icons/logo.svg";
 
 import FloatingButton from "../components/buttons/FloatingButton";
 import ShareButton from "../components/buttons/ShareButton";
+import Toast from "../components/toast/Toast";
 import FeedCardContainer from "../domain/FeedCardContainer";
 import QuestionModal from "../domain/modal/QuestionModal";
 import { useFetchQuestionSubject } from "../hooks/useFetchQuestionSubject";
@@ -15,11 +19,7 @@ function CardPage({ id = 3856 }) {
   const [isPostedQuestion, setIsPostedQuestion] = useState(false);
   const isMobile = useMediaQueryForMobile();
   const [isOpenModal, setIsOpenModal] = useState(false);
-  const user = useFetchQuestionSubject(
-    id,
-    isPostedQuestion,
-    setIsPostedQuestion
-  );
+  const user = useFetchQuestionSubject(id, isPostedQuestion, setIsPostedQuestion);
 
   const handleClick = () => {
     setIsOpenModal((isOpenModal) => !isOpenModal);
@@ -31,7 +31,7 @@ function CardPage({ id = 3856 }) {
       <ProfileImg src={user.imageSource} />
       <NameTitle>{user.name}</NameTitle>
       <ShareButton />
-      <FeedCardContainer id={id} questionCount={user.questionCount} />
+      <FeedCardContainer id={id} questionCount={user.questionCount}/>
       <FloatingButtonLayout>
         <FloatingButton isMobile={isMobile} onClick={handleClick} />
       </FloatingButtonLayout>
@@ -43,7 +43,7 @@ function CardPage({ id = 3856 }) {
           imageSource={user.imageSource}
           setIsPostedQuestion={setIsPostedQuestion}
         />
-      )}
+      }
     </Layout>
   );
 }
@@ -77,7 +77,7 @@ const FloatingButtonLayout = styled.div`
   position: fixed;
   bottom: 24px;
   right: 24px;
-`;
+`
 
 const NameTitle = styled.span`
   color: var(--Grayscale-60, #000);
@@ -103,4 +103,4 @@ const ProfileImg = styled.img`
     width: 13.6rem;
     height: 13.6rem;
   }
-`;
+`
