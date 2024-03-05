@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
-import { ReactComponent as EditIcon } from "../../assets/svg/icons/edit.svg";
 import { ReactComponent as DeleteIcon } from "../../assets/svg/icons/close.svg";
+import { ReactComponent as EditIcon } from "../../assets/svg/icons/edit.svg";
 
 function EditDropdownMenu() {
   return (
@@ -36,9 +36,7 @@ const Container = styled.div`
 
 const Title = styled.span`
   color: var(--Grayscale-50, #515151);
-  font-feature-settings:
-    "clig" off,
-    "liga" off;
+  font-feature-settings: "clig" off, "liga" off;
   font-family: Pretendard;
   font-size: 1.4rem;
   font-style: normal;
@@ -57,7 +55,8 @@ const Wrapper = styled.button`
   border: none;
   &:hover {
     svg {
-      filter: invert(30%) sepia(87%) saturate(2359%) hue-rotate(204deg) brightness(100%) contrast(90%);
+      filter: invert(30%) sepia(87%) saturate(2359%) hue-rotate(204deg)
+        brightness(100%) contrast(90%);
       transition: 0.5s;
     }
 

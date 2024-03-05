@@ -1,4 +1,4 @@
-import { useCallback, useEffect } from 'react'
+import { useCallback, useEffect } from "react";
 
 import axios from "../../apis/axios";
 import requests from "../../apis/request";
@@ -11,13 +11,13 @@ const NES = () => {
     try {
       await axios.get(requests.SUBJECTS);
     } catch (error) {
-      console.error('에러 발생:', error);
+      console.error("에러 발생:", error);
     }
-  },[])
+  }, []);
 
   useEffect(() => {
     fetchData();
-  })
+  });
 
 
   return (
