@@ -4,6 +4,8 @@ import { Link } from "react-router-dom";
 import { styled } from "styled-components";
 import axios from "../apis/axios";
 import requests from "../apis/request";
+import { ReactComponent as ArrowDoubleLeftIcon } from "../assets/svg/icons/arrow-double-left.svg";
+import { ReactComponent as ArrowDoubleRightIcon } from "../assets/svg/icons/arrow-double-right.svg";
 import { ReactComponent as ArrowLeftIcon } from "../assets/svg/icons/arrow-left.svg";
 import { ReactComponent as ArrowRightIcon } from "../assets/svg/icons/arrow-right.svg";
 import logo from "../assets/svg/icons/logo.svg";
@@ -109,6 +111,36 @@ function ListPage() {
     }
   };
 
+  //페이지 네이션의 더블 왼쪽 화살표를 누르면 실행되는 함수
+  //3이 n이 된다.
+  const handleFarLeftPage = () => {
+    if (startPage == 1) {
+      return;
+    }
+    setStartPage(1);
+    setClickedPage(1);
+    setOffset(8 * 1 - 8);
+    setEndPage(1 + 3 - 1);
+  };
+
+  //페이지 네이션의 더블 오른쪽 화살표를 누르면 실행되는 함수
+  //3이 n이 된다.
+  const handleFarRightPage = () => {
+    if (endPage == pages) {
+      return;
+    }
+
+    setEndPage(pages);
+    setClickedPage(pages);
+    setOffset(8 * pages - 8);
+
+    if (pages % 3 == 0) {
+      setStartPage(pages - 3 + 1);
+    } else {
+      setStartPage(pages - (pages % 3) + 1);
+    }
+  };
+
   return (
     <Container>
       <HeaderDiv>
@@ -141,9 +173,11 @@ function ListPage() {
           ))}
       </CardListDiv>
       <PaginationDiv>
+        <StyledDoubleArrowLeftIcon onClick={handleFarLeftPage} />
         <StyledArrowLeftIcon onClick={handleBeforePage} />
         {renderPageNumbers()}
         <StyledArrowRightIcon onClick={handleAfterPage} />
+        <StyledDoubleArrowRightIcon onClick={handleFarRightPage} />
       </PaginationDiv>
     </Container>
   );
@@ -228,6 +262,28 @@ const StyledArrowLeftIcon = styled(ArrowLeftIcon)`
 `;
 
 const StyledArrowRightIcon = styled(ArrowRightIcon)`
+  color: var(--Grayscale-40, #818181);
+  text-align: center;
+  font-feature-settings: "clig" off, "liga" off;
+  font-family: Actor;
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 25px; /* 125% */
+`;
+
+const StyledDoubleArrowLeftIcon = styled(ArrowDoubleLeftIcon)`
+  color: var(--Grayscale-40, #818181);
+  text-align: center;
+  font-feature-settings: "clig" off, "liga" off;
+  font-family: Actor;
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 25px; /* 125% */
+`;
+
+const StyledDoubleArrowRightIcon = styled(ArrowDoubleRightIcon)`
   color: var(--Grayscale-40, #818181);
   text-align: center;
   font-feature-settings: "clig" off, "liga" off;
