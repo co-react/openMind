@@ -80,17 +80,19 @@ function ListPage() {
   };
 
   //페이지 네이션의 왼쪽 화살표를 누르면 실행되는 함수
+  // < 4 5 >에서 < 누르면  3으로 가도록
   const handleBeforePage = () => {
     if (startPage == 1) {
       return;
     }
     setStartPage(startPage - 3);
-    setClickedPage(startPage - 3);
-    setOffset(8 * (startPage - 3) - 8);
+    setClickedPage(startPage - 1);
+    setOffset(8 * (startPage - 1) - 8);
     setEndPage(startPage - 1);
   };
 
   //페이지 네이션의 오른쪽 화살표를 누르면 실행되는 함수
+  // < 1 2 3 >에서 > 누르면 4로 가도록
   const handleAfterPage = () => {
     if (endPage == pages) {
       return;
