@@ -5,7 +5,6 @@ import { ReactComponent as Logo } from "../assets/svg/icons/logo.svg";
 import Button from "../components/buttons/ArrowIconButton";
 import Stack from "../components/common/Stack";
 import CreateQuestionCard from "../domain/CreateQuestionCard";
-P;
 
 function Main() {
   return (
