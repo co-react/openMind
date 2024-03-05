@@ -3,7 +3,7 @@ import { FlexCenter } from "../../style/commonStyles";
 
 function Stack({ className, gap, children }) {
   return (
-    <StyledStack className={className} gap={gap}>
+    <StyledStack className={className} $gap={gap}>
       {children}
     </StyledStack>
   );
@@ -14,5 +14,5 @@ const StyledStack = styled.div`
   position: relative;
   ${FlexCenter}
   flex-direction: column;
-  gap: ${(props) => props.gap * 0.1}rem;
+  gap: ${(props) => props.$gap * 0.1}rem;
 `;
