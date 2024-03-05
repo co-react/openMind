@@ -11,7 +11,9 @@ function Main() {
       <Link to="/main">
         <MainLogo />
       </Link>
-      <GoToASK variant="outline">질문하러 가기</GoToASK>
+      <Link to="/list">
+        <GoToASK variant="outline">질문하러 가기</GoToASK>
+      </Link>
       <CreateQuestionCard />
     </Container>
   );
