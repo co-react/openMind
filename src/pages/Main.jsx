@@ -12,7 +12,9 @@ function Main() {
         <MainLogo />
       </Link>
       <Link to="/list">
-        <GoToASK variant="outline">질문하러 가기</GoToASK>
+        <GoToASK variant="outline" hasIcon>
+          질문하러 가기
+        </GoToASK>
       </Link>
       <CreateQuestionCard />
     </Container>
