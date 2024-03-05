@@ -5,6 +5,7 @@ import { ReactComponent as LinkLogo } from "../../assets/svg/icons/link.svg";
 import { Link } from "react-router-dom";
 
 function LinkButton() {
+  
   return (
     <LinkList>
       <Link to="/">
