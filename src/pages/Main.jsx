@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import styled from "styled-components";
+import mainImg from "../assets/png/main.png";
 import { ReactComponent as Logo } from "../assets/svg/icons/logo.svg";
 import Button from "../components/buttons/ArrowIconButton";
 import Stack from "../components/common/Stack";
@@ -7,12 +8,15 @@ import CreateQuestionCard from "../domain/CreateQuestionCard";
 
 function Main() {
   return (
-    <Container gap={24}>
+    <Container $gap={24}>
       <Link to="/main">
         <MainLogo />
       </Link>
-      <GoToASK variant="outline">질문하러 가기</GoToASK>
+      <GoToASK variant="outline" hasIcon>
+        질문하러 가기
+      </GoToASK>
       <CreateQuestionCard />
+      <MainImg src={mainImg} />
     </Container>
   );
 }
@@ -45,4 +49,9 @@ const GoToASK = styled(Button)`
   @media (min-width: 1200px) {
     right: 13rem;
   }
+`;
+
+const MainImg = styled.img`
+  width: 100%;
+  object-fit: cover;
 `;
