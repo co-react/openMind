@@ -1,6 +1,7 @@
 const FACEBOOK_SHARE_URL = "https://www.facebook.com/sharer/sharer.php?href=";
 const SMALL_WINDOW_SIZE = 'width=400 ,height=800';
-const APP_URL = "YOUR_APP_URL"; // 도메인에 등록해야 합니다.
+//const APP_URL = "YOUR_APP_URL"; // 도메인에 등록해야 합니다.
+const LOCAL_URL = "http://localhost:3000" 
 
 export function shareToFacebook() {
   window.open(FACEBOOK_SHARE_URL,'공유하기' ,SMALL_WINDOW_SIZE)
@@ -18,8 +19,7 @@ export function shareToKakao() {
       'https://ibb.co/VDqwJQF',
       link: {
         // [내 애플리케이션] > [플랫폼] 에서 등록한 사이트 도메인과 일치해야 합니다.
-        mobileWebUrl: APP_URL,
-        webUrl: APP_URL,
+        webUrl: LOCAL_URL,
       },
     },
   });
