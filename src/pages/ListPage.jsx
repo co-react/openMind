@@ -84,7 +84,7 @@ function ListPage() {
   //페이지 네이션의 왼쪽 화살표를 누르면 실행되는 함수
   // < 4 5 >에서 < 누르면  3으로 가도록
   const handleBeforePage = () => {
-    if (startPage == 1) {
+    if (startPage === 1) {
       return;
     }
     setStartPage(startPage - 5);
@@ -96,7 +96,7 @@ function ListPage() {
   //페이지 네이션의 오른쪽 화살표를 누르면 실행되는 함수
   // < 1 2 3 >에서 > 누르면 4로 가도록
   const handleAfterPage = () => {
-    if (endPage == pages) {
+    if (endPage === pages) {
       return;
     }
     setStartPage(startPage + 5);
@@ -114,7 +114,7 @@ function ListPage() {
   //페이지 네이션의 더블 왼쪽 화살표를 누르면 실행되는 함수
   //3이 n이 된다.
   const handleFarLeftPage = () => {
-    if (startPage == 1) {
+    if (startPage === 1) {
       return;
     }
     setStartPage(1);
@@ -134,7 +134,7 @@ function ListPage() {
     setClickedPage(pages);
     setOffset(8 * pages - 8);
 
-    if (pages % 5 == 0) {
+    if (pages % 5 === 0) {
       setStartPage(pages - 5 + 1);
     } else {
       setStartPage(pages - (pages % 5) + 1);
