@@ -1,28 +1,15 @@
-import { useState, useCallback, useEffect } from "react";
+import { useState, useEffect } from "react";
 
-import axios from "../apis/axios";
 import requests from "../apis/request";
 
 export function useFetchQuestions(id, questionCount) {
   const [questions, setQuestions] = useState([]);
   const [next, setNext] = useState("");
 
-  const fetchInitData = useCallback(async () => {
+  const fetchNextData = async () => {
     try {
-      const response = await axios.get(`${requests.SUBJECTS}${id}/questions/`);
-      const data = response.data;
+      const data = await requests.getNext(next);
 
-      setNext(data.next);
-      setQuestions(data.results);
-    } catch (error) {
-      console.error('에러 발생:', error);
-    }
-  },[questionCount])
-
-  const fetchNextData = useCallback(async () => {
-    try {
-      const response = await axios.get(`${next}`);
-      const data = response.data;
       const newQuestions = data.results;
 
       setNext(data.next);
@@ -30,7 +17,7 @@ export function useFetchQuestions(id, questionCount) {
     } catch (error) {
       console.error('에러 발생:', error);
     }
-  },[next])
+  }
 
   const handleScroll = () => {
     const scrollPosition = window.innerHeight + document.documentElement.scrollTop;
@@ -42,6 +29,17 @@ export function useFetchQuestions(id, questionCount) {
   };
 
   useEffect(() => {
+    const fetchInitData = async () => {
+      try {
+        const data = await requests.getQuestions(id);
+  
+        setNext(data.next);
+        setQuestions(data.results);
+      } catch (error) {
+        console.error('에러 발생:', error);
+      }
+    }
+
     fetchInitData();
   }, [questionCount])
 
