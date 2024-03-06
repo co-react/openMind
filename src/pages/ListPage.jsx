@@ -20,7 +20,7 @@ function ListPage() {
   const [cards, setCards] = useState(0); //총 카드 수 28개
   const [pages, setPages] = useState(0); //총 페이지 수
   const [startPage, setStartPage] = useState(1); //시작 페이지
-  const [endPage, setEndPage] = useState(3); //끝 페이지 (수정 필요)
+  const [endPage, setEndPage] = useState(5); //끝 페이지 (수정 필요)
   const [clickedPage, setClickedPage] = useState(1); //누른 페이지 숫자
   const [offset, setOffset] = useState(0);
   const [limit, setLimit] = useState(8);
@@ -87,7 +87,7 @@ function ListPage() {
     if (startPage == 1) {
       return;
     }
-    setStartPage(startPage - 3);
+    setStartPage(startPage - 5);
     setClickedPage(startPage - 1);
     setOffset(8 * (startPage - 1) - 8);
     setEndPage(startPage - 1);
@@ -99,15 +99,15 @@ function ListPage() {
     if (endPage == pages) {
       return;
     }
-    setStartPage(startPage + 3);
-    setClickedPage(startPage + 3);
-    setOffset(8 * (startPage + 3) - 8);
+    setStartPage(startPage + 5);
+    setClickedPage(startPage + 5);
+    setOffset(8 * (startPage + 5) - 8);
     //이 케이스는 페이지네이션을 일정한 값을 더해가면서 넘기는데
     //기존의 총 페이지 수보다 클 경우를 대비
-    if (endPage + 3 > pages) {
+    if (endPage + 5 > pages) {
       setEndPage(pages);
     } else {
-      setEndPage(endPage + 3);
+      setEndPage(endPage + 5);
     }
   };
 
@@ -120,7 +120,7 @@ function ListPage() {
     setStartPage(1);
     setClickedPage(1);
     setOffset(8 * 1 - 8);
-    setEndPage(1 + 3 - 1);
+    setEndPage(1 + 5 - 1);
   };
 
   //페이지 네이션의 더블 오른쪽 화살표를 누르면 실행되는 함수
@@ -134,10 +134,10 @@ function ListPage() {
     setClickedPage(pages);
     setOffset(8 * pages - 8);
 
-    if (pages % 3 == 0) {
-      setStartPage(pages - 3 + 1);
+    if (pages % 5 == 0) {
+      setStartPage(pages - 5 + 1);
     } else {
-      setStartPage(pages - (pages % 3) + 1);
+      setStartPage(pages - (pages % 5) + 1);
     }
   };
 
