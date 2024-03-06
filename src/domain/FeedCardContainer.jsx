@@ -5,6 +5,7 @@ import { ReactComponent as MessageIcon } from "../assets/svg/icons/messages.svg"
 
 import FeedCard from "../components/feedCard/FeedCard";
 import { useFetchQuestions } from "../hooks/useFetchQuestions";
+import { useFetchNextWithInfiniteScroll } from "../hooks/useFetchNextWithInfiniteScroll";
 
 function FeedCardContainer({ id, questionCount }) {
   if (!questionCount) {
@@ -19,7 +20,8 @@ function FeedCardContainer({ id, questionCount }) {
     );
   }
 
-  const questions = useFetchQuestions(id, questionCount);
+  const [questions, next, setQuestions, setNext] = useFetchQuestions(id, questionCount);
+  useFetchNextWithInfiniteScroll(next, setQuestions, setNext);
 
   return (
     <Container $questionCount={questionCount}>

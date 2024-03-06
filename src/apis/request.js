@@ -49,7 +49,7 @@ const requests = Object.freeze({
   },
   getNext: async function(nextUrl) {
     try {
-      const { data } = await axios.get(`${nextUrl}`);
+      const { data } = await axios.get(nextUrl);
 
       return data;
     } catch (error) {
