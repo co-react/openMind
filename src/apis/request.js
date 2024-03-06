@@ -9,9 +9,9 @@ const requests = Object.freeze({
 
   getSubjects: async function() {
     try {
-      const { response } = await axios.get("/subjects/");
+      const { data } = await axios.get("/subjects/");
 
-      return response;
+      return data;
     } catch (error) {
       console.error(ERROR_MESSAGE, error);
     }
