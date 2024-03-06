@@ -1,11 +1,12 @@
 import { Link } from "react-router-dom";
 import styled from "styled-components";
+import { Toaster, toast } from 'sonner';
 
 import { ReactComponent as FacebookLogo } from "../../assets/svg/icons/Facebook.svg";
 import { ReactComponent as KakaoLogo } from "../../assets/svg/icons/Kakaotalk.svg";
 import { ReactComponent as LinkLogo } from "../../assets/svg/icons/link.svg";
 
-function LinkButton({ setIsOpenToast }) {
+function LinkButton() {
   const handleClick = (text) => {
     const $textarea = document.createElement("textarea");
 
@@ -16,14 +17,30 @@ function LinkButton({ setIsOpenToast }) {
 
     document.execCommand("copy");
     document.body.removeChild($textarea);
-
-    setIsOpenToast(true);
   };
 
   return (
     <LinkList>
       <LinkItem color="var(--Brown-40)">
-        <Button onClick={() => {handleClick(window.location.href)}}>
+        <Toaster 
+          position="bottom-center"
+          toastOptions={{
+            style: {
+              background: "var(--Brown-10, #f5f1ee)",
+              color: "var(--Brown-40, #542f1a)",
+            },
+            className: 'class',
+          }}
+        />
+        <Button onClick={() => {
+          toast.success('URL이 복사되었습니다', {
+            cancel: {
+              label: '취소',
+              background: "black"
+          }});
+          handleClick(window.location.href);
+          }
+        }>
           <LinkLogo fill="white" width={18} />
         </Button>
       </LinkItem>

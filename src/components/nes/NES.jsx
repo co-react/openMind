@@ -1,4 +1,5 @@
 import { useCallback, useEffect } from "react";
+//import { Toaster, toast } from 'sonner'
 
 import axios from "../../apis/axios";
 import requests from "../../apis/request";
@@ -26,3 +27,26 @@ const NES = () => {
 };
 
 export default NES;
+
+
+{/* <>
+      <Toaster 
+        position="bottom-center"
+        toastOptions={{
+          style: {
+            background: "white",
+            color: "black",
+          },
+          className: 'class',
+        }}
+      />
+      <button onClick={() => toast.success('URL이 복사되었습니다', {
+          cancel: {
+            label: '취소',
+            onClick: () => console.log('Cancel!'),
+          },
+        })}
+      >
+        토스트
+      </button>
+    </> */}
