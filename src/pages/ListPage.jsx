@@ -10,7 +10,6 @@ import { ReactComponent as ArrowRightIcon } from "../assets/svg/icons/arrow-righ
 import logo from "../assets/svg/icons/logo.svg";
 import BaseButton from "../components/buttons/ArrowIconButton";
 import Dropdown from "../components/dropdown/Dropdown";
-import KDH from "../components/kdh/KDH";
 import Pagination from "../components/pagination/Pagination";
 import UserCard from "../components/userCard/UserCard";
 
@@ -154,7 +153,7 @@ function ListPage() {
     <Container>
       <HeaderDiv>
         <Header>
-          <Link to={`/`} element={<KDH />}>
+          <Link to={`/`}>
             <Logo src={logo} alt="로고 이미지" />
           </Link>
           <BaseButton variant="outline" hasIcon onClick={handleAnswerClick}>
