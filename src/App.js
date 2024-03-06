@@ -33,7 +33,6 @@ function App() {
           <Routes>
             <Route path="/" element={<MainTest />} />
             <Route path="/main" element={<Main />} />
-            <Route path="/list" />
             <Route path="/list" element={<ListPage />} />
             <Route path="/post">
               <Route path=":id" />

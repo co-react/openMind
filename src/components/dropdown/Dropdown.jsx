@@ -6,23 +6,30 @@ import { ReactComponent as ArrowUpIcon } from "../../assets/svg/icons/arrow-up.s
 
 //import "./Dropdown.css";
 
-function Dropdown() {
+function Dropdown({ onSelect }) {
   const [isOpened, setIsOpened] = useState(false);
+  const [selectedOption, setSelectedOption] = useState("최신순");
 
   const handleClick = () => {
     setIsOpened(!isOpened);
   };
 
+  const handleOptionClick = (option) => {
+    setSelectedOption(option); //화면상 보여지는 함수
+    onSelect(option); // 선택된 옵션을 부모 컴포넌트로 전달
+    setIsOpened(false);
+  };
+
   if (isOpened) {
     return (
       <Container>
-        <Title>이름순</Title>
+        <Title>{selectedOption}</Title>
         <StyledArrowUpIcon onClick={handleClick} alt="접기" />
         <DropdownMenuContainer>
-          <DropdownMenu>
+          <DropdownMenu onClick={() => handleOptionClick("이름순")}>
             <Title>이름순</Title>
           </DropdownMenu>
-          <DropdownMenu>
+          <DropdownMenu onClick={() => handleOptionClick("최신순")}>
             <Title>최신순</Title>
           </DropdownMenu>
         </DropdownMenuContainer>
@@ -32,7 +39,7 @@ function Dropdown() {
 
   return (
     <Container>
-      <Title>이름순</Title>
+      <Title>{selectedOption}</Title>
       <StyledArrowDownIcon onClick={handleClick} alt="펼치기" />
     </Container>
   );

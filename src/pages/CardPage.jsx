@@ -5,6 +5,7 @@ import { ReactComponent as LogoIcon } from "../assets/svg/icons/logo.svg";
 
 import FloatingButton from "../components/buttons/FloatingButton";
 import ShareButton from "../components/buttons/ShareButton";
+//import Toast from "../components/toast/Toast";
 import FeedCardContainer from "../domain/FeedCardContainer";
 import QuestionModal from "../domain/modal/QuestionModal";
 import { useFetchQuestionSubject } from "../hooks/useFetchQuestionSubject";
@@ -15,6 +16,7 @@ function CardPage({ id = 3983 }) {
   const [isPostedQuestion, setIsPostedQuestion] = useState(false);
   const isMobile = useMediaQueryForMobile();
   const [isOpenModal, setIsOpenModal] = useState(false);
+  //const [isOpenToast, setIsOpenToast] = useOpenToast(false);
   const user = useFetchQuestionSubject(id, isPostedQuestion, setIsPostedQuestion);
 
   const handleClick = () => {
@@ -71,8 +73,8 @@ const SmallStyledLogo = styled(LogoIcon)`
 
 const FloatingButtonLayout = styled.div`
   position: fixed;
-  bottom: 24px;
-  right: 24px;
+  bottom: 2.4rem;
+  right: 2.4rem;
 `;
 
 const NameTitle = styled.span`
