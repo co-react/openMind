@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
+import { Toaster, toast } from "sonner";
 import styled from "styled-components";
-import { Toaster, toast } from 'sonner';
 
 import { ReactComponent as FacebookLogo } from "../../assets/svg/icons/Facebook.svg";
 import { ReactComponent as KakaoLogo } from "../../assets/svg/icons/Kakaotalk.svg";
@@ -22,25 +22,27 @@ function LinkButton() {
   return (
     <LinkList>
       <LinkItem color="var(--Brown-40)">
-        <Toaster 
+        <Toaster
           position="bottom-center"
           toastOptions={{
             style: {
               background: "var(--Brown-10, #f5f1ee)",
               color: "var(--Brown-40, #542f1a)",
             },
-            className: 'class',
+            className: "class",
           }}
         />
-        <Button onClick={() => {
-          toast.success('URL이 복사되었습니다', {
-            cancel: {
-              label: '취소',
-              background: "black"
-          }});
-          handleClick(window.location.href);
-          }
-        }>
+        <Button
+          onClick={() => {
+            toast.success("URL이 복사되었습니다", {
+              cancel: {
+                label: "취소",
+                background: "black",
+              },
+            });
+            handleClick(window.location.href);
+          }}
+        >
           <LinkLogo fill="white" width={18} />
         </Button>
       </LinkItem>
@@ -84,7 +86,7 @@ const Button = styled.button`
   height: 4rem;
   border-radius: 100%;
   background-color: var(--Brown-40);
-`
+`;
 
 const LinkList = styled.ul`
   display: flex;
@@ -100,7 +102,7 @@ const LinkItem = styled.li`
   width: 4rem;
   height: 4rem;
   border-radius: 100%;
-  background-color: ${props => props.color};
+  background-color: ${(props) => props.color};
 
   & svg {
     width: 1.8rem;
