@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { styled } from "styled-components";
 import axios from "../apis/axios";
 import requests from "../apis/request";
@@ -25,6 +25,7 @@ function ListPage() {
   const [offset, setOffset] = useState(0);
   const [limit, setLimit] = useState(8);
   const [sortUrl, setSortUrl] = useState("&sort=time");
+  const navigate = useNavigate();
 
   //오프셋 리미트를 위한 코드
   const offsetUrl = `?limit=${limit}&offset=${offset}`;
@@ -140,6 +141,16 @@ function ListPage() {
     }
   };
 
+  //답변하러가기 클릭 시 실행되는 함수
+  const handleAnswerClick = () => {
+    const postId = localStorage.getItem("박박");
+    if (postId) {
+      navigate(`/post/${postId}/answer`);
+    } else {
+      navigate(`/`);
+    }
+  };
+
   return (
     <Container>
       <HeaderDiv>
@@ -147,7 +158,7 @@ function ListPage() {
           <Link to={`/`} element={<KDH />}>
             <Logo src={logo} alt="로고 이미지" />
           </Link>
-          <BaseButton variant="outline" hasIcon>
+          <BaseButton variant="outline" hasIcon onClick={handleAnswerClick}>
             답변하러가기
           </BaseButton>
         </Header>
