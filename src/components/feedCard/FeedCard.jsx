@@ -1,9 +1,11 @@
-import { useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { useLocation } from "react-router-dom";
 import styled from "styled-components";
 
 import FeedCardAnswer from "./FeedCardAnswer";
 import FeedCardQuestion from "./FeedCardQuestion";
+import axios from "../../apis/axios";
+import requests from "../../apis/request";
 import moreIcon from "../../assets/svg/icons/more.svg";
 import DisLike from "../../domain/reactions/DisLike";
 import Like from "../../domain/reactions/Like";
@@ -13,56 +15,83 @@ import EditDropdownMenu from "../dropdown/EditDropdownMenu";
 
 function FeedCard({ questionId, answer, content, createdAt, like, subjectId }) {
   const [isEditMenuVisible, setEditMenuVisible] = useState(false);
-  const [state, setState] = useState("Empty");
+
   const [isAnswerPage, setIsAnswerPage] = useState(false);
+  const [isClickEdit, setIsClickEdit] = useState(false);
+  const [isClickDelete, setIsClickDelete] = useState(false);
 
   const location = useLocation();
-
-  const handleClick = () => {
-    setEditMenuVisible(!isEditMenuVisible);
-  };
-
-  // 케밥 버튼 외부 클릭시 꺼지는 코드
   const dropdownRef = useRef(null);
 
-  const handleClickOutside = (event) => {
-    if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
-      setEditMenuVisible(false);
-    }
-  };
-
   useEffect(() => {
-    addEventListener("click", handleClickOutside);
+    const handleClickOutside = (event) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+        setEditMenuVisible(false);
+      }
+    };
+
+    document.addEventListener("click", handleClickOutside);
 
     return () => {
-      removeEventListener("click", handleClickOutside);
+      document.removeEventListener("click", handleClickOutside);
     };
-  }, []);
+  }, [dropdownRef]);
 
   useEffect(() => {
-    // 지금은 임시로 kdh 페이지일 때만 답변을 표시
-    // localStorage 아이디 값과 answer페이지 아이디값과 일치하는지에 따라 answer 페이지를 보여줄지 말지 구현 예정
     setIsAnswerPage(location.pathname === "/kdh");
   }, [location.pathname]);
 
-  useEffect(() => {
-    // 거부되는 상황은 일단 X
-    if (answer != null) {
-      setState("Sent");
+  const handleEditClick = () => {
+    setIsClickEdit(true);
+    setEditMenuVisible(false);
+  };
+
+  const handleDeleteClick = useCallback(async () => {
+    try {
+      await axios.delete(`${requests.ANSWERS}${answer.id}/`);
+      setIsClickDelete(true);
+    } catch (error) {
+      console.error("에러 발생:", error);
     }
+
+    setEditMenuVisible(false);
   });
+
+  function toggleIsEdit() {
+    setIsClickEdit(!isClickEdit);
+  }
+
+  function toggleIsDelete() {
+    setIsClickDelete(!isClickDelete);
+  }
 
   return (
     <FeedCardContainer>
       <CardTopContainer>
         <AnswerButton isAnswered={answer} />
         <KebabContainer ref={dropdownRef}>
-          <KebabIcon src={moreIcon} onClick={handleClick} />
-          {isEditMenuVisible && <DropdownMenu className={"DropdownMenu"} />}
+          <KebabIcon src={moreIcon} onClick={() => setEditMenuVisible(!isEditMenuVisible)} />
+          {isEditMenuVisible && (
+            <DropdownMenu
+              className={"DropdownMenu"}
+              onEditClick={handleEditClick}
+              onDeleteClick={handleDeleteClick}
+            />
+          )}
         </KebabContainer>
       </CardTopContainer>
       <FeedCardQuestion createdAt={calculateDateDifference(createdAt)} content={content} />
-      {isAnswerPage && <FeedCardAnswer subjectId={subjectId} answer={answer} state={state} />}
+      {isAnswerPage && (
+        <FeedCardAnswer
+          questionId={questionId}
+          subjectId={subjectId}
+          answer={answer}
+          isClickEdit={isClickEdit}
+          isClickDelete={isClickDelete}
+          toggleIsEdit={toggleIsEdit}
+          toggleIsDelete={toggleIsDelete}
+        />
+      )}
       <CardFooter>
         <CardFooterContainer>
           <Like counts={like} questionId={questionId} />

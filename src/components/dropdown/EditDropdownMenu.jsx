@@ -3,14 +3,22 @@ import styled from "styled-components";
 import { ReactComponent as DeleteIcon } from "../../assets/svg/icons/close.svg";
 import { ReactComponent as EditIcon } from "../../assets/svg/icons/edit.svg";
 
-function EditDropdownMenu({ className }) {
+function EditDropdownMenu({ className, onEditClick, onDeleteClick }) {
+  const handleEditClick = () => {
+    onEditClick();
+  };
+
+  const handleDeleteClick = () => {
+    onDeleteClick();
+  };
+
   return (
     <Container className={className}>
-      <Wrapper>
+      <Wrapper onClick={handleEditClick}>
         <EditIcon alt="수정하기 아이콘" />
         <Title>수정하기</Title>
       </Wrapper>
-      <Wrapper>
+      <Wrapper onClick={handleDeleteClick}>
         <DeleteIcon alt="삭제하기 아이콘" />
         <Title>삭제하기</Title>
       </Wrapper>

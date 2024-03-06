@@ -1,18 +1,25 @@
 import { useState, useCallback, useEffect } from "react";
 import styled from "styled-components";
-
 import axios from "../../apis/axios";
 import requests from "../../apis/request";
 import { calculateDateDifference } from "../../utils/dateCalculate";
-
 import Button from "../buttons/Button";
 import InputTextArea from "../input/InputTextArea";
 
-function FeedCardAnswer({ subjectId, answer, state }) {
+function FeedCardAnswer({
+  questionId,
+  subjectId,
+  answer,
+  isClickEdit,
+  isClickDelete,
+  toggleIsEdit,
+  toggleIsDelete,
+}) {
   const [inputValue, setInputValue] = useState("");
   const [user, setUser] = useState({});
   const [content, setContent] = useState("");
   const [createdAt, setCreatedAt] = useState("");
+  const [state, setState] = useState("Empty");
 
   const handleInputChange = (event) => {
     setInputValue(event.target.value);
@@ -23,13 +30,41 @@ function FeedCardAnswer({ subjectId, answer, state }) {
       try {
         const response = await axios.get(`${requests.SUBJECTS}${subjectId}/`);
         const data = response.data;
-
         setUser(data);
       } catch (error) {
         console.error("에러 발생:", error);
       }
     }
-  }, []);
+  }, [subjectId, isClickEdit, state]);
+
+  const handleClickPost = useCallback(async () => {
+    try {
+      await axios.post(`${requests.QUESTIONS}${questionId}/answers/`, {
+        questionId: 0,
+        content: inputValue,
+        isRejected: true,
+        team: "string",
+      });
+      setContent(inputValue);
+      setState("Sent");
+    } catch (error) {
+      console.error("에러 발생:", error);
+    }
+  });
+
+  const handleClickEdit = useCallback(async () => {
+    if (subjectId) {
+      try {
+        await axios.patch(`${requests.ANSWERS}${answer.id}/`, {
+          content: content,
+          isRejected: true,
+        });
+        toggleIsEdit();
+      } catch (error) {
+        console.error("에러 발생:", error);
+      }
+    }
+  });
 
   useEffect(() => {
     fetchData();
@@ -38,6 +73,17 @@ function FeedCardAnswer({ subjectId, answer, state }) {
       setCreatedAt(answer.createdAt);
     }
   }, []);
+
+  useEffect(() => {
+    if (isClickDelete) {
+      setState("Empty");
+      toggleIsDelete();
+    }
+  }, [isClickDelete]);
+
+  useEffect(() => {
+    setState(answer !== null ? "Sent" : "Empty");
+  }, [answer]);
 
   return (
     <CardAnswerContainer>
@@ -54,11 +100,21 @@ function FeedCardAnswer({ subjectId, answer, state }) {
               value={inputValue}
               onChange={handleInputChange}
             />
-
-            <Button variant="fill" disabled={inputValue.trim() === ""}></Button>
+            <Button variant="fill" disabled={inputValue.trim() === ""} onClick={handleClickPost}>
+              답변달기
+            </Button>
           </>
         ) : state === "Sent" ? (
-          <AnswerDescription>{content}</AnswerDescription>
+          isClickEdit ? (
+            <>
+              <InputTextArea value={content} onChange={(e) => setContent(e.target.value)} />
+              <Button variant="fill" disabled={content.trim() === ""} onClick={handleClickEdit}>
+                수정하기
+              </Button>
+            </>
+          ) : (
+            <AnswerDescription>{content}</AnswerDescription>
+          )
         ) : state === "Resection" ? (
           <AnswerResection>답변 거절</AnswerResection>
         ) : null}
