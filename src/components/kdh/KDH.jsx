@@ -2,12 +2,10 @@ import { useState } from "react";
 
 import styled from "styled-components";
 import QuestionModal from "../../domain/modal/QuestionModal";
-<<<<<<< HEAD
 import CardPage from "../../pages/CardPage";
 import ThemeModeButton from "../buttons/ThemeModeButton";
 import FeedCard from "../feedCard/FeedCard";
 
-import FeedCard from "../feedCard/FeedCard";
 function KDH({ themeMode, toggleTheme }) {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
