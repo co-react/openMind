@@ -31,22 +31,19 @@ function App() {
         <GlobalStyles />
         <BrowserRouter>
           <Routes>
-            <Route path="/" element={<MainTest />}></Route>
-            <Route path="/main" element={<Main />}></Route>
-            <Route path="/list"></Route>
-            <Route path="/list" element={<ListPage />}></Route>
+            <Route path="/" element={<MainTest />} />
+            <Route path="/main" element={<Main />} />
+            <Route path="/list" />
+            <Route path="/list" element={<ListPage />} />
             <Route path="/post">
-              <Route path=":id"></Route>
-              <Route path=":id/answer"></Route>
+              <Route path=":id" />
+              <Route path=":id/answer" />
             </Route>
             {/* 이하 테스트용 Route */}
-            <Route
-              path="/kdh"
-              element={<KDH themeMode={themeMode} toggleTheme={toggleTheme} />}
-            ></Route>
-            <Route path="/nes" element={<NES />}></Route>
-            <Route path="/kye" element={<KYE />}></Route>
-            <Route path="/pgb" element={<PGB />}></Route>
+            <Route path="/kdh" element={<KDH themeMode={themeMode} toggleTheme={toggleTheme} />} />
+            <Route path="/nes" element={<NES />} />
+            <Route path="/kye" element={<KYE />} />
+            <Route path="/pgb" element={<PGB />} />
           </Routes>
         </BrowserRouter>
       </ThemeProvider>
