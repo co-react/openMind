@@ -1,14 +1,14 @@
 import { useState } from "react";
 import styled from "styled-components";
 
-import { useFetchQuestionSubject } from "../hooks/useFetchQuestionSubject";
-import { useMediaQueryForMobile } from "../hooks/useMediaQueryForMobile";
 import { ReactComponent as LogoIcon } from "../assets/svg/icons/logo.svg";
 
 import FloatingButton from "../components/buttons/FloatingButton";
 import ShareButton from "../components/buttons/ShareButton";
 import FeedCardContainer from "../domain/FeedCardContainer";
 import QuestionModal from "../domain/modal/QuestionModal";
+import { useFetchQuestionSubject } from "../hooks/useFetchQuestionSubject";
+import { useMediaQueryForMobile } from "../hooks/useMediaQueryForMobile";
 
 function CardPage({ id = 3856 }) {
   // 현재 id는 하드 코딩

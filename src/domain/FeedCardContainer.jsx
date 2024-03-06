@@ -4,8 +4,8 @@ import emptyCard from "../assets/png/letter.png";
 import { ReactComponent as MessageIcon } from "../assets/svg/icons/messages.svg";
 
 import FeedCard from "../components/feedCard/FeedCard";
-import { useFetchQuestions } from "../hooks/useFetchQuestions";
 import { useFetchNextWithInfiniteScroll } from "../hooks/useFetchNextWithInfiniteScroll";
+import { useFetchQuestions } from "../hooks/useFetchQuestions";
 
 function FeedCardContainer({ id, questionCount }) {
   if (!questionCount) {
