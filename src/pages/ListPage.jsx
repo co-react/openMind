@@ -39,7 +39,6 @@ function ListPage() {
         setCards(Number(response.data.count));
         setPages(Math.ceil(cards / 8)); // 총 페이지 수 계산
         setLimit(8);
-        console.log("랜더링");
       } catch (error) {
         console.error("에러 발생:", error);
       }
@@ -161,14 +160,14 @@ function ListPage() {
         {cardList.results &&
           cardList.results.map((item) => (
             <>
-              <UserCard
-                key={item.id}
-                profileImg={item.imageSource}
-                profileName={item.name}
-                questionCount={item.questionCount}
-              ></UserCard>
-              {/* <p>{cards}</p>
-              <p>{nextUrl}</p> */}
+              <Link to={`/post/${item.id}`}>
+                <UserCard
+                  key={item.id}
+                  profileImg={item.imageSource}
+                  profileName={item.name}
+                  questionCount={item.questionCount}
+                ></UserCard>
+              </Link>
             </>
           ))}
       </CardListDiv>
