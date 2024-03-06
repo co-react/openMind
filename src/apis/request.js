@@ -24,7 +24,7 @@ const requests = Object.freeze({
 
       return true;
     } catch (error) {
-      return false;
+      console.error(ERROR_MESSAGE, error);
     }
   },
   getQuestions: async function(id) {
