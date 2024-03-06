@@ -15,7 +15,11 @@ function CardPage({ id = 3856 }) {
   const [isPostedQuestion, setIsPostedQuestion] = useState(false);
   const isMobile = useMediaQueryForMobile();
   const [isOpenModal, setIsOpenModal] = useState(false);
-  const user = useFetchQuestionSubject(id, isPostedQuestion, setIsPostedQuestion);
+  const user = useFetchQuestionSubject(
+    id,
+    isPostedQuestion,
+    setIsPostedQuestion
+  );
 
   const handleClick = () => {
     setIsOpenModal((isOpenModal) => !isOpenModal);
@@ -27,7 +31,7 @@ function CardPage({ id = 3856 }) {
       <ProfileImg src={user.imageSource} />
       <NameTitle>{user.name}</NameTitle>
       <ShareButton />
-      <FeedCardContainer id={id} questionCount={user.questionCount}/>
+      <FeedCardContainer id={id} questionCount={user.questionCount} />
       <FloatingButtonLayout>
         <FloatingButton isMobile={isMobile} onClick={handleClick}>
           {isMobile ? "질문 작성" : "질문 작성하기"}
@@ -75,7 +79,7 @@ const FloatingButtonLayout = styled.div`
   position: fixed;
   bottom: 2.4rem;
   right: 2.4rem;
-`
+`;
 
 const NameTitle = styled.span`
   color: var(--Grayscale-60, #000);
@@ -101,7 +105,7 @@ const ProfileImg = styled.img`
     width: 13.6rem;
     height: 13.6rem;
   }
-`
+`;
 
 // const ToastLayout = styled.div`
 //   position: fixed;
