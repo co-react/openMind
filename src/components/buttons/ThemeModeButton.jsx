@@ -1,7 +1,6 @@
 import { css, styled } from "styled-components";
 
 function ThemeModeButton({ toggleTheme, themeMode }) {
-  // export const ThemeModeButton = () => {
   return (
     <StyledThemeModeButton onClick={toggleTheme}>
       {themeMode === "lightTheme" ? "🌝" : "🌚"}
