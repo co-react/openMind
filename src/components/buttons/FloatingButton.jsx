@@ -1,10 +1,10 @@
 import styled from 'styled-components';
 
-function FloatingButton({isMobile , onClick}) {
+function FloatingButton({children, onClick}) {
   return (
     <Button onClick={onClick}>
       <Text>
-      {isMobile ? "질문 작성" : "질문 작성하기"}
+      {children}
       </Text>
     </Button>
   )
