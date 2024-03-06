@@ -1,13 +1,14 @@
-import { Link } from "react-router-dom";
-import { Toaster, toast } from "sonner";
+import { Toaster, toast } from 'sonner';
 import styled from "styled-components";
+
+import { shareToFacebook, shareToKakao } from "../../utils/shareToSns";
 
 import { ReactComponent as FacebookLogo } from "../../assets/svg/icons/Facebook.svg";
 import { ReactComponent as KakaoLogo } from "../../assets/svg/icons/Kakaotalk.svg";
 import { ReactComponent as LinkLogo } from "../../assets/svg/icons/link.svg";
 
 function LinkButton() {
-  const handleClick = (text) => {
+  const handleClickToCopyUrl = (text) => {
     const $textarea = document.createElement("textarea");
 
     document.body.appendChild($textarea);
@@ -18,6 +19,14 @@ function LinkButton() {
     document.execCommand("copy");
     document.body.removeChild($textarea);
   };
+
+  const handleClickToShareFacebook = () => {
+    shareToFacebook();
+  }
+
+  const handleClickToShareKakao = () => {
+    shareToKakao();
+  }
 
   return (
     <LinkList>
@@ -32,6 +41,7 @@ function LinkButton() {
             className: "class",
           }}
         />
+<<<<<<< HEAD
         <Button
           onClick={() => {
             toast.success("URL이 복사되었습니다", {
@@ -43,19 +53,38 @@ function LinkButton() {
             handleClick(window.location.href);
           }}
         >
+=======
+        <Button 
+          onClick={() => {
+            toast.success('URL이 복사되었습니다', {
+              cancel: {
+                label: '취소',
+                background: "black"
+            }});
+            handleClickToCopyUrl(window.location.href);
+          }}
+          color="var(--Brown-40)"
+          >
+>>>>>>> 96aa410494ee6d015e5db9ee286381bba2511045
           <LinkLogo fill="white" width={18} />
         </Button>
       </LinkItem>
-      <Link to="/">
-        <LinkItem color="var(--Yellow-50)">
+      <LinkItem color="var(--Yellow-50)">
+        <Button 
+          onClick={handleClickToShareKakao}
+          color="var(--Yellow-50)"
+        >
           <KakaoLogo width={18} />
-        </LinkItem>
-      </Link>
-      <Link to="/">
-        <LinkItem color="var(--Blue-50)">
+        </Button>
+      </LinkItem>
+      <LinkItem color="var(--Blue-50)">
+        <Button 
+          onClick={handleClickToShareFacebook}
+          color="var(--Blue-50)"
+        >
           <FacebookLogo fill="white" width={18} />
-        </LinkItem>
-      </Link>
+        </Button>
+      </LinkItem>
     </LinkList>
   );
 }
@@ -85,8 +114,13 @@ const Button = styled.button`
   width: 4rem;
   height: 4rem;
   border-radius: 100%;
+<<<<<<< HEAD
   background-color: var(--Brown-40);
 `;
+=======
+  background-color: ${props => props.color};
+`
+>>>>>>> 96aa410494ee6d015e5db9ee286381bba2511045
 
 const LinkList = styled.ul`
   display: flex;
