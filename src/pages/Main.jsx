@@ -8,7 +8,7 @@ import CreateQuestionCard from "../domain/CreateQuestionCard";
 
 function Main() {
   return (
-    <Container $gap={24}>
+    <Container gap={24}>
       <Link to="/main">
         <MainLogo />
       </Link>
