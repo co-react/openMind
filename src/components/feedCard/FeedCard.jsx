@@ -1,4 +1,5 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useLocation } from "react-router-dom";
 import styled from "styled-components";
 
 import FeedCardAnswer from "./FeedCardAnswer";
@@ -10,13 +11,30 @@ import { calculateDateDifference } from "../../utils/dateCalculate";
 import AnswerButton from "../badge/AnswerButton";
 import EditDropdownMenu from "../dropdown/EditDropdownMenu";
 
-function FeedCard({ questionId, answer, content, createdAt, like, subjectId, state = "sent" }) {
+function FeedCard({ questionId, answer, content, createdAt, like, subjectId }) {
   const [isEditMenuVisible, setEditMenuVisible] = useState(false);
+  const [state, setState] = useState("Empty");
+  const [isAnswerPage, setIsAnswerPage] = useState(false);
+
+  const location = useLocation();
 
   const handleClick = () => {
-    console.log(isEditMenuVisible);
     setEditMenuVisible(!isEditMenuVisible);
   };
+
+  // 위치가 변경될 때마다 상태 업데이트
+  useEffect(() => {
+    // 지금은 임시로 kdh 페이지일 때만 답변을 표시
+    // localStorage 아이디 값과 answer페이지 아이디값과 일치하는지에 따라 answer 페이지를 보여줄지 말지 구현 예정
+    setIsAnswerPage(location.pathname === "/kdh");
+  }, [location.pathname]);
+
+  useEffect(() => {
+    // 거부되는 상황을
+    if (answer != null) {
+      setState("Sent");
+    }
+  });
 
   return (
     <FeedCardContainer>
@@ -32,7 +50,7 @@ function FeedCard({ questionId, answer, content, createdAt, like, subjectId, sta
         </KebabContainer>
       </CardTopContainer>
       <FeedCardQuestion createdAt={calculateDateDifference(createdAt)} content={content} />
-      {answer && <FeedCardAnswer subjectId={subjectId} answer={answer} state={state} />}
+      {isAnswerPage && <FeedCardAnswer subjectId={subjectId} answer={answer} state={state} />}
       <CardFooter>
         <CardFooterContainer>
           <Like counts={like} questionId={questionId} />

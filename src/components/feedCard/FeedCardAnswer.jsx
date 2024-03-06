@@ -9,36 +9,43 @@ import Button from "../buttons/Button";
 import InputTextArea from "../input/InputTextArea";
 
 function FeedCardAnswer({ subjectId, answer, state }) {
-  const {content, createdAt} = answer;
-
   const [inputValue, setInputValue] = useState("");
-  const [user, setUser] = useState({})
+  const [user, setUser] = useState({});
+  const [content, setContent] = useState("");
+  const [createdAt, setCreatedAt] = useState("");
 
   const handleInputChange = (event) => {
     setInputValue(event.target.value);
   };
 
   const fetchData = useCallback(async () => {
-    try {
-      const response = await axios.get(`${requests.SUBJECTS}${subjectId}/`);
-      const data = response.data;
+    if (subjectId) {
+      try {
+        const response = await axios.get(`${requests.SUBJECTS}${subjectId}/`);
+        const data = response.data;
 
-      setUser(data);
-    } catch (error) {
-      console.error('에러 발생:', error);
+        setUser(data);
+      } catch (error) {
+        console.error("에러 발생:", error);
+      }
     }
-  },[])
+  }, []);
 
   useEffect(() => {
     fetchData();
-  }, [])
+    if (answer) {
+      setContent(answer.content);
+      setCreatedAt(answer.createdAt);
+    }
+  }, []);
+
   return (
     <CardAnswerContainer>
-      <ProfileImage src={user.imageSource}/>
+      <ProfileImage src={user.imageSource} />
       <AnswerContainer>
         <AnswerTop>
           <AnswerName>{user.name}</AnswerName>
-          <AnswerDate>{calculateDateDifference(createdAt)}</AnswerDate>
+          {createdAt && <AnswerDate>{calculateDateDifference(createdAt)}</AnswerDate>}
         </AnswerTop>
         {state === "Empty" ? (
           <>
@@ -47,9 +54,8 @@ function FeedCardAnswer({ subjectId, answer, state }) {
               value={inputValue}
               onChange={handleInputChange}
             />
-            <Button color="brown" disabled={inputValue.trim() === ""}>
-              답변완료
-            </Button>
+
+            <Button variant="fill" disabled={inputValue.trim() === ""}></Button>
           </>
         ) : state === "Sent" ? (
           <AnswerDescription>{content}</AnswerDescription>
