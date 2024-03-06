@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useLocation } from "react-router-dom";
 import styled from "styled-components";
 
@@ -22,7 +22,23 @@ function FeedCard({ questionId, answer, content, createdAt, like, subjectId }) {
     setEditMenuVisible(!isEditMenuVisible);
   };
 
-  // 위치가 변경될 때마다 상태 업데이트
+  // 케밥 버튼 외부 클릭시 꺼지는 코드
+  const dropdownRef = useRef(null);
+
+  const handleClickOutside = (event) => {
+    if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+      setEditMenuVisible(false);
+    }
+  };
+
+  useEffect(() => {
+    addEventListener("click", handleClickOutside);
+
+    return () => {
+      removeEventListener("click", handleClickOutside);
+    };
+  }, []);
+
   useEffect(() => {
     // 지금은 임시로 kdh 페이지일 때만 답변을 표시
     // localStorage 아이디 값과 answer페이지 아이디값과 일치하는지에 따라 answer 페이지를 보여줄지 말지 구현 예정
@@ -30,7 +46,7 @@ function FeedCard({ questionId, answer, content, createdAt, like, subjectId }) {
   }, [location.pathname]);
 
   useEffect(() => {
-    // 거부되는 상황을
+    // 거부되는 상황은 일단 X
     if (answer != null) {
       setState("Sent");
     }
@@ -40,13 +56,9 @@ function FeedCard({ questionId, answer, content, createdAt, like, subjectId }) {
     <FeedCardContainer>
       <CardTopContainer>
         <AnswerButton isAnswered={answer} />
-        <KebabContainer>
+        <KebabContainer ref={dropdownRef}>
           <KebabIcon src={moreIcon} onClick={handleClick} />
-          {isEditMenuVisible && (
-            <Temp>
-              <EditDropdownMenu />
-            </Temp>
-          )}
+          {isEditMenuVisible && <DropdownMenu className={"DropdownMenu"} />}
         </KebabContainer>
       </CardTopContainer>
       <FeedCardQuestion createdAt={calculateDateDifference(createdAt)} content={content} />
@@ -100,15 +112,10 @@ const KebabIcon = styled.img`
   height: 26px;
 `;
 
-const Temp = styled.div`
+const DropdownMenu = styled(EditDropdownMenu)`
   position: absolute;
   top: 25px;
 `;
-// 왜 안될까
-// const DropdownMenu = styled(EditDropdownMenu)`
-//   position: absolute;
-//   top: 25px;
-// `;
 
 const CardFooter = styled.div`
   width: 100%;
