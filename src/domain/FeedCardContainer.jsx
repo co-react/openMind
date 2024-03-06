@@ -31,14 +31,13 @@ function FeedCardContainer({ id, questionCount }) {
       </QuestionContainer>
       <FeedCardList>
         {questions.map(
-          ({ id, answer, content, createdAt, like, subjectId }) => (
+          ({ id, answer, content, createdAt, subjectId }) => (
             <FeedCard
               key={id}
               questionId={id}
               answer={answer}
               content={content}
               createdAt={createdAt}
-              like={like}
               subjectId={subjectId}
             />
           )

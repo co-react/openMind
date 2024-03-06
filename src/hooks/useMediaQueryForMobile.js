@@ -1,11 +1,13 @@
 import { useState, useEffect } from "react";
 
+const MOBILE_SIZE = 768;
+
 export function useMediaQueryForMobile() {
   const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
     const handleResize = () => {
-      if (window.innerWidth <= 768) {
+      if (window.innerWidth <= MOBILE_SIZE) {
         setIsMobile(() => true);
       } else {
         setIsMobile(() => false);
