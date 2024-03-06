@@ -10,7 +10,7 @@ const InputField = styled(Input)`
   padding-left: 4rem;
 
   ${(props) =>
-    props.onError &&
+    props.hasError &&
     css`
       border-color: var(--Red-50);
     `}
