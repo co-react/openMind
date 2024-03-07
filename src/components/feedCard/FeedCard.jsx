@@ -15,7 +15,6 @@ function FeedCard({
   answer,
   content,
   createdAt,
-  like,
   subjectId,
   state = "sent",
 }) {
@@ -48,7 +47,7 @@ function FeedCard({
       )}
       <CardFooter>
         <CardFooterContainer>
-          <Like counts={like} questionId={questionId} />
+          <Like questionId={questionId} />
           <DisLike questionId={questionId} />
         </CardFooterContainer>
       </CardFooter>

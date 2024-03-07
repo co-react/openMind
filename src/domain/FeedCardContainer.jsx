@@ -4,6 +4,7 @@ import emptyCard from "../assets/png/letter.png";
 import { ReactComponent as MessageIcon } from "../assets/svg/icons/messages.svg";
 
 import FeedCard from "../components/feedCard/FeedCard";
+import { useFetchNextWithInfiniteScroll } from "../hooks/useFetchNextWithInfiniteScroll";
 import { useFetchQuestions } from "../hooks/useFetchQuestions";
 
 function FeedCardContainer({ id, questionCount }) {
@@ -19,7 +20,8 @@ function FeedCardContainer({ id, questionCount }) {
     );
   }
 
-  const questions = useFetchQuestions(id, questionCount);
+  const [questions, next, setQuestions, setNext] = useFetchQuestions(id, questionCount);
+  useFetchNextWithInfiniteScroll(next, setQuestions, setNext);
 
   return (
     <Container $questionCount={questionCount}>
@@ -31,14 +33,13 @@ function FeedCardContainer({ id, questionCount }) {
       </QuestionContainer>
       <FeedCardList>
         {questions.map(
-          ({ id, answer, content, createdAt, like, subjectId }) => (
+          ({ id, answer, content, createdAt, subjectId }) => (
             <FeedCard
               key={id}
               questionId={id}
               answer={answer}
               content={content}
               createdAt={createdAt}
-              like={like}
               subjectId={subjectId}
             />
           )
