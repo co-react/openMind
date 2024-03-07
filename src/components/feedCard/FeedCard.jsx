@@ -1,11 +1,12 @@
-import { useCallback, useEffect, useRef, useState } from "react";
+// import { useCallback, useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useLocation } from "react-router-dom";
 import styled from "styled-components";
 
 import FeedCardAnswer from "./FeedCardAnswer";
 import FeedCardQuestion from "./FeedCardQuestion";
-import axios from "../../apis/axios";
-import requests from "../../apis/request";
+// import axios from "../../apis/axios";
+// import requests from "../../apis/request";
 import moreIcon from "../../assets/svg/icons/more.svg";
 import DisLike from "../../domain/reactions/DisLike";
 import Like from "../../domain/reactions/Like";
@@ -23,13 +24,13 @@ function FeedCard({ questionId, answer, content, createdAt, like, subjectId }) {
   const location = useLocation();
   const dropdownRef = useRef(null);
 
+  // 드롭다운 외부 클릭 or 버튼 클릭시 꺼지게
   useEffect(() => {
     const handleClickOutside = (event) => {
       if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
         setEditMenuVisible(false);
       }
     };
-
     document.addEventListener("click", handleClickOutside);
 
     return () => {
@@ -37,32 +38,35 @@ function FeedCard({ questionId, answer, content, createdAt, like, subjectId }) {
     };
   }, [dropdownRef]);
 
+  // 현재 위치에 따라 answer 보여줄지 말지, 나중에는 id값 비교 예정
   useEffect(() => {
     setIsAnswerPage(location.pathname === "/kdh");
   }, [location.pathname]);
 
+  // 수정버튼을 눌렀을 때
   const handleEditClick = () => {
     setIsClickEdit(true);
+    closeDropDownMenu();
+  };
+
+  // 삭제 버튼을 눌렀을 때
+  const handleDeleteClick = () => {
+    setIsClickDelete(true);
     setEditMenuVisible(false);
   };
 
-  const handleDeleteClick = useCallback(async () => {
-    try {
-      await axios.delete(`${requests.ANSWERS}${answer.id}/`);
-      setIsClickDelete(true);
-    } catch (error) {
-      console.error("에러 발생:", error);
-    }
-
-    setEditMenuVisible(false);
-  });
-
+  // 수정 상태 변환
   function toggleIsEdit() {
     setIsClickEdit(!isClickEdit);
   }
 
+  // 삭제 상태 변환
   function toggleIsDelete() {
     setIsClickDelete(!isClickDelete);
+  }
+
+  function closeDropDownMenu() {
+    setEditMenuVisible(false);
   }
 
   return (

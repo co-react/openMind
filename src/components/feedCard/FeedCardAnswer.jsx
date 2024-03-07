@@ -20,11 +20,14 @@ function FeedCardAnswer({
   const [content, setContent] = useState("");
   const [createdAt, setCreatedAt] = useState("");
   const [state, setState] = useState("Empty");
+  const [answerId, setAnswerId] = useState("");
 
+  // InputTextArea value값 추적
   const handleInputChange = (event) => {
     setInputValue(event.target.value);
   };
 
+  // 유저 데이터 받아오기
   const fetchData = useCallback(async () => {
     if (subjectId) {
       try {
@@ -35,16 +38,19 @@ function FeedCardAnswer({
         console.error("에러 발생:", error);
       }
     }
-  }, [subjectId, isClickEdit, state]);
+  }, [subjectId]);
 
+  // 답변하기
   const handleClickPost = useCallback(async () => {
     try {
-      await axios.post(`${requests.QUESTIONS}${questionId}/answers/`, {
+      const response = await axios.post(`${requests.QUESTIONS}${questionId}/answers/`, {
         questionId: 0,
         content: inputValue,
         isRejected: true,
         team: "string",
       });
+      console.log(response.data.id);
+      setAnswerId(response.data.id);
       setContent(inputValue);
       setState("Sent");
     } catch (error) {
@@ -52,10 +58,11 @@ function FeedCardAnswer({
     }
   });
 
+  // 답변 수정하기
   const handleClickEdit = useCallback(async () => {
     if (subjectId) {
       try {
-        await axios.patch(`${requests.ANSWERS}${answer.id}/`, {
+        await axios.patch(`${requests.ANSWERS}${answerId}/`, {
           content: content,
           isRejected: true,
         });
@@ -66,17 +73,26 @@ function FeedCardAnswer({
     }
   });
 
+  // 시작하고 최초에 실행됨
   useEffect(() => {
     fetchData();
     if (answer) {
+      setAnswerId(answer.id);
       setContent(answer.content);
       setCreatedAt(answer.createdAt);
     }
   }, []);
 
+  // 삭제되었다면 InputTextArea 보여주게
   useEffect(() => {
     if (isClickDelete) {
+      try {
+        axios.delete(`${requests.ANSWERS}${answerId}/`);
+      } catch (error) {
+        console.error("에러 발생:", error);
+      }
       setState("Empty");
+      setInputValue("");
       toggleIsDelete();
     }
   }, [isClickDelete]);
