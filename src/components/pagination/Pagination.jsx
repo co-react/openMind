@@ -1,4 +1,4 @@
-import { styled, css } from "styled-components";
+import { styled } from "styled-components";
 
 function Pagination({ isSelected, children, onClick }) {
   return (
@@ -28,7 +28,10 @@ const PaginationBox = styled.div`
 `;
 
 const PaginationData = styled.p`
-  color: var(--Grayscale-40, #818181);
+  color: ${(props) =>
+    props.$isSelected
+      ? "var(--Brown-40, #542f1a)"
+      : "var(--Grayscale-40, #818181)"};
   text-align: center;
   font-feature-settings: "clig" off, "liga" off;
   font-family: Actor;
@@ -45,10 +48,4 @@ const PaginationData = styled.p`
     // 호버 시 적용될 스타일
     color: var(--Grayscale-60, #000);
   }
-
-  ${({ isSelected }) =>
-    isSelected &&
-    css`
-      color: var(--Brown-40, #542f1a);
-    `}
 `;
