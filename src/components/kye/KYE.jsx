@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import CreateQuestionCard from "../../domain/CreateQuestionCard";
 import Button from "../buttons/ArrowIconButton";
+import FloatingButton from "../buttons/FloatingButton";
 import ShareButton from "../buttons/ShareButton";
 import Form from "../input/Form";
 import InputField from "../input/InputField";
@@ -35,8 +36,8 @@ function KYE() {
         <ShareButton />
         <Link to="/main">메인페이지 가기</Link>
       </Form>
-
       <CreateQuestionCard />
+      <FloatingButton>질문 작성하기</FloatingButton>
     </>
   );
 }

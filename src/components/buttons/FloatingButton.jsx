@@ -1,37 +1,19 @@
-import styled from 'styled-components';
+import styled from "styled-components";
+import Button from "./Button";
+import { BoxShadow1 } from "../../style/commonStyles";
 
-function FloatingButton({children, onClick}) {
+function FloatingButton({ children, ...rest }) {
   return (
-    <Button onClick={onClick}>
-      <Text>
+    <StyledButton variant="fill" {...rest}>
       {children}
-      </Text>
-    </Button>
-  )
+    </StyledButton>
+  );
 }
 
-export default FloatingButton
+export default FloatingButton;
 
 // styled
-const Button = styled.button`
-  display: inline-flex;
-  box-sizing: border-box;
-  justify-content: center;
-  align-items: center;
-  height: 5.4rem;
-  padding: 1.2rem 2.4rem;
-  flex-shrink: 0;
-
-  border-radius: 20.0rem;
-  background: var(--Brown-40, #542F1A);
-  box-shadow: 0rem 0.4rem 0.4rem 0rem rgba(0, 0, 0, 0.25);
+const StyledButton = styled(Button)`
+  ${BoxShadow1}
+  border-radius: 20rem;
 `;
-
-const Text = styled.span`
-  color: var(--Grayscale-10, #FFF);
-  font-feature-settings: 'clig' off, 'liga' off;
-  font-family: Pretendard;
-  font-size: 2.0rem;
-  font-style: normal;
-  font-weight: 400;
-`
