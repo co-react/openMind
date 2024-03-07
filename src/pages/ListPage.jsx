@@ -12,6 +12,7 @@ import BaseButton from "../components/buttons/ArrowIconButton";
 import Dropdown from "../components/dropdown/Dropdown";
 import Pagination from "../components/pagination/Pagination";
 import UserCard from "../components/userCard/UserCard";
+import AnswerModal from "../domain/modal/AnsweModal";
 
 function ListPage() {
   const [cardList, setCardList] = useState([]);
@@ -23,6 +24,7 @@ function ListPage() {
   const [offset, setOffset] = useState(0);
   const [limit, setLimit] = useState(8);
   const [sortUrl, setSortUrl] = useState("&sort=time");
+  const [isModal, setIsModal] = useState(false);
   //const navigate = useNavigate();
 
   //오프셋 리미트를 위한 코드
@@ -142,17 +144,7 @@ function ListPage() {
   //답변하러가기 클릭 시 실행되는 함수
   //로컬 스토리지에 한사람이 여러계정을 만들 수 있음.
   const handleAnswerClick = () => {
-    //모달 창 on
-    //이 모달 창에 이름을 넣고
-    //답변 완료하기 누르면 로컬 스토리지에 이름이 있는 경우 페이지이동
-    //아니면 에러메시지로 표시
-    // const postId = localStorage.getItem(localNameValue);
-    // if (postId) {
-    //   navigate(`/post/${postId}/answer`);
-    // } else {
-    //   console.log(localNameValue);
-    //   navigate(`/`);
-    // }
+    setIsModal(!isModal);
   };
 
   return (
@@ -171,6 +163,7 @@ function ListPage() {
         <Title>누구에게 질문할까요?</Title>
         <Dropdown onSelect={handleSortOption} />
       </TitleDiv>
+      {isModal && <AnswerModal onClose={handleAnswerClick} />}
       <CardListDiv>
         {cardList.results &&
           cardList.results.map((item) => (
