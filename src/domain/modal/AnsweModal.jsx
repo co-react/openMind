@@ -23,7 +23,7 @@ function AnswerModal({ onClose }) {
     if (postId) {
       navigate(`/post/${postId}/answer`);
     } else {
-      setErrorMsg(ERROR_MESSAGE.NO_NAME);
+      setErrorMsg(ERROR_MESSAGE.NO_ID);
     }
   };
 
@@ -87,5 +87,5 @@ const CloseIcon = styled.img`
 const ErrorMsg = styled.p`
   color: red;
   font-size: 13px;
-  font-weight: 500;
+  font-weight: 600;
 `;
