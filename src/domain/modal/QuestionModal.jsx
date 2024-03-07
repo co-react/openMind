@@ -13,10 +13,6 @@ import InputTextArea from "../../components/input/InputTextArea";
 function QuestionModal({ onClose, id, userName, imageSource, setIsPostedQuestion }) {
   const [inputValue, setInputValue] = useState("");
 
-  // const handleBackgroundClick = () => {
-  //   onClose();
-  // };
-
   const handleInputChange = (event) => {
     setInputValue(event.target.value);
   };
