@@ -1,6 +1,7 @@
 import { useState } from "react";
 import styled from "styled-components";
 
+import ModalBackground from "./ModalBackground";
 import axios from "../../apis/axios";
 import requests from "../../apis/request";
 
@@ -9,18 +10,12 @@ import messages from "../../assets/svg/icons/messages.svg";
 import Button from "../../components/buttons/Button";
 import InputTextArea from "../../components/input/InputTextArea";
 
-function QuestionModal({
-  onClose,
-  id,
-  userName,
-  imageSource,
-  setIsPostedQuestion,
-}) {
+function QuestionModal({ onClose, id, userName, imageSource, setIsPostedQuestion }) {
   const [inputValue, setInputValue] = useState("");
 
-  const handleBackgroundClick = () => {
-    onClose();
-  };
+  // const handleBackgroundClick = () => {
+  //   onClose();
+  // };
 
   const handleInputChange = (event) => {
     setInputValue(event.target.value);
@@ -40,73 +35,34 @@ function QuestionModal({
   };
 
   return (
-    <Background onClick={handleBackgroundClick}>
-      <ModalContainer onClick={(e) => e.stopPropagation()}>
-        <ModalTop>
-          <Title>
-            <MessageIcon src={messages} />
-            질문을 작성하세요
-          </Title>
-          <CloseIcon src={close} onClick={handleBackgroundClick} />
-        </ModalTop>
-        <ModalContents>
-          <Profile>
-            To.
-            <ProfileImg src={imageSource} />
-            {userName}
-          </Profile>
-          <ModalInputTextArea
-            placeholder="질문을 입력해주세요"
-            value={inputValue}
-            onChange={handleInputChange}
-          />
-          <Button
-            variant="fill"
-            disabled={inputValue.trim() === ""}
-            onClick={handleClick}
-          >
-            질문 보내기
-          </Button>
-        </ModalContents>
-      </ModalContainer>
-    </Background>
+    <ModalBackground onClick={onClose}>
+      <ModalTop>
+        <Title>
+          <MessageIcon src={messages} />
+          질문을 작성하세요
+        </Title>
+        <CloseIcon src={close} onClick={onClose} />
+      </ModalTop>
+      <ModalContents>
+        <Profile>
+          To.
+          <ProfileImg src={imageSource} />
+          {userName}
+        </Profile>
+        <ModalInputTextArea
+          placeholder="질문을 입력해주세요"
+          value={inputValue}
+          onChange={handleInputChange}
+        />
+        <Button variant="fill" disabled={inputValue.trim() === ""} onClick={handleClick}>
+          질문 보내기
+        </Button>
+      </ModalContents>
+    </ModalBackground>
   );
 }
 
 export default QuestionModal;
-
-const Background = styled.div`
-  position: fixed;
-  width: 100%;
-  height: 100%;
-  background: var(--Dim, rgba(0, 0, 0, 0.56));
-  top: 0;
-  left: 0;
-  cursor: pointer;
-`;
-
-const ModalContainer = styled.div`
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 32.7rem;
-  height: 56.8rem;
-  padding: 4rem;
-  flex-shrink: 0;
-  border-radius: 2.4rem;
-  background: var(--Grayscale-10, #fff);
-  box-shadow: 0rem 1.6rem 2rem 0rem rgba(48, 48, 48, 0.62);
-  cursor: default;
-  display: flex;
-  flex-direction: column;
-  gap: 3.4rem;
-
-  @media screen and (min-width: 768px) {
-    width: 61.2rem;
-    height: 45.4rem;
-  }
-`;
 
 const ModalTop = styled.div`
   display: flex;
