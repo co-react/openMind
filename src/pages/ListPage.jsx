@@ -9,7 +9,7 @@ import { ReactComponent as ArrowRightIcon } from "../assets/svg/icons/arrow-righ
 import logo from "../assets/svg/icons/logo.svg";
 import BaseButton from "../components/buttons/ArrowIconButton";
 import Dropdown from "../components/dropdown/Dropdown";
-import KDH from "../components/kdh/KDH";
+//import KDH from "../components/kdh/KDH";
 import Pagination from "../components/pagination/Pagination";
 import UserCard from "../components/userCard/UserCard";
 
@@ -37,7 +37,7 @@ function ListPage() {
         setCards(Number(response.data.count));
         setPages(Math.ceil(cards / 8)); // 총 페이지 수 계산
         setLimit(8);
-        console.log("랜더링");
+
       } catch (error) {
         console.error("에러 발생:", error);
       }
@@ -111,12 +111,14 @@ function ListPage() {
     <Container>
       <HeaderDiv>
         <Header>
-          <Link to={`/`} element={<KDH />}>
+          <Link to="/" >
             <Logo src={logo} alt="로고 이미지" />
           </Link>
-          <BaseButton variant="outline" hasIcon>
-            답변하러가기
-          </BaseButton>
+          <Link to={`/post/3816/answer`}>
+            <BaseButton variant="outline" hasIcon>
+              답변하러가기
+            </BaseButton>
+          </Link>
         </Header>
       </HeaderDiv>
       <TitleDiv>
@@ -126,7 +128,7 @@ function ListPage() {
       <CardListDiv>
         {cardList.results &&
           cardList.results.map((item) => (
-            <>
+            <Link to={`/post/${item.id}`}>
               <UserCard
                 key={item.id}
                 profileImg={item.imageSource}
@@ -135,7 +137,7 @@ function ListPage() {
               ></UserCard>
               {/* <p>{cards}</p>
               <p>{nextUrl}</p> */}
-            </>
+            </Link>
           ))}
       </CardListDiv>
       <PaginationDiv>
