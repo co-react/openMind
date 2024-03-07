@@ -106,12 +106,3 @@ const ProfileImg = styled.img`
     height: 13.6rem;
   }
 `;
-
-// const ToastLayout = styled.div`
-//   position: fixed;
-//   bottom: 10rem;
-
-//   @media (min-width: 768px) {
-//     bottom: 6rem;
-//   }
-// `
