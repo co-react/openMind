@@ -3,14 +3,22 @@ import styled from "styled-components";
 import { ReactComponent as DeleteIcon } from "../../assets/svg/icons/close.svg";
 import { ReactComponent as EditIcon } from "../../assets/svg/icons/edit.svg";
 
-function EditDropdownMenu() {
+function EditDropdownMenu({ className, onEditClick, onDeleteClick }) {
+  const handleEditClick = () => {
+    onEditClick();
+  };
+
+  const handleDeleteClick = () => {
+    onDeleteClick();
+  };
+
   return (
-    <Container>
-      <Wrapper>
+    <Container className={className}>
+      <Wrapper onClick={handleEditClick}>
         <EditIcon alt="수정하기 아이콘" />
         <Title>수정하기</Title>
       </Wrapper>
-      <Wrapper>
+      <Wrapper onClick={handleDeleteClick}>
         <DeleteIcon alt="삭제하기 아이콘" />
         <Title>삭제하기</Title>
       </Wrapper>
@@ -55,8 +63,8 @@ const Wrapper = styled.button`
   border: none;
   &:hover {
     svg {
-      filter: invert(30%) sepia(87%) saturate(2359%) hue-rotate(204deg)
-        brightness(100%) contrast(90%);
+      filter: invert(30%) sepia(87%) saturate(2359%) hue-rotate(204deg) brightness(100%)
+        contrast(90%);
       transition: 0.5s;
     }
 

@@ -1,15 +1,14 @@
-import React from "react";
 import { css, styled } from "styled-components";
 
-export const ThemeModeButton = ({ toggleTheme, themeMode }) => {
+function ThemeModeButton({ toggleTheme, themeMode }) {
   return (
-    <ThemeModeWrapper onClick={toggleTheme}>
+    <StyledThemeModeButton onClick={toggleTheme}>
       {themeMode === "lightTheme" ? "🌝" : "🌚"}
-    </ThemeModeWrapper>
+    </StyledThemeModeButton>
   );
-};
+}
 
-const ThemeModeWrapper = styled.button`
+const StyledThemeModeButton = styled.button`
   position: absolute;
   top: 0;
   right: 0;
@@ -28,3 +27,5 @@ const ThemeModeWrapper = styled.button`
     `;
   }}
 `;
+
+export default ThemeModeButton;

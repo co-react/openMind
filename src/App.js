@@ -14,14 +14,13 @@ import { lightTheme, darkTheme } from "./style/darkStyle";
 import GlobalStyles from "./style/GlobalStyles";
 
 function App() {
-  const localThemeMode = window.localStorage.getItem("theme") || "lightTheme";
+  const localThemeMode = localStorage.getItem("theme") || "lightTheme";
   const [themeMode, setThemeMode] = useState(localThemeMode);
 
   const toggleTheme = () => {
-    const newThemeMode =
-      themeMode === "lightTheme" ? "darkTheme" : "lightTheme";
+    const newThemeMode = themeMode === "lightTheme" ? "darkTheme" : "lightTheme";
     setThemeMode(newThemeMode);
-    window.localStorage.setItem("theme", newThemeMode);
+    localStorage.setItem("theme", newThemeMode);
   };
 
   const theme = themeMode === "lightTheme" ? lightTheme : darkTheme;
@@ -40,10 +39,7 @@ function App() {
               <Route path=":id/answer" />
             </Route>
             {/* 이하 테스트용 Route */}
-            <Route
-              path="/kdh"
-              element={<KDH themeMode={themeMode} toggleTheme={toggleTheme} />}
-            />
+            <Route path="/kdh" element={<KDH themeMode={themeMode} toggleTheme={toggleTheme} />} />
             <Route path="/nes" element={<NES />} />
             <Route path="/kye" element={<KYE />} />
             <Route path="/pgb" element={<PGB />} />

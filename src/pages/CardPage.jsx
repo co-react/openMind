@@ -10,7 +10,7 @@ import QuestionModal from "../domain/modal/QuestionModal";
 import { useFetchQuestionSubject } from "../hooks/useFetchQuestionSubject";
 import { useMediaQueryForMobile } from "../hooks/useMediaQueryForMobile";
 
-function CardPage({ id = 3856 }) {
+function CardPage({ id = 3983 }) {
   // 현재 id는 하드 코딩
   const [isPostedQuestion, setIsPostedQuestion] = useState(false);
   const isMobile = useMediaQueryForMobile();
@@ -106,12 +106,3 @@ const ProfileImg = styled.img`
     height: 13.6rem;
   }
 `;
-
-// const ToastLayout = styled.div`
-//   position: fixed;
-//   bottom: 10rem;
-
-//   @media (min-width: 768px) {
-//     bottom: 6rem;
-//   }
-// `
