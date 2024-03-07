@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Link, useParams } from 'react-router-dom';
+import { Link, useParams } from "react-router-dom";
 import styled from "styled-components";
 
 import { ReactComponent as LogoIcon } from "../assets/svg/icons/logo.svg";
@@ -31,7 +31,7 @@ function CardPage() {
       <ProfileImg src={user.imageSource} />
       <NameTitle>{user.name}</NameTitle>
       <ShareButton />
-      <FeedCardContainer id={id} questionCount={user.questionCount} />
+      <FeedCardContainer id={id} questionCount={user.questionCount} userName={user.name} />
       <FloatingButtonLayout>
         <FloatingButton isMobile={isMobile} onClick={handleClick}>
           {isMobile ? "질문 작성" : "질문 작성하기"}
