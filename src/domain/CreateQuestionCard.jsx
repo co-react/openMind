@@ -1,6 +1,7 @@
 import { useState } from "react";
-import axios from "../apis/axios";
-import requests from "../apis/request";
+import BASEURL from "../apis/axios";
+import getAllData from "../apis/getDataAll";
+import REQUEST from "../apis/request";
 
 import Button from "../components/buttons/ArrowIconButton";
 import ErrorMessage from "../components/error/ErrorMessage";
@@ -8,30 +9,37 @@ import MainForm from "../components/input/Form";
 import InputField from "../components/input/InputField";
 
 import ERROR_MESSAGE from "../constants/message";
+import validateInput from "../utils/validate/validateInput";
 
 let localNameValue = {}; // 변수를 외부로 보내기 위한 배열
 
 function CreateQuestionCard() {
   const [answerer, setAnswerer] = useState("");
-  const [error, setError] = useState("");
+  const [errorMessage, setErrorMessage] = useState("");
 
   const handleChange = (e) => {
     setAnswerer(e.target.value);
-    setError("");
+    setErrorMessage("");
   };
 
   const handleClick = async (e) => {
     e.preventDefault();
-    try {
-      const getData = await axios.get(requests.SUBJECTS);
-      const nickNameList = getData.data.results.map((subject) => subject.name);
 
-      if (nickNameList.includes(answerer)) {
-        setError(ERROR_MESSAGE.NAME_ALREADY_IN_USE);
+    try {
+      const validate = validateInput(answerer);
+      if (validate) {
+        setErrorMessage(validate);
+        return;
+      }
+      const nicknameList = (await getAllData(REQUEST.SUBJECTS)).map(
+        (data) => data.name
+      );
+      if (nicknameList.includes(answerer)) {
+        setErrorMessage(ERROR_MESSAGE.NAME_ALREADY_IN_USE);
         return;
       }
 
-      const response = await axios.post(requests.SUBJECTS, {
+      const response = await BASEURL.post(REQUEST.SUBJECTS, {
         name: answerer,
       });
       const { id } = response.data;
@@ -48,9 +56,9 @@ function CreateQuestionCard() {
       <InputField
         placeholder="이름을 입력하세요"
         onChange={handleChange}
-        onError={error}
+        hasError={errorMessage}
       />
-      {error && <ErrorMessage error={error} />}
+      {errorMessage && <ErrorMessage error={errorMessage} />}
 
       <Button variant="fill" onClick={handleClick}>
         질문 받기
