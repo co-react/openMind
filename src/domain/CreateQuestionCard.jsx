@@ -11,8 +11,6 @@ import InputField from "../components/input/InputField";
 import ERROR_MESSAGE from "../constants/message";
 import validateInput from "../utils/validate/validateInput";
 
-let localNameValue = {}; // 변수를 외부로 보내기 위한 배열
-
 function CreateQuestionCard() {
   const [answerer, setAnswerer] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
@@ -44,7 +42,6 @@ function CreateQuestionCard() {
       });
       const { id } = response.data;
       localStorage.setItem(answerer, id);
-      localNameValue[answerer] = id;
       // id 를 통해 그 질문 받는 페이지로 이동
     } catch (error) {
       console.error("에러 발생:", error);
@@ -68,4 +65,3 @@ function CreateQuestionCard() {
 }
 
 export default CreateQuestionCard;
-export { localNameValue };

@@ -143,13 +143,17 @@ function ListPage() {
   //답변하러가기 클릭 시 실행되는 함수
   //로컬 스토리지에 한사람이 여러계정을 만들 수 있음.
   const handleAnswerClick = () => {
-    const postId = localStorage.getItem(localNameValue);
-    if (postId) {
-      navigate(`/post/${postId}/answer`);
-    } else {
-      console.log(localNameValue);
-      navigate(`/`);
-    }
+    //모달 창 on
+    //이 모달 창에 이름을 넣고
+    //답변 완료하기 누르면 로컬 스토리지에 이름이 있는 경우 페이지이동
+    //아니면 에러메시지로 표시
+    // const postId = localStorage.getItem(localNameValue);
+    // if (postId) {
+    //   navigate(`/post/${postId}/answer`);
+    // } else {
+    //   console.log(localNameValue);
+    //   navigate(`/`);
+    // }
   };
 
   return (
