@@ -3,7 +3,7 @@ import { styled, css } from "styled-components";
 function Pagination({ isSelected, children, onClick }) {
   return (
     <PaginationBox>
-      <PaginationData onClick={onClick} isSelected={isSelected}>
+      <PaginationData onClick={onClick} $isSelected={isSelected}>
         {children}
       </PaginationData>
     </PaginationBox>
