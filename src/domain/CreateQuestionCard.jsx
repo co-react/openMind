@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import BASEURL from "../apis/axios";
 import getAllData from "../apis/getDataAll";
 import REQUEST from "../apis/request";
@@ -12,6 +13,7 @@ import ERROR_MESSAGE from "../constants/message";
 import validateInput from "../utils/validate/validateInput";
 
 function CreateQuestionCard() {
+  const navigate = useNavigate();
   const [answerer, setAnswerer] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
 
@@ -43,6 +45,7 @@ function CreateQuestionCard() {
       const { id } = response.data;
       localStorage.setItem(answerer, id);
       // id 를 통해 그 질문 받는 페이지로 이동
+      navigate(`/post/${id}`);
     } catch (error) {
       console.error("에러 발생:", error);
     }
