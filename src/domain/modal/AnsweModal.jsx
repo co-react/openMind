@@ -5,13 +5,16 @@ import ModalBackground from "./ModalBackground";
 import close from "../../assets/svg/icons/close.svg";
 import Button from "../../components/buttons/Button";
 import InputField from "../../components/input/InputField";
+import ERROR_MESSAGE from "../../constants/message";
 
 function AnswerModal({ onClose }) {
   const [inputValue, setInputValue] = useState("");
+  const [errorMsg, setErrorMsg] = useState("");
   const navigate = useNavigate();
 
   const handleInputChange = (event) => {
     setInputValue(event.target.value);
+    setErrorMsg("");
   };
 
   //답변하러 가기 버튼을 클릭했을 때 나오는 실행되는 함수
@@ -20,7 +23,7 @@ function AnswerModal({ onClose }) {
     if (postId) {
       navigate(`/post/${postId}/answer`);
     } else {
-      navigate(`/`);
+      setErrorMsg(ERROR_MESSAGE.NO_NAME);
     }
   };
 
@@ -38,6 +41,7 @@ function AnswerModal({ onClose }) {
         placeholder="닉네임을 입력하세요"
         onChange={handleInputChange}
       ></InputField>
+      {errorMsg && <ErrorMsg>{errorMsg}</ErrorMsg>}
       <Button
         variant="fill"
         disabled={inputValue.trim() === ""}
@@ -78,4 +82,10 @@ const CloseIcon = styled.img`
     width: 2.8rem;
     height: 2.8rem;
   }
+`;
+
+const ErrorMsg = styled.p`
+  color: red;
+  font-size: 13px;
+  font-weight: 500;
 `;
