@@ -14,13 +14,7 @@ import { calculateDateDifference } from "../../utils/dateCalculate";
 import AnswerButton from "../badge/AnswerButton";
 import EditDropdownMenu from "../dropdown/EditDropdownMenu";
 
-function FeedCard({
-  questionId,
-  answer,
-  content,
-  createdAt,
-  subjectId,
-}) {
+function FeedCard({ questionId, answer, content, createdAt, subjectId }) {
   const [isEditMenuVisible, setEditMenuVisible] = useState(false);
 
   const [isAnswerPage, setIsAnswerPage] = useState(false);

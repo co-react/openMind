@@ -15,11 +15,7 @@ function CardPage({ id = 3983 }) {
   const [isPostedQuestion, setIsPostedQuestion] = useState(false);
   const isMobile = useMediaQueryForMobile();
   const [isOpenModal, setIsOpenModal] = useState(false);
-  const user = useFetchQuestionSubject(
-    id,
-    isPostedQuestion,
-    setIsPostedQuestion
-  );
+  const user = useFetchQuestionSubject(id, isPostedQuestion, setIsPostedQuestion);
 
   const handleClick = () => {
     setIsOpenModal((isOpenModal) => !isOpenModal);
@@ -105,13 +101,4 @@ const ProfileImg = styled.img`
     width: 13.6rem;
     height: 13.6rem;
   }
-`
-
-// const ToastLayout = styled.div`
-//   position: fixed;
-//   bottom: 10rem;
-
-//   @media (min-width: 768px) {
-//     bottom: 6rem;
-//   }
-// `
+`;

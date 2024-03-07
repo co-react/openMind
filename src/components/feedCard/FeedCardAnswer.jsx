@@ -49,7 +49,6 @@ function FeedCardAnswer({
         isRejected: true,
         team: "string",
       });
-      console.log(response.data.id);
       setAnswerId(response.data.id);
       setContent(inputValue);
       setState("Sent");
