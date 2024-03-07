@@ -8,8 +8,8 @@ const NES = () => {
   useEffect(() => {
     const fetchInitData = async () => {
       try {
-        const data = await requests.getSubjects();
-        console.log(data);
+        await requests.getSubjects();
+
       } catch (error) {
         console.error('에러 발생:', error);
       }

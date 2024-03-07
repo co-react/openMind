@@ -16,7 +16,7 @@ export function useFetchNextWithInfiniteScroll(next, setQuestions, setNext) {
   }
 
   const handleScroll = useCallback(() => {
-    const scrollPosition = window.innerHeight + document.documentElement.scrollTop;
+    const scrollPosition = innerHeight + document.documentElement.scrollTop;
     const documentHeight = document.documentElement.offsetHeight;
 
     if (scrollPosition >= documentHeight) {
@@ -25,10 +25,10 @@ export function useFetchNextWithInfiniteScroll(next, setQuestions, setNext) {
   }, [next]);
 
   useEffect(() => {
-    window.addEventListener('scroll', handleScroll);
+    addEventListener('scroll', handleScroll);
 
     return () => {
-      window.removeEventListener('scroll', handleScroll);
+      removeEventListener('scroll', handleScroll);
     };
   }, [next]); // 페이지 상태가 변경될 때마다 이펙트 재실행
 }
