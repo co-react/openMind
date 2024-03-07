@@ -5,7 +5,6 @@ import { ReactComponent as LogoIcon } from "../assets/svg/icons/logo.svg";
 
 import FloatingButton from "../components/buttons/FloatingButton";
 import ShareButton from "../components/buttons/ShareButton";
-//import Toast from "../components/toast/Toast";
 import FeedCardContainer from "../domain/FeedCardContainer";
 import QuestionModal from "../domain/modal/QuestionModal";
 import { useFetchQuestionSubject } from "../hooks/useFetchQuestionSubject";
@@ -16,8 +15,11 @@ function CardPage({ id = 3983 }) {
   const [isPostedQuestion, setIsPostedQuestion] = useState(false);
   const isMobile = useMediaQueryForMobile();
   const [isOpenModal, setIsOpenModal] = useState(false);
-  //const [isOpenToast, setIsOpenToast] = useOpenToast(false);
-  const user = useFetchQuestionSubject(id, isPostedQuestion, setIsPostedQuestion);
+  const user = useFetchQuestionSubject(
+    id,
+    isPostedQuestion,
+    setIsPostedQuestion
+  );
 
   const handleClick = () => {
     setIsOpenModal((isOpenModal) => !isOpenModal);
@@ -31,7 +33,9 @@ function CardPage({ id = 3983 }) {
       <ShareButton />
       <FeedCardContainer id={id} questionCount={user.questionCount} />
       <FloatingButtonLayout>
-        <FloatingButton isMobile={isMobile} onClick={handleClick} />
+        <FloatingButton isMobile={isMobile} onClick={handleClick}>
+          {isMobile ? "질문 작성" : "질문 작성하기"}
+        </FloatingButton>
       </FloatingButtonLayout>
       {isOpenModal && (
         <QuestionModal
