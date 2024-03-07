@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Link, useParams } from 'react-router-dom';
 import styled from "styled-components";
 
 import { ReactComponent as LogoIcon } from "../assets/svg/icons/logo.svg";
@@ -10,7 +11,8 @@ import QuestionModal from "../domain/modal/QuestionModal";
 import { useFetchQuestionSubject } from "../hooks/useFetchQuestionSubject";
 import { useMediaQueryForMobile } from "../hooks/useMediaQueryForMobile";
 
-function CardPage({ id = 3983 }) {
+function CardPage() {
+  const { id } = useParams();
   // 현재 id는 하드 코딩
   const [isPostedQuestion, setIsPostedQuestion] = useState(false);
   const isMobile = useMediaQueryForMobile();
@@ -27,7 +29,9 @@ function CardPage({ id = 3983 }) {
 
   return (
     <Layout>
-      <SmallStyledLogo />
+      <Link to="/">
+        <SmallStyledLogo />
+      </Link>
       <ProfileImg src={user.imageSource} />
       <NameTitle>{user.name}</NameTitle>
       <ShareButton />

@@ -9,7 +9,7 @@ import CreateQuestionCard from "../domain/CreateQuestionCard";
 function Main() {
   return (
     <Container gap={24}>
-      <Link to="/main">
+      <Link to="/">
         <MainLogo />
       </Link>
       <Link to="/list">
