@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { styled } from "styled-components";
 import axios from "../apis/axios";
 import requests from "../apis/request";
@@ -12,7 +12,6 @@ import BaseButton from "../components/buttons/ArrowIconButton";
 import Dropdown from "../components/dropdown/Dropdown";
 import Pagination from "../components/pagination/Pagination";
 import UserCard from "../components/userCard/UserCard";
-import { localNameValue } from "../domain/CreateQuestionCard";
 
 function ListPage() {
   const [cardList, setCardList] = useState([]);
@@ -24,7 +23,7 @@ function ListPage() {
   const [offset, setOffset] = useState(0);
   const [limit, setLimit] = useState(8);
   const [sortUrl, setSortUrl] = useState("&sort=time");
-  const navigate = useNavigate();
+  //const navigate = useNavigate();
 
   //오프셋 리미트를 위한 코드
   const offsetUrl = `?limit=${limit}&offset=${offset}`;
@@ -204,6 +203,9 @@ const Container = styled.div`
   width: 100%;
   height: 100vh;
   background: var(--Grayscale-20, #f9f9f9);
+  @media (min-width: 1200px) {
+    padding: 0 100px; /* 좌우 여백 조절 */
+  }
 `;
 
 const TitleDiv = styled.div`
