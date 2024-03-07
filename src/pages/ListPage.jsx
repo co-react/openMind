@@ -12,6 +12,7 @@ import BaseButton from "../components/buttons/ArrowIconButton";
 import Dropdown from "../components/dropdown/Dropdown";
 import Pagination from "../components/pagination/Pagination";
 import UserCard from "../components/userCard/UserCard";
+import { localNameValue } from "../domain/CreateQuestionCard";
 
 function ListPage() {
   const [cardList, setCardList] = useState([]);
@@ -140,11 +141,13 @@ function ListPage() {
   };
 
   //답변하러가기 클릭 시 실행되는 함수
+  //로컬 스토리지에 한사람이 여러계정을 만들 수 있음.
   const handleAnswerClick = () => {
-    const postId = localStorage.getItem("박박");
+    const postId = localStorage.getItem(localNameValue);
     if (postId) {
       navigate(`/post/${postId}/answer`);
     } else {
+      console.log(localNameValue);
       navigate(`/`);
     }
   };
