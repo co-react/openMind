@@ -1,10 +1,8 @@
 import { Toaster, toast } from "sonner";
 import styled from "styled-components";
 
-import { ReactComponent as FacebookLogo } from "../../assets/svg/icons/Facebook.svg";
-import { ReactComponent as KakaoLogo } from "../../assets/svg/icons/Kakaotalk.svg";
-import { ReactComponent as LinkLogo } from "../../assets/svg/icons/link.svg";
 import { shareToFacebook, shareToKakao } from "../../utils/shareToSns";
+import SVG from "../common/IconMapping";
 
 function LinkButton() {
   const handleClickToCopyUrl = (text) => {
@@ -52,17 +50,17 @@ function LinkButton() {
           }}
           color="var(--Brown-40)"
         >
-          <LinkLogo fill="white" width={18} />
+          {<SVG.Link fill="white" width={18} />}
         </Button>
       </LinkItem>
       <LinkItem color="var(--Yellow-50)">
         <Button onClick={handleClickToShareKakao} color="var(--Yellow-50)">
-          <KakaoLogo width={18} />
+          {<SVG.Kakaotalk width={18} />}
         </Button>
       </LinkItem>
       <LinkItem color="var(--Blue-50)">
         <Button onClick={handleClickToShareFacebook} color="var(--Blue-50)">
-          <FacebookLogo fill="white" width={18} />
+          {<SVG.Facebook fill="white" width={18} />}
         </Button>
       </LinkItem>
     </LinkList>
@@ -115,5 +113,6 @@ const LinkItem = styled.li`
 
   & svg {
     width: 1.8rem;
+    height: 1.8rem;
   }
 `;
