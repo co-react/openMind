@@ -28,7 +28,7 @@ const ModalContainer = styled.div`
   left: 50%;
   transform: translate(-50%, -50%);
   width: 40rem;
-  height: 30rem;
+  height: 28rem;
   padding: 4rem;
   flex-shrink: 0;
   border-radius: 2.4rem;
@@ -41,6 +41,6 @@ const ModalContainer = styled.div`
 
   @media screen and (min-width: 768px) {
     width: 61.2rem;
-    height: 30rem;
+    height: 29rem;
   }
 `;
