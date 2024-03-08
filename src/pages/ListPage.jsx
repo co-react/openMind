@@ -25,7 +25,6 @@ function ListPage() {
   const [limit, setLimit] = useState(8);
   const [sortUrl, setSortUrl] = useState("&sort=time");
   const [isModal, setIsModal] = useState(false);
-  //const navigate = useNavigate();
 
   //오프셋 리미트를 위한 코드
   const offsetUrl = `?limit=${limit}&offset=${offset}`;
