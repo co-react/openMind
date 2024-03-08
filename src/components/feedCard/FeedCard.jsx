@@ -16,7 +16,7 @@ function FeedCard({ questionId, answer, content, createdAt, subjectId, hasAnswer
 
   const [isClickEdit, setIsClickEdit] = useState(false);
   const [isClickDelete, setIsClickDelete] = useState(false);
-
+  const [hasAnswer, setHasAnswer] = useState(false);
   const dropdownRef = useRef(null);
 
   // 드롭다운 외부 클릭 or 버튼 클릭시 꺼지게
@@ -43,7 +43,12 @@ function FeedCard({ questionId, answer, content, createdAt, subjectId, hasAnswer
   const handleDeleteClick = () => {
     setIsClickDelete(true);
     setEditMenuVisible(false);
+    setHasAnswer(false);
   };
+
+  function toggleIsPost() {
+    setHasAnswer(!hasAnswer);
+  }
 
   // 수정 상태 변환
   function toggleIsEdit() {
@@ -59,12 +64,18 @@ function FeedCard({ questionId, answer, content, createdAt, subjectId, hasAnswer
     setEditMenuVisible(false);
   }
 
+  useEffect(() => {
+    if (answer) {
+      setHasAnswer(true);
+    }
+  }, [answer]);
+
   return (
     <FeedCardContainer>
       <CardTopContainer>
-        <AnswerButton isAnswered={answer} />
+        <AnswerButton isAnswered={hasAnswer} />
         <KebabContainer ref={dropdownRef}>
-          {hasAnswerCondition && (
+          {hasAnswerCondition && hasAnswer && (
             <KebabIcon src={moreIcon} onClick={() => setEditMenuVisible(!isEditMenuVisible)} />
           )}
           {isEditMenuVisible && (
@@ -84,6 +95,7 @@ function FeedCard({ questionId, answer, content, createdAt, subjectId, hasAnswer
         answer={answer}
         isClickEdit={isClickEdit}
         isClickDelete={isClickDelete}
+        toggleIsPost={toggleIsPost}
         toggleIsEdit={toggleIsEdit}
         toggleIsDelete={toggleIsDelete}
         hasAnswerCondition={hasAnswerCondition}

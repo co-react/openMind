@@ -12,6 +12,7 @@ function FeedCardAnswer({
   answer,
   isClickEdit,
   isClickDelete,
+  toggleIsPost,
   toggleIsEdit,
   toggleIsDelete,
   hasAnswerCondition,
@@ -43,18 +44,21 @@ function FeedCardAnswer({
 
   // 답변하기
   const handleClickPost = useCallback(async () => {
-    try {
-      const response = await axios.post(`${requests.QUESTIONS}${questionId}/answers/`, {
-        questionId: 0,
-        content: inputValue,
-        isRejected: true,
-        team: "string",
-      });
-      setAnswerId(response.data.id);
-      setContent(inputValue);
-      setState("Sent");
-    } catch (error) {
-      console.error("에러 발생:", error);
+    if (inputValue.trim() != "") {
+      try {
+        const response = await axios.post(`${requests.QUESTIONS}${questionId}/answers/`, {
+          questionId: 0,
+          content: inputValue,
+          isRejected: true,
+          team: "string",
+        });
+        toggleIsPost();
+        setAnswerId(response.data.id);
+        setContent(inputValue);
+        setState("Sent");
+      } catch (error) {
+        console.error("에러 발생:", error);
+      }
     }
   });
 
