@@ -22,7 +22,7 @@ function ListPage() {
   const [endPage, setEndPage] = useState(5); //끝 페이지 (수정 필요)
   const [clickedPage, setClickedPage] = useState(1); //누른 페이지 숫자
   const [offset, setOffset] = useState(0);
-  const [limit, setLimit] = useState(8);
+  const [limit, setLimit] = useState(window.innerWidth < 1000 ? 6 : 8);
   const [sortUrl, setSortUrl] = useState("&sort=time");
   const [isModal, setIsModal] = useState(false);
 
@@ -35,7 +35,6 @@ function ListPage() {
         const response = await axios.get(
           requests.SUBJECTS + offsetUrl + sortUrl
         );
-        console.log(response);
         setCardList(response.data);
         setCards(Number(response.data.count));
         setPages(Math.ceil(cards / limit)); // 총 페이지 수 계산
@@ -231,6 +230,11 @@ const CardListDiv = styled.div`
 
   @media (max-width: 1000px) {
     grid-template-columns: repeat(3, 22rem);
+  }
+
+  @media (max-width: 767px) {
+    grid-template-columns: repeat(2, 22rem);
+    grid-template-rows: 1fr 1fr 1fr;
   }
 `;
 
