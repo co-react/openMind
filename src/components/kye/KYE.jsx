@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import CreateQuestionCard from "../../domain/CreateQuestionCard";
 import Button from "../buttons/ArrowIconButton";
+import BasicButton from "../buttons/Button";
 import FloatingButton from "../buttons/FloatingButton";
 import ShareButton from "../buttons/ShareButton";
 import Form from "../input/Form";
@@ -10,17 +11,15 @@ import InputTextArea from "../input/InputTextArea";
 function KYE() {
   return (
     <>
+      <BasicButton>ㅇㅇㅇ</BasicButton>
       <Form>
+        <BasicButton />
         <InputField placeholder="이름을 입력하세요" />
         <InputTextArea placeholder="이름을 입력하세요" />
-        <Button variant="fill">fill버튼</Button>
-        <Button variant="fill" hasIcon>
-          fill버튼 아이콘 O
-        </Button>
-        <Button variant="fill" disabled>
-          fill버튼 disabled
-        </Button>
-        <Button variant="fill" hasIcon disabled>
+        <Button>fill버튼</Button>
+        <Button hasIcon>fill버튼 아이콘 O</Button>
+        <Button disabled>fill버튼 disabled</Button>
+        <Button hasIcon disabled>
           fill버튼 disabled 아이콘 O
         </Button>
         <Button variant="outline">outline버튼</Button>
@@ -35,6 +34,7 @@ function KYE() {
         </Button>
         <ShareButton />
         <Link to="/main">메인페이지 가기</Link>
+        <FloatingButton>질문 작성하기</FloatingButton>
       </Form>
       <CreateQuestionCard />
       <FloatingButton>질문 작성하기</FloatingButton>

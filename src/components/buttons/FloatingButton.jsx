@@ -1,10 +1,10 @@
 import styled from "styled-components";
 import Button from "./Button";
-import { BoxShadow1 } from "../../style/commonStyles";
+import { BoxShadow2 } from "../../style/commonStyles";
 
-function FloatingButton({ children, ...rest }) {
+function FloatingButton({ className, children, ...rest }) {
   return (
-    <StyledButton variant="fill" {...rest}>
+    <StyledButton className={className} variant="fill" {...rest}>
       {children}
     </StyledButton>
   );
@@ -14,6 +14,6 @@ export default FloatingButton;
 
 // styled
 const StyledButton = styled(Button)`
-  ${BoxShadow1}
+  ${BoxShadow2}
   border-radius: 20rem;
 `;

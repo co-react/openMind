@@ -3,11 +3,17 @@ import { ReactComponent as NextArrow } from "../../assets/svg/icons/next.svg";
 import { BUTTON_STYLE } from "../../style/commonStyles";
 import Button from "../buttons/Button";
 
-function ArrowIconButton({ hasIcon, variant, children, disabled, ...rest }) {
+function ArrowIconButton({
+  hasIcon,
+  variant = "fill",
+  children,
+  disabled = false,
+  ...rest
+}) {
   return (
     <Button
-      disabled={disabled}
       variant={variant}
+      disabled={disabled}
       rightIcon={
         hasIcon && <StyledNextArrow variant={variant} disabled={disabled} />
       }
