@@ -1,21 +1,28 @@
 import { useState } from "react";
+import { Link, useParams } from "react-router-dom";
 import styled from "styled-components";
 
-import { useFetchQuestionSubject } from "../hooks/useFetchQuestionSubject";
-import { useMediaQueryForMobile } from "../hooks/useMediaQueryForMobile";
+//import { useOpenToast } from "../hooks/useOpenToast";
 import { ReactComponent as LogoIcon } from "../assets/svg/icons/logo.svg";
 
 import FloatingButton from "../components/buttons/FloatingButton";
 import ShareButton from "../components/buttons/ShareButton";
 import FeedCardContainer from "../domain/FeedCardContainer";
 import QuestionModal from "../domain/modal/QuestionModal";
+import { useFetchQuestionSubject } from "../hooks/useFetchQuestionSubject";
+import { useMediaQueryForMobile } from "../hooks/useMediaQueryForMobile";
 
-function CardPage({ id = 3856 }) {
+function CardPage() {
+  const { id } = useParams();
   // 현재 id는 하드 코딩
   const [isPostedQuestion, setIsPostedQuestion] = useState(false);
   const isMobile = useMediaQueryForMobile();
   const [isOpenModal, setIsOpenModal] = useState(false);
-  const user = useFetchQuestionSubject(id, isPostedQuestion, setIsPostedQuestion);
+  const user = useFetchQuestionSubject(
+    id,
+    isPostedQuestion,
+    setIsPostedQuestion
+  );
 
   const handleClick = () => {
     setIsOpenModal((isOpenModal) => !isOpenModal);
@@ -23,11 +30,17 @@ function CardPage({ id = 3856 }) {
 
   return (
     <Layout>
-      <SmallStyledLogo />
+      <Link to="/">
+        <SmallStyledLogo />
+      </Link>
       <ProfileImg src={user.imageSource} />
       <NameTitle>{user.name}</NameTitle>
       <ShareButton />
-      <FeedCardContainer id={id} questionCount={user.questionCount}/>
+      <FeedCardContainer
+        id={id}
+        questionCount={user.questionCount}
+        userName={user.name}
+      />
       <FloatingButtonLayout>
         <FloatingButton isMobile={isMobile} onClick={handleClick}>
           {isMobile ? "질문 작성" : "질문 작성하기"}
@@ -75,7 +88,7 @@ const FloatingButtonLayout = styled.div`
   position: fixed;
   bottom: 2.4rem;
   right: 2.4rem;
-`
+`;
 
 const NameTitle = styled.span`
   color: var(--Grayscale-60, #000);
@@ -101,13 +114,4 @@ const ProfileImg = styled.img`
     width: 13.6rem;
     height: 13.6rem;
   }
-`
-
-// const ToastLayout = styled.div`
-//   position: fixed;
-//   bottom: 10rem;
-
-//   @media (min-width: 768px) {
-//     bottom: 6rem;
-//   }
-// `
+`;

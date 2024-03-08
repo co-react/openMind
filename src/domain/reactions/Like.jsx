@@ -5,9 +5,9 @@ import axios from "../../apis/axios";
 import { ReactComponent as likeIcon } from "../../assets/svg/icons/thumbs-up.svg";
 
 
-function Like({ counts, questionId }) {
+function Like({ questionId }) {
   const [isReacted, setIsReacted] = useState(false);
-  const [countLike, setCountLike] =useState(counts);
+  const [countLike, setCountLike] =useState(0);
 
   const handleClick = async () => {
     try {

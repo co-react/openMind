@@ -1,12 +1,15 @@
+import { useEffect, useState } from "react";
+import { useLocation } from "react-router-dom";
 import styled, { css } from "styled-components";
 
 import emptyCard from "../assets/png/letter.png";
 import { ReactComponent as MessageIcon } from "../assets/svg/icons/messages.svg";
 
 import FeedCard from "../components/feedCard/FeedCard";
+import { useFetchNextWithInfiniteScroll } from "../hooks/useFetchNextWithInfiniteScroll";
 import { useFetchQuestions } from "../hooks/useFetchQuestions";
 
-function FeedCardContainer({ id, questionCount }) {
+function FeedCardContainer({ id, questionCount, userName }) {
   if (!questionCount) {
     return (
       <Container $isQuestion={questionCount}>
@@ -19,30 +22,42 @@ function FeedCardContainer({ id, questionCount }) {
     );
   }
 
-  const questions = useFetchQuestions(id, questionCount);
+  const [questions, next, setQuestions, setNext] = useFetchQuestions(id, questionCount);
+  useFetchNextWithInfiniteScroll(next, setQuestions, setNext);
+
+  const [hasAnswerCondition, setHasAnswerCondition] = useState(false);
+  const location = useLocation();
+
+  useEffect(() => {
+    const postId = location.pathname.split("/")[2];
+    const isKeyInLocalStorage = localStorage.getItem(userName) == postId;
+    console.log(postId, localStorage.getItem(userName) == postId, isKeyInLocalStorage);
+
+    if (isKeyInLocalStorage) {
+      setHasAnswerCondition(true);
+    } else {
+      setHasAnswerCondition(false);
+    }
+  }, [location.pathname]);
 
   return (
     <Container $questionCount={questionCount}>
       <QuestionContainer>
         <MessageIcon />
-        <QuestionsCountText>
-          {questionCount}개의 질문이 있습니다
-        </QuestionsCountText>
+        <QuestionsCountText>{questionCount}개의 질문이 있습니다</QuestionsCountText>
       </QuestionContainer>
       <FeedCardList>
-        {questions.map(
-          ({ id, answer, content, createdAt, like, subjectId }) => (
-            <FeedCard
-              key={id}
-              questionId={id}
-              answer={answer}
-              content={content}
-              createdAt={createdAt}
-              like={like}
-              subjectId={subjectId}
-            />
-          )
-        )}
+        {questions.map(({ id, answer, content, createdAt, subjectId }) => (
+          <FeedCard
+            key={id}
+            questionId={id}
+            answer={answer}
+            content={content}
+            createdAt={createdAt}
+            subjectId={subjectId}
+            hasAnswerCondition={hasAnswerCondition}
+          />
+        ))}
       </FeedCardList>
     </Container>
   );

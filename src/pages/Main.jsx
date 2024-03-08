@@ -9,12 +9,14 @@ import CreateQuestionCard from "../domain/CreateQuestionCard";
 function Main() {
   return (
     <Container gap={24}>
-      <Link to="/main">
+      <Link to="/">
         <MainLogo />
       </Link>
-      <GoToASK variant="outline" hasIcon>
-        질문하러 가기
-      </GoToASK>
+      <Link to="/list">
+        <GoToASK variant="outline" hasIcon>
+          질문하러 가기
+        </GoToASK>
+      </Link>
       <CreateQuestionCard />
       <ImgContainer>
         <MainImg src={mainImg} />

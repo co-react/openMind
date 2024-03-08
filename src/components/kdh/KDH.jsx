@@ -1,33 +1,40 @@
 import { useState } from "react";
+
 import styled from "styled-components";
+import AnswerModal from "../../domain/modal/AnsweModal";
 import QuestionModal from "../../domain/modal/QuestionModal";
-import { ThemeModeButton } from "../buttons/ToggleButton";
+import CardPage from "../../pages/CardPage";
+import ThemeModeButton from "../buttons/ThemeModeButton";
 import FeedCard from "../feedCard/FeedCard";
-// import ModalBackground from "../modal/ModalBackground";
 
 function KDH({ themeMode, toggleTheme }) {
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isQuestionModalOpen, setIsQuestionModalOpen] = useState(false);
+  const [isAnswerModalOpen, setIsAnswerModalOpen] = useState(false);
 
   function handleClick() {
-    setIsModalOpen((prev) => !prev);
-    console.log(isModalOpen);
+    setIsQuestionModalOpen((prev) => !prev);
   }
+
+  function handleClickAnswer() {
+    setIsAnswerModalOpen((prev) => !prev);
+  }
+
   return (
-    <KDHBackground>
-      <KdhTextArea>
-        <h1>
-          안녕하세요 감사해요 잘있어요 다시만나요 아침해가 뜨면~ 아침해가 뜨면~{" "}
-        </h1>
-      </KdhTextArea>
-      <FeedCard1></FeedCard1>
-      <br />
-      {isModalOpen && <QuestionModal onClose={handleClick} />}
-      <Button onClick={handleClick}>클릭</Button>
-      <ThemeModeButton
-        themeMode={themeMode}
-        toggleTheme={toggleTheme}
-      ></ThemeModeButton>
-    </KDHBackground>
+    <>
+      <KDHBackground>
+        <KdhTextArea>
+          <h1>안녕하세요 감사해요 잘있어요 다시만나요 아침해가 뜨면~ 아침해가 뜨면~ </h1>
+        </KdhTextArea>
+        <FeedCard1></FeedCard1>
+        <br />
+        {isQuestionModalOpen && <QuestionModal onClose={handleClick} />}
+        {isAnswerModalOpen && <AnswerModal onClose={handleClickAnswer} />}
+        <Button onClick={handleClick}>질문 모달 클릭</Button>
+        <Button onClick={handleClickAnswer}>질문 모달 클릭</Button>
+        <ThemeModeButton themeMode={themeMode} toggleTheme={toggleTheme}></ThemeModeButton>
+      </KDHBackground>
+      <CardPage />
+    </>
   );
 }
 
