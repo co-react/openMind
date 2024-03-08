@@ -38,15 +38,15 @@ function ListPage() {
         console.log(response);
         setCardList(response.data);
         setCards(Number(response.data.count));
-        setPages(Math.ceil(cards / 8)); // 총 페이지 수 계산
-        setLimit(8);
+        setPages(Math.ceil(cards / limit)); // 총 페이지 수 계산
+        //setLimit(window.innerWidth < 1000 ? 6 : 8);
       } catch (error) {
         console.error("에러 발생:", error);
       }
     }
 
     getCardList();
-  }, [offset, sortUrl, cards]);
+  }, [offset, sortUrl, cards, limit]);
 
   //페이지네이션 랜더링 함수
   const renderPageNumbers = () => {
@@ -77,7 +77,7 @@ function ListPage() {
 
   //페이지 네이션의 각 페이지 숫자를 클릭하면 실행되는 함수
   const handleClickPage = (i) => {
-    setOffset(8 * i - 8);
+    setOffset(limit * i - limit);
     setClickedPage(i);
   };
 
@@ -89,7 +89,7 @@ function ListPage() {
     }
     setStartPage(startPage - 5);
     setClickedPage(startPage - 1);
-    setOffset(8 * (startPage - 1) - 8);
+    setOffset(limit * (startPage - 1) - limit);
     setEndPage(startPage - 1);
   };
 
@@ -101,7 +101,7 @@ function ListPage() {
     }
     setStartPage(startPage + 5);
     setClickedPage(startPage + 5);
-    setOffset(8 * (startPage + 5) - 8);
+    setOffset(limit * (startPage + 5) - limit);
     //이 케이스는 페이지네이션을 일정한 값을 더해가면서 넘기는데
     //기존의 총 페이지 수보다 클 경우를 대비
     if (endPage + 5 > pages) {
@@ -119,7 +119,7 @@ function ListPage() {
     }
     setStartPage(1);
     setClickedPage(1);
-    setOffset(8 * 1 - 8);
+    setOffset(limit * 1 - limit);
     setEndPage(1 + 5 - 1);
   };
 
@@ -132,7 +132,7 @@ function ListPage() {
 
     setEndPage(pages);
     setClickedPage(pages);
-    setOffset(8 * pages - 8);
+    setOffset(limit * pages - limit);
 
     if (pages % 5 === 0) {
       setStartPage(pages - 5 + 1);
@@ -146,6 +146,14 @@ function ListPage() {
   const handleAnswerClick = () => {
     setIsModal(!isModal);
   };
+
+  useEffect(() => {
+    function handleResize() {
+      setLimit(window.innerWidth < 1000 ? 6 : 8);
+    }
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, [limit]);
 
   return (
     <Container>
@@ -217,6 +225,13 @@ const CardListDiv = styled.div`
   grid-template-columns: repeat(4, 22rem);
   gap: 2rem;
   margin-top: 3rem;
+  @media (max-width: 1199px) {
+    padding: 0 32px; /* 좌우 여백 조절 */
+  }
+
+  @media (max-width: 1000px) {
+    grid-template-columns: repeat(3, 22rem);
+  }
 `;
 
 const PaginationDiv = styled.div`
@@ -234,6 +249,9 @@ const HeaderDiv = styled.div`
   align-items: center;
   gap: 8px;
   align-self: stretch;
+  @media (max-width: 1199px) {
+    padding: 40px 50px 45px 50px; /* 좌우 여백 조절 */
+  }
 `;
 
 const Header = styled.div`

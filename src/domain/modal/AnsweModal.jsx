@@ -85,7 +85,6 @@ const CloseIcon = styled.img`
 `;
 
 const ErrorMsg = styled.p`
-  color: red;
-  font-size: 13px;
-  font-weight: 600;
+  color: var(--Red-50);
+  font-size: small;
 `;
