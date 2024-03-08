@@ -27,6 +27,15 @@ const requests = Object.freeze({
       console.error(ERROR_MESSAGE, error);
     }
   },
+  getSubject: async function(id) {
+    try {
+      const { data } = await axios.get(`/subjects/${id}/`);
+
+      return data;
+    } catch (error) {
+      console.error(ERROR_MESSAGE, error);
+    }
+  },
   getQuestions: async function(id) {
     try {
       const { data } = await axios.get(`/subjects/${id}/questions/`);
