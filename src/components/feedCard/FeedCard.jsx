@@ -64,7 +64,9 @@ function FeedCard({ questionId, answer, content, createdAt, subjectId, hasAnswer
       <CardTopContainer>
         <AnswerButton isAnswered={answer} />
         <KebabContainer ref={dropdownRef}>
-          <KebabIcon src={moreIcon} onClick={() => setEditMenuVisible(!isEditMenuVisible)} />
+          {hasAnswerCondition && (
+            <KebabIcon src={moreIcon} onClick={() => setEditMenuVisible(!isEditMenuVisible)} />
+          )}
           {isEditMenuVisible && (
             <DropdownMenu
               className={"DropdownMenu"}
@@ -75,17 +77,18 @@ function FeedCard({ questionId, answer, content, createdAt, subjectId, hasAnswer
         </KebabContainer>
       </CardTopContainer>
       <FeedCardQuestion createdAt={calculateDateDifference(createdAt)} content={content} />
-      {hasAnswerCondition && (
-        <FeedCardAnswer
-          questionId={questionId}
-          subjectId={subjectId}
-          answer={answer}
-          isClickEdit={isClickEdit}
-          isClickDelete={isClickDelete}
-          toggleIsEdit={toggleIsEdit}
-          toggleIsDelete={toggleIsDelete}
-        />
-      )}
+
+      <FeedCardAnswer
+        questionId={questionId}
+        subjectId={subjectId}
+        answer={answer}
+        isClickEdit={isClickEdit}
+        isClickDelete={isClickDelete}
+        toggleIsEdit={toggleIsEdit}
+        toggleIsDelete={toggleIsDelete}
+        hasAnswerCondition={hasAnswerCondition}
+      />
+
       <CardFooter>
         <CardFooterContainer>
           <Like questionId={questionId} />

@@ -31,7 +31,6 @@ function FeedCardContainer({ id, questionCount, userName }) {
   useEffect(() => {
     const postId = location.pathname.split("/")[2];
     const isKeyInLocalStorage = localStorage.getItem(userName) == postId;
-    console.log(postId, localStorage.getItem(userName) == postId, isKeyInLocalStorage);
 
     if (isKeyInLocalStorage) {
       setHasAnswerCondition(true);

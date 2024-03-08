@@ -14,6 +14,7 @@ function FeedCardAnswer({
   isClickDelete,
   toggleIsEdit,
   toggleIsDelete,
+  hasAnswerCondition,
 }) {
   const [inputValue, setInputValue] = useState("");
   const [user, setUser] = useState({});
@@ -108,7 +109,7 @@ function FeedCardAnswer({
           <AnswerName>{user.name}</AnswerName>
           {createdAt && <AnswerDate>{calculateDateDifference(createdAt)}</AnswerDate>}
         </AnswerTop>
-        {state === "Empty" ? (
+        {state === "Empty" && hasAnswerCondition ? (
           <>
             <InputTextArea
               placeholder="답변을 입력해주세요"
