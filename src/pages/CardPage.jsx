@@ -17,7 +17,11 @@ function CardPage() {
   const [isPostedQuestion, setIsPostedQuestion] = useState(false);
   const isMobile = useMediaQueryForMobile();
   const [isOpenModal, setIsOpenModal] = useState(false);
-  const user = useFetchQuestionSubject(id, isPostedQuestion, setIsPostedQuestion);
+  const user = useFetchQuestionSubject(
+    id,
+    isPostedQuestion,
+    setIsPostedQuestion
+  );
 
   const handleClick = () => {
     setIsOpenModal((isOpenModal) => !isOpenModal);
