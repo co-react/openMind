@@ -37,8 +37,7 @@ function ListPage() {
         );
         setCardList(response.data);
         setCards(Number(response.data.count));
-        setPages(Math.ceil(cards / limit)); // 총 페이지 수 계산
-        //setLimit(window.innerWidth < 1000 ? 6 : 8);
+        setPages(Math.ceil(response.data.count / limit)); // 총 페이지 수 계산
       } catch (error) {
         console.error("에러 발생:", error);
       }
@@ -46,6 +45,30 @@ function ListPage() {
 
     getCardList();
   }, [offset, sortUrl, cards, limit]);
+
+  useEffect(() => {
+    function handleResize() {
+      setLimit(window.innerWidth < 1000 ? 6 : 8);
+    }
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, [limit]);
+
+  useEffect(() => {
+    // limit가 변경될 때마다 전체 페이지 수를 다시 계산
+    const newPages = Math.ceil(cards / limit);
+    setPages(newPages);
+
+    // limit가 변경되었을 때, 페이지 번호 범위를 조정
+    const currentPage = Math.min(clickedPage, newPages); // 현재 페이지 번호가 새로운 페이지 수를 초과하지 않도록 조정
+    const newStartPage = Math.max(1, 5 * Math.floor((currentPage - 1) / 5) + 1); // 시작 페이지 번호는 현재 페이지를 기준으로 고정 범위 내에 위치하도록 설정
+    const newEndPage = Math.min(newPages, newStartPage + 4); // 종료 페이지 번호는 시작 페이지로부터 4씩 증가한 값 중 새로운 페이지 수를 초과하지 않도록 설정
+
+    // 설정한 페이지 번호로 업데이트
+    setStartPage(newStartPage);
+    setEndPage(newEndPage);
+    setClickedPage(currentPage);
+  }, [limit, cards, clickedPage]);
 
   //페이지네이션 랜더링 함수
   const renderPageNumbers = () => {
@@ -145,14 +168,6 @@ function ListPage() {
   const handleAnswerClick = () => {
     setIsModal(!isModal);
   };
-
-  useEffect(() => {
-    function handleResize() {
-      setLimit(window.innerWidth < 1000 ? 6 : 8);
-    }
-    window.addEventListener("resize", handleResize);
-    return () => window.removeEventListener("resize", handleResize);
-  }, [limit]);
 
   return (
     <Container>
