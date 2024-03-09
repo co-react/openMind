@@ -306,6 +306,7 @@ const StyledArrowLeftIcon = styled(ArrowLeftIcon)`
   font-style: normal;
   font-weight: 400;
   line-height: 25px; /* 125% */
+  cursor: pointer;
 `;
 
 const StyledArrowRightIcon = styled(ArrowRightIcon)`
@@ -317,6 +318,7 @@ const StyledArrowRightIcon = styled(ArrowRightIcon)`
   font-style: normal;
   font-weight: 400;
   line-height: 25px; /* 125% */
+  cursor: pointer;
 `;
 
 const StyledDoubleArrowLeftIcon = styled(ArrowDoubleLeftIcon)`
@@ -328,6 +330,7 @@ const StyledDoubleArrowLeftIcon = styled(ArrowDoubleLeftIcon)`
   font-style: normal;
   font-weight: 400;
   line-height: 25px; /* 125% */
+  cursor: pointer;
 `;
 
 const StyledDoubleArrowRightIcon = styled(ArrowDoubleRightIcon)`
@@ -339,4 +342,5 @@ const StyledDoubleArrowRightIcon = styled(ArrowDoubleRightIcon)`
   font-style: normal;
   font-weight: 400;
   line-height: 25px; /* 125% */
+  cursor: pointer;
 `;
