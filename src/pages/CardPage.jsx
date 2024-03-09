@@ -17,7 +17,9 @@ function CardPage() {
   const { id } = useParams();
   const isMobile = useMediaQueryForMobile();
   const [isOpenModal, setIsOpenModal] = useState(false);
-  const user = useFetchQuestionSubject(id, isPostedQuestion, setIsPostedQuestion);
+
+  // server state
+  const {isSuccess, isLoading, data} = useSubjectQuery(id);
 
   const handleClick = () => {
     setIsOpenModal((isOpenModal) => !isOpenModal);
@@ -38,7 +40,7 @@ function CardPage() {
         </>
       }
       <ShareButton />
-      <FeedCardContainer id={id} questionCount={user.questionCount} />
+      <FeedCardContainer id={id} />
       <FloatingButtonLayout>
         <FloatingButton isMobile={isMobile} onClick={handleClick}>
           {isMobile ? "질문 작성" : "질문 작성하기"}

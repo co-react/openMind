@@ -32,7 +32,7 @@ export function useInfiniteQuestionsQuery({id, limit}) {
       return offsetValue;
     },
     select: (data) => {
-      return data.pages.flatMap((page) => page);
+      return data.pages.flatMap((page) => page.results);
     },
   })
 
