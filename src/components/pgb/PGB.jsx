@@ -31,16 +31,13 @@ function PGB() {
   useEffect(() => {
     async function getCardList() {
       try {
-        const response = await axios.get(
-          requests.SUBJECTS + offsetUrl + sortUrl
-        );
+        const response = await axios.get(requests.SUBJECTS + offsetUrl + sortUrl);
         setCardList(response.data);
         setNextUrl(response.data.next);
         setCards(Number(response.data.count));
         setPages(Math.ceil(cards / 8)); // 총 페이지 수 계산
         setLimit(8);
         //setOffset(8);
-        console.log(1);
       } catch (error) {
         console.error("에러 발생:", error);
       }
@@ -54,11 +51,7 @@ function PGB() {
     const pageNumbers = [];
     for (let i = startPage; i <= endPage; i++) {
       pageNumbers.push(
-        <Pagination
-          isSelected={i === clickedPage}
-          onClick={() => handleClickPage(i)}
-          key={i}
-        >
+        <Pagination isSelected={i === clickedPage} onClick={() => handleClickPage(i)} key={i}>
           {i}
         </Pagination>
       );
