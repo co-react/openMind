@@ -96,6 +96,7 @@ function FeedCardAnswer({
         console.error("에러 발생:", error);
       }
       setState("Empty");
+      setCreatedAt("");
       setInputValue("");
       toggleIsDelete();
     }
