@@ -5,7 +5,7 @@ function Button({ variant = "fill", children, rightIcon, disabled, ...rest }) {
   return (
     <StyledButton
       variant={variant}
-      rightIcon={rightIcon}
+      $rightIcon={rightIcon}
       disabled={disabled}
       {...rest}
     >
