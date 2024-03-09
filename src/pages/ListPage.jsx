@@ -22,10 +22,9 @@ function ListPage() {
   const [endPage, setEndPage] = useState(5); //끝 페이지 (수정 필요)
   const [clickedPage, setClickedPage] = useState(1); //누른 페이지 숫자
   const [offset, setOffset] = useState(0);
-  const [limit, setLimit] = useState(8);
+  const [limit, setLimit] = useState(window.innerWidth < 1000 ? 6 : 8);
   const [sortUrl, setSortUrl] = useState("&sort=time");
   const [isModal, setIsModal] = useState(false);
-  //const navigate = useNavigate();
 
   //오프셋 리미트를 위한 코드
   const offsetUrl = `?limit=${limit}&offset=${offset}`;
@@ -36,18 +35,40 @@ function ListPage() {
         const response = await axios.get(
           requests.SUBJECTS + offsetUrl + sortUrl
         );
-        console.log(response);
         setCardList(response.data);
         setCards(Number(response.data.count));
-        setPages(Math.ceil(cards / 8)); // 총 페이지 수 계산
-        setLimit(8);
+        setPages(Math.ceil(response.data.count / limit)); // 총 페이지 수 계산
       } catch (error) {
         console.error("에러 발생:", error);
       }
     }
 
     getCardList();
-  }, [offset, sortUrl, cards]);
+  }, [offset, sortUrl, cards, limit]);
+
+  useEffect(() => {
+    function handleResize() {
+      setLimit(window.innerWidth < 1000 ? 6 : 8);
+    }
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, [limit]);
+
+  useEffect(() => {
+    // limit가 변경될 때마다 전체 페이지 수를 다시 계산
+    const newPages = Math.ceil(cards / limit);
+    setPages(newPages);
+
+    // limit가 변경되었을 때, 페이지 번호 범위를 조정
+    const currentPage = Math.min(clickedPage, newPages); // 현재 페이지 번호가 새로운 페이지 수를 초과하지 않도록 조정
+    const newStartPage = Math.max(1, 5 * Math.floor((currentPage - 1) / 5) + 1); // 시작 페이지 번호는 현재 페이지를 기준으로 고정 범위 내에 위치하도록 설정
+    const newEndPage = Math.min(newPages, newStartPage + 4); // 종료 페이지 번호는 시작 페이지로부터 4씩 증가한 값 중 새로운 페이지 수를 초과하지 않도록 설정
+
+    // 설정한 페이지 번호로 업데이트
+    setStartPage(newStartPage);
+    setEndPage(newEndPage);
+    setClickedPage(currentPage);
+  }, [limit, cards, clickedPage]);
 
   //페이지네이션 랜더링 함수
   const renderPageNumbers = () => {
@@ -78,7 +99,7 @@ function ListPage() {
 
   //페이지 네이션의 각 페이지 숫자를 클릭하면 실행되는 함수
   const handleClickPage = (i) => {
-    setOffset(8 * i - 8);
+    setOffset(limit * i - limit);
     setClickedPage(i);
   };
 
@@ -90,7 +111,7 @@ function ListPage() {
     }
     setStartPage(startPage - 5);
     setClickedPage(startPage - 1);
-    setOffset(8 * (startPage - 1) - 8);
+    setOffset(limit * (startPage - 1) - limit);
     setEndPage(startPage - 1);
   };
 
@@ -102,7 +123,7 @@ function ListPage() {
     }
     setStartPage(startPage + 5);
     setClickedPage(startPage + 5);
-    setOffset(8 * (startPage + 5) - 8);
+    setOffset(limit * (startPage + 5) - limit);
     //이 케이스는 페이지네이션을 일정한 값을 더해가면서 넘기는데
     //기존의 총 페이지 수보다 클 경우를 대비
     if (endPage + 5 > pages) {
@@ -120,7 +141,7 @@ function ListPage() {
     }
     setStartPage(1);
     setClickedPage(1);
-    setOffset(8 * 1 - 8);
+    setOffset(limit * 1 - limit);
     setEndPage(1 + 5 - 1);
   };
 
@@ -133,7 +154,7 @@ function ListPage() {
 
     setEndPage(pages);
     setClickedPage(pages);
-    setOffset(8 * pages - 8);
+    setOffset(limit * pages - limit);
 
     if (pages % 5 === 0) {
       setStartPage(pages - 5 + 1);
@@ -218,6 +239,18 @@ const CardListDiv = styled.div`
   grid-template-columns: repeat(4, 22rem);
   gap: 2rem;
   margin-top: 3rem;
+  @media (max-width: 1199px) {
+    padding: 0 32px; /* 좌우 여백 조절 */
+  }
+
+  @media (max-width: 1000px) {
+    grid-template-columns: repeat(3, 22rem);
+  }
+
+  @media (max-width: 767px) {
+    grid-template-columns: repeat(2, 22rem);
+    grid-template-rows: 1fr 1fr 1fr;
+  }
 `;
 
 const PaginationDiv = styled.div`
@@ -235,6 +268,9 @@ const HeaderDiv = styled.div`
   align-items: center;
   gap: 8px;
   align-self: stretch;
+  @media (max-width: 1199px) {
+    padding: 40px 50px 45px 50px; /* 좌우 여백 조절 */
+  }
 `;
 
 const Header = styled.div`
