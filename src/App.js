@@ -11,6 +11,7 @@ import ListPage from "./pages/ListPage";
 import Main from "./pages/Main";
 import MainTest from "./pages/MainTest";
 
+import NotFound from "./pages/NotFound";
 import { lightTheme, darkTheme } from "./style/darkStyle";
 import GlobalStyles from "./style/GlobalStyles";
 
@@ -19,7 +20,8 @@ function App() {
   const [themeMode, setThemeMode] = useState(localThemeMode);
 
   const toggleTheme = () => {
-    const newThemeMode = themeMode === "lightTheme" ? "darkTheme" : "lightTheme";
+    const newThemeMode =
+      themeMode === "lightTheme" ? "darkTheme" : "lightTheme";
     setThemeMode(newThemeMode);
     localStorage.setItem("theme", newThemeMode);
   };
@@ -35,12 +37,16 @@ function App() {
             <Route path="/component" element={<MainTest />} />
             <Route path="/" element={<Main />} />
             <Route path="/list" element={<ListPage />} />
-            <Route path="/post" >
-              <Route path=":id" element={<CardPage />}/>
-              <Route path=":id/answer" element={<CardPage />}/>
+            <Route path="/post">
+              <Route path=":id" element={<CardPage />} />
+              <Route path=":id/answer" element={<CardPage />} />
             </Route>
+            <Route path="/*" element={<NotFound />} />
             {/* 이하 테스트용 Route */}
-            <Route path="/kdh" element={<KDH themeMode={themeMode} toggleTheme={toggleTheme} />} />
+            <Route
+              path="/kdh"
+              element={<KDH themeMode={themeMode} toggleTheme={toggleTheme} />}
+            />
             <Route path="/nes" element={<NES />} />
             <Route path="/kye" element={<KYE />} />
             <Route path="/pgb" element={<PGB />} />
