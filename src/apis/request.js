@@ -36,9 +36,14 @@ const requests = Object.freeze({
       console.error(ERROR_MESSAGE, error);
     }
   },
-  getQuestions: async function(id) {
+  getQuestions: async function({id, limit, offset}) {
     try {
-      const { data } = await axios.get(`/subjects/${id}/questions/`);
+      const { data } = await axios.get(`/subjects/${id}/questions/`, {
+        params: {
+          limit,
+          offset
+        },
+      });
 
       return data;
     } catch (error) {

@@ -11,15 +11,14 @@ import AvatarSkeleton from "../components/skeleton/AvatarSkeleton";
 import FeedCardContainer from "../domain/FeedCardContainer";
 import QuestionModal from "../domain/modal/QuestionModal";
 import { useSubjectQuery } from "../hooks/api/useQueryWithAxios";
-import { useFetchQuestionSubject } from "../hooks/useFetchQuestionSubject";
 import { useMediaQueryForMobile } from "../hooks/useMediaQueryForMobile";
 
 function CardPage() {
   const { id } = useParams();
-  // 현재 id는 하드 코딩
-  const [isPostedQuestion, setIsPostedQuestion] = useState(false);
   const isMobile = useMediaQueryForMobile();
   const [isOpenModal, setIsOpenModal] = useState(false);
+  
+  //server State
   const {isSuccess, isLoading, data} = useSubjectQuery(id);
 
   const handleClick = () => {
@@ -45,7 +44,7 @@ function CardPage() {
         <FeedCardContainer id={id} questionCount={0} />
       }
       {isSuccess && 
-        <FeedCardContainer id={id} questionCount={data.questionCount} />
+        <FeedCardContainer id={id} />
       }
       <FloatingButtonLayout>
         <FloatingButton isMobile={isMobile} onClick={handleClick}>
@@ -58,7 +57,6 @@ function CardPage() {
           id={id}
           userName={data.name}
           imageSource={data.imageSource}
-          setIsPostedQuestion={setIsPostedQuestion}
         />
       )}
     </Layout>

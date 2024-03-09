@@ -1,17 +1,19 @@
 import { useState } from "react";
+import { useQueryClient } from '@tanstack/react-query'
 import styled from "styled-components";
 
 import ModalBackground from "./ModalBackground";
-import axios from "../../apis/axios";
-import requests from "../../apis/request";
 
 import close from "../../assets/svg/icons/close.svg";
 import messages from "../../assets/svg/icons/messages.svg";
 import Button from "../../components/buttons/Button";
 import InputTextArea from "../../components/input/InputTextArea";
+import { useQuestionsMutation } from "../../hooks/api/useMutationWithAxios";
 
-function QuestionModal({ onClose, id, userName, imageSource, setIsPostedQuestion }) {
+function QuestionModal({ onClose, id, userName, imageSource }) {
   const [inputValue, setInputValue] = useState("");
+  const queryClient = useQueryClient();
+  const { mutateAsync } = useQuestionsMutation(id, inputValue, queryClient);
 
   const handleInputChange = (event) => {
     setInputValue(event.target.value);
@@ -19,12 +21,12 @@ function QuestionModal({ onClose, id, userName, imageSource, setIsPostedQuestion
 
   const handleClick = async () => {
     try {
-      await axios.post(`${requests.SUBJECTS}${id}/questions/`, {
-        content: inputValue,
+      await mutateAsync(id, inputValue, {
+        onSuccess: () => {
+        }
       });
 
-      setIsPostedQuestion(true);
-      onClose(); // 완료되면 닫음.
+      onClose();
     } catch (error) {
       console.error("에러 발생:", error);
     }

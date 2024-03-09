@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { ThemeProvider } from "styled-components";
 import KDH from "./components/kdh/KDH";
@@ -47,6 +48,7 @@ function App() {
           </Routes>
         </BrowserRouter>
       </ThemeProvider>
+      <ReactQueryDevtools />
     </>
   );
 }

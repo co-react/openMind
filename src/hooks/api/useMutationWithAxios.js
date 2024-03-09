@@ -1,10 +1,8 @@
-import { useMutation, useQueryClient } from '@tanstack/react-query'
+import { useMutation } from '@tanstack/react-query'
 
 import requests from '../../apis/request'
 
-const queryClient = useQueryClient();
-
-export function useSubjectsMutation(answerer) {
+export function useSubjectsMutation(answerer, queryClient) {
   const query = useMutation({
     mutationFn: async () => await requests.postSubjects(answerer),
     onSuccess: () => {
@@ -16,14 +14,12 @@ export function useSubjectsMutation(answerer) {
   return query;
 }
 
-export function useQuestionsMutation(id, inputValue) {
-  const query = useMutation({
-    mutationFn: async () => await requests.postSubjects(id, inputValue),
+export function useQuestionsMutation(id, inputValue, queryClient) {
+  return useMutation({
+    mutationFn: async () => await requests.postQuestions(id, inputValue),
     onSuccess: () => {
       // Invalidate and refetch
-      queryClient.invalidateQueries({ queryKey: ['questions'] })
+      queryClient.invalidateQueries({ queryKey: [`questions_${id}`] })
     },
   });
-
-  return query;
 }

@@ -1,50 +1,53 @@
-import styled, { css } from "styled-components";
+import styled from "styled-components";
 
 import emptyCard from "../assets/png/letter.png";
 import { ReactComponent as MessageIcon } from "../assets/svg/icons/messages.svg";
 
 import FeedCard from "../components/feedCard/FeedCard";
-import { useFetchNextWithInfiniteScroll } from "../hooks/useFetchNextWithInfiniteScroll";
-import { useFetchQuestions } from "../hooks/useFetchQuestions";
+import { useInfiniteQuestionsQuery } from "../hooks/api/useQueryWithAxios";
 
-function FeedCardContainer({ id, questionCount }) {
-  if (!questionCount) {
-    return (
-      <Container $isQuestion={questionCount}>
-        <QuestionContainer>
-          <MessageIcon />
-          <QuestionsCountText>아직 질문이 없습니다</QuestionsCountText>
-        </QuestionContainer>
-        <StyledEmptyCard src={emptyCard} />
-      </Container>
-    );
-  }
+const OFFSET = 8;
 
-  const [questions, next, setQuestions, setNext] = useFetchQuestions(id, questionCount);
-  useFetchNextWithInfiniteScroll(next, setQuestions, setNext);
+function FeedCardContainer({ id }) {
+  const {data, isSuccess, isPending} = useInfiniteQuestionsQuery({id, limit: OFFSET});
 
   return (
-    <Container $questionCount={questionCount}>
+    <Container >
       <QuestionContainer>
         <MessageIcon />
-        <QuestionsCountText>
-          {questionCount}개의 질문이 있습니다
-        </QuestionsCountText>
+        {isPending && 
+          <QuestionsCountText>
+            질문을 불러오고 있습니다
+          </QuestionsCountText>
+        }
+        {isSuccess && data[0].count !== 0 &&
+          <QuestionsCountText>
+            {data[0].count}개의 질문이 있습니다
+          </QuestionsCountText>
+        }
+        {isSuccess && data[0].count === 0 && 
+          <QuestionsCountText>아직 질문이 없습니다</QuestionsCountText>
+        }
       </QuestionContainer>
-      <FeedCardList>
-        {questions.map(
-          ({ id, answer, content, createdAt, subjectId }) => (
-            <FeedCard
-              key={id}
-              questionId={id}
-              answer={answer}
-              content={content}
-              createdAt={createdAt}
-              subjectId={subjectId}
-            />
-          )
-        )}
-      </FeedCardList>
+      {isSuccess && data[0].count !== 0 &&
+        <FeedCardList>
+          {data[0].results.map(
+            ({ id, answer, content, createdAt, subjectId }) => (
+              <FeedCard
+                key={id}
+                questionId={id}
+                answer={answer}
+                content={content}
+                createdAt={createdAt}
+                subjectId={subjectId}
+              />
+            )
+          )}
+        </FeedCardList>
+      }
+      {isSuccess && data[0].count === 0 && 
+        <StyledEmptyCard src={emptyCard} />
+      }
     </Container>
   );
 }
@@ -63,13 +66,6 @@ const Container = styled.div`
   border-radius: 1.6rem;
   border: 1px solid var(--Brown-20, #e4d5c9);
   background: var(--Brown-10, #f5f1ee);
-
-  ${(props) =>
-    !props.$questionCount &&
-    css`
-      height: 33rem;
-      gap: 8rem;
-    `}
 
   @media (min-width: 768px) {
     width: 70.4rem;
