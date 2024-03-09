@@ -32,9 +32,14 @@ export function useInfiniteQuestionsQuery({id, limit}) {
       return offsetValue;
     },
     select: (data) => {
-      return data.pages.flatMap((page) => page.results);
+      const [firstData] = data.pages;
+      const { count } = firstData;
+    
+      const flattenResults = data.pages.flatMap((page) => page.results);
+    
+      return { count, result: flattenResults };
     },
   })
 
-  return {data,isSuccess ,isPending, hasNextPage, fetchNextPage}
+  return {data, isSuccess ,isPending, hasNextPage, fetchNextPage}
 }
