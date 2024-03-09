@@ -12,7 +12,7 @@ import BaseButton from "../components/buttons/ArrowIconButton";
 import Dropdown from "../components/dropdown/Dropdown";
 import Pagination from "../components/pagination/Pagination";
 import UserCard from "../components/userCard/UserCard";
-import AnswerModal from "../domain/modal/AnsweModal";
+import AnswerModal from "../domain/modal/AnswerModal";
 
 function ListPage() {
   const [cardList, setCardList] = useState([]);
@@ -32,9 +32,7 @@ function ListPage() {
   useEffect(() => {
     async function getCardList() {
       try {
-        const response = await axios.get(
-          requests.SUBJECTS + offsetUrl + sortUrl
-        );
+        const response = await axios.get(requests.SUBJECTS + offsetUrl + sortUrl);
         setCardList(response.data);
         setCards(Number(response.data.count));
         setPages(Math.ceil(response.data.count / limit)); // 총 페이지 수 계산
@@ -75,11 +73,7 @@ function ListPage() {
     const pageNumbers = [];
     for (let i = startPage; i <= endPage; i++) {
       pageNumbers.push(
-        <Pagination
-          isSelected={i === clickedPage}
-          onClick={() => handleClickPage(i)}
-          key={i}
-        >
+        <Pagination isSelected={i === clickedPage} onClick={() => handleClickPage(i)} key={i}>
           {i}
         </Pagination>
       );
