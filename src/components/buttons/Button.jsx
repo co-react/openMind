@@ -1,11 +1,11 @@
 import styled from "styled-components";
 import { BUTTON_STYLE } from "../../style/commonStyles";
 
-function Button({ variant, children, rightIcon, disabled, ...rest }) {
+function Button({ variant = "fill", children, rightIcon, disabled, ...rest }) {
   return (
     <StyledButton
       variant={variant}
-      rightIcon={rightIcon}
+      $rightIcon={rightIcon}
       disabled={disabled}
       {...rest}
     >

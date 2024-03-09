@@ -1,12 +1,9 @@
-// import { useCallback, useEffect, useRef, useState } from "react";
 import { useEffect, useRef, useState } from "react";
-import { useLocation } from "react-router-dom";
 import styled from "styled-components";
 
 import FeedCardAnswer from "./FeedCardAnswer";
 import FeedCardQuestion from "./FeedCardQuestion";
-// import axios from "../../apis/axios";
-// import requests from "../../apis/request";
+
 import moreIcon from "../../assets/svg/icons/more.svg";
 import DisLike from "../../domain/reactions/DisLike";
 import Like from "../../domain/reactions/Like";
@@ -14,14 +11,12 @@ import { calculateDateDifference } from "../../utils/dateCalculate";
 import AnswerButton from "../badge/AnswerButton";
 import EditDropdownMenu from "../dropdown/EditDropdownMenu";
 
-function FeedCard({ questionId, answer, content, createdAt, subjectId }) {
+function FeedCard({ questionId, answer, content, createdAt, subjectId, hasAnswerCondition }) {
   const [isEditMenuVisible, setEditMenuVisible] = useState(false);
 
-  const [isAnswerPage, setIsAnswerPage] = useState(false);
   const [isClickEdit, setIsClickEdit] = useState(false);
   const [isClickDelete, setIsClickDelete] = useState(false);
-
-  const location = useLocation();
+  const [hasAnswer, setHasAnswer] = useState(false);
   const dropdownRef = useRef(null);
 
   // 드롭다운 외부 클릭 or 버튼 클릭시 꺼지게
@@ -38,11 +33,6 @@ function FeedCard({ questionId, answer, content, createdAt, subjectId }) {
     };
   }, [dropdownRef]);
 
-  // 현재 위치에 따라 answer 보여줄지 말지, 나중에는 id값 비교 예정
-  useEffect(() => {
-    setIsAnswerPage(location.pathname === "/kdh");
-  }, [location.pathname]);
-
   // 수정버튼을 눌렀을 때
   const handleEditClick = () => {
     setIsClickEdit(true);
@@ -53,7 +43,12 @@ function FeedCard({ questionId, answer, content, createdAt, subjectId }) {
   const handleDeleteClick = () => {
     setIsClickDelete(true);
     setEditMenuVisible(false);
+    setHasAnswer(false);
   };
+
+  function toggleIsPost() {
+    setHasAnswer(!hasAnswer);
+  }
 
   // 수정 상태 변환
   function toggleIsEdit() {
@@ -69,12 +64,20 @@ function FeedCard({ questionId, answer, content, createdAt, subjectId }) {
     setEditMenuVisible(false);
   }
 
+  useEffect(() => {
+    if (answer) {
+      setHasAnswer(true);
+    }
+  }, [answer]);
+
   return (
     <FeedCardContainer>
       <CardTopContainer>
-        <AnswerButton isAnswered={answer} />
+        <AnswerButton isAnswered={hasAnswer} />
         <KebabContainer ref={dropdownRef}>
-          <KebabIcon src={moreIcon} onClick={() => setEditMenuVisible(!isEditMenuVisible)} />
+          {hasAnswerCondition && hasAnswer && (
+            <KebabIcon src={moreIcon} onClick={() => setEditMenuVisible(!isEditMenuVisible)} />
+          )}
           {isEditMenuVisible && (
             <DropdownMenu
               className={"DropdownMenu"}
@@ -85,17 +88,21 @@ function FeedCard({ questionId, answer, content, createdAt, subjectId }) {
         </KebabContainer>
       </CardTopContainer>
       <FeedCardQuestion createdAt={calculateDateDifference(createdAt)} content={content} />
-      {isAnswerPage && (
+
+      {(hasAnswer || hasAnswerCondition) && (
         <FeedCardAnswer
           questionId={questionId}
           subjectId={subjectId}
           answer={answer}
           isClickEdit={isClickEdit}
           isClickDelete={isClickDelete}
+          toggleIsPost={toggleIsPost}
           toggleIsEdit={toggleIsEdit}
           toggleIsDelete={toggleIsDelete}
+          hasAnswerCondition={hasAnswerCondition}
         />
       )}
+
       <CardFooter>
         <CardFooterContainer>
           <Like questionId={questionId} />

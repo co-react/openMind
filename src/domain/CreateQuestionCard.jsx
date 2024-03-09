@@ -23,42 +23,39 @@ function CreateQuestionCard() {
     setErrorMessage("");
   };
 
-  const handleClick = useCallback(async (e) => {
-    e.preventDefault();
+  const handleClick = useCallback(
+    async (e) => {
+      e.preventDefault();
 
-    try {
-      const validate = validateInput(answerer);
-      if (validate) {
-        setErrorMessage(validate);
-        return;
+      try {
+        const validate = validateInput(answerer);
+        if (validate) {
+          setErrorMessage(validate);
+          return;
+        }
+        const nicknameList = (await getAllData(REQUEST.SUBJECTS)).map((data) => data.name);
+        if (nicknameList.includes(answerer)) {
+          setErrorMessage(ERROR_MESSAGE.NAME_ALREADY_IN_USE);
+          return;
+        }
+
+        const response = await BASEURL.post(REQUEST.SUBJECTS, {
+          name: answerer,
+        });
+        const { id } = response.data;
+        localStorage.setItem(answerer, id);
+
+        navigate(`/post/${id}/answer`);
+      } catch (error) {
+        console.error("에러 발생:", error);
       }
-      const nicknameList = (await getAllData(REQUEST.SUBJECTS)).map(
-        (data) => data.name
-      );
-      if (nicknameList.includes(answerer)) {
-        setErrorMessage(ERROR_MESSAGE.NAME_ALREADY_IN_USE);
-        return;
-      }
-
-      const response = await BASEURL.post(REQUEST.SUBJECTS, {
-        name: answerer,
-      });
-      const { id } = response.data;
-      localStorage.setItem(answerer, id);
-
-      navigate(`/post/${id}`);
-    } catch (error) {
-      console.error("에러 발생:", error);
-    }
-  }, [answerer]);
+    },
+    [answerer]
+  );
 
   return (
     <MainForm>
-      <InputField
-        placeholder="이름을 입력하세요"
-        onChange={handleChange}
-        hasError={errorMessage}
-      />
+      <InputField placeholder="이름을 입력하세요" onChange={handleChange} hasError={errorMessage} />
       {errorMessage && <ErrorMessage error={errorMessage} />}
 
       <Button variant="fill" onClick={handleClick}>
