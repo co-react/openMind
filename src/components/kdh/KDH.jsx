@@ -1,7 +1,7 @@
 import { useState } from "react";
 
 import styled from "styled-components";
-import AnswerModal from "../../domain/modal/AnsweModal";
+import AnswerModal from "../../domain/modal/AnswerModal";
 import QuestionModal from "../../domain/modal/QuestionModal";
 import CardPage from "../../pages/CardPage";
 import ThemeModeButton from "../buttons/ThemeModeButton";
