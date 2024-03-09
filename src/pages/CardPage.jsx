@@ -1,5 +1,4 @@
 import { useState } from "react";
-//import { Avatar } from '@skeletonlabs/skeleton';
 import { Link, useParams } from 'react-router-dom';
 import styled from "styled-components";
 

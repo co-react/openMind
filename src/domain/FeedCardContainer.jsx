@@ -5,12 +5,14 @@ import { ReactComponent as MessageIcon } from "../assets/svg/icons/messages.svg"
 
 import FeedCard from "../components/feedCard/FeedCard";
 import { useInfiniteQuestionsQuery } from "../hooks/api/useQueryWithAxios";
+import { useIntersectionObserver } from "../hooks/useIntersectionObserver";
 
 const OFFSET = 8;
 
 function FeedCardContainer({ id }) {
-  const {data, isSuccess, isPending} = useInfiniteQuestionsQuery({id, limit: OFFSET});
-
+  const {data, isSuccess, isPending, fetchNextPage} = useInfiniteQuestionsQuery({id, limit: OFFSET});
+  const bottomRef = useIntersectionObserver({callback: fetchNextPage});
+  console.log(bottomRef);
   return (
     <Container >
       <QuestionContainer>
@@ -48,6 +50,7 @@ function FeedCardContainer({ id }) {
       {isSuccess && data[0].count === 0 && 
         <StyledEmptyCard src={emptyCard} />
       }
+      <div ref={bottomRef} />
     </Container>
   );
 }

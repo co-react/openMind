@@ -33,7 +33,7 @@ function ListPage() {
         const response = await axios.get(
           requests.SUBJECTS + offsetUrl + sortUrl
         );
-        console.log(response);
+
         setCardList(response.data);
         setCards(Number(response.data.count));
         setPages(Math.ceil(cards / 8)); // 총 페이지 수 계산

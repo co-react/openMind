@@ -20,17 +20,8 @@ export function useSubjectQuery(id) {
   return {isSuccess, isLoading, isError, data};
 }
 
-export function useQuestionsQuery(id) {
-  const {isSuccess, isLoading, isError, data} = useQuery({
-    queryKey: [`questions_${id}`],
-    queryFn: async () => await requests.getQuestions(id)}
-  );
-
-  return {isSuccess, isLoading, isError, data};
-}
-
 export function useInfiniteQuestionsQuery({id, limit}) {
-  const {data, isSuccess , isPending, hasNextPage} = useInfiniteQuery({
+  const {data, isSuccess , isPending, hasNextPage, fetchNextPage} = useInfiniteQuery({
     queryKey: [`questions_${id}`],
     queryFn: async ({ pageParam=0 }) => await requests.getQuestions({id, limit, offset: pageParam}),
     getNextPageParam: (lastPage) => {
@@ -45,5 +36,5 @@ export function useInfiniteQuestionsQuery({id, limit}) {
     },
   })
 
-  return {data,isSuccess ,isPending, hasNextPage}
+  return {data,isSuccess ,isPending, hasNextPage, fetchNextPage}
 }
