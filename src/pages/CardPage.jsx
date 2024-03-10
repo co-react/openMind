@@ -2,22 +2,23 @@ import { useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import styled from "styled-components";
 
-//import { useOpenToast } from "../hooks/useOpenToast";
 import { ReactComponent as LogoIcon } from "../assets/svg/icons/logo.svg";
 
 import FloatingButton from "../components/buttons/FloatingButton";
 import ShareButton from "../components/buttons/ShareButton";
+import AvatarSkeleton from "../components/skeleton/AvatarSkeleton";
 import FeedCardContainer from "../domain/FeedCardContainer";
 import QuestionModal from "../domain/modal/QuestionModal";
-import { useFetchQuestionSubject } from "../hooks/useFetchQuestionSubject";
+import { useSubjectQuery } from "../hooks/api/useQueryWithAxios";
 import { useMediaQueryForMobile } from "../hooks/useMediaQueryForMobile";
 
 function CardPage() {
   const { id } = useParams();
-  const [isPostedQuestion, setIsPostedQuestion] = useState(false);
   const isMobile = useMediaQueryForMobile();
   const [isOpenModal, setIsOpenModal] = useState(false);
-  const user = useFetchQuestionSubject(id, isPostedQuestion, setIsPostedQuestion);
+
+  // server state
+  const { isSuccess, isLoading, data } = useSubjectQuery(id);
 
   const handleClick = () => {
     setIsOpenModal((isOpenModal) => !isOpenModal);
@@ -28,22 +29,27 @@ function CardPage() {
       <Link to="/">
         <SmallStyledLogo />
       </Link>
-      <ProfileImg src={user.imageSource} />
-      <NameTitle>{user.name}</NameTitle>
+      {isLoading && <AvatarSkeleton />}
+      {isSuccess && (
+        <>
+          <ProfileImg src={data.imageSource} />
+          <NameTitle>{data.name}</NameTitle>
+        </>
+      )}
       <ShareButton />
-      <FeedCardContainer id={id} questionCount={user.questionCount} userName={user.name} />
+      {isLoading && <FeedCardContainer id={id} />}
+      {isSuccess && <FeedCardContainer id={id} userName={data.name} />}
       <FloatingButtonLayout>
         <FloatingButton isMobile={isMobile} onClick={handleClick}>
           {isMobile ? "질문 작성" : "질문 작성하기"}
         </FloatingButton>
       </FloatingButtonLayout>
-      {isOpenModal && (
+      {isOpenModal && isSuccess && (
         <QuestionModal
           onClose={handleClick}
           id={id}
-          userName={user.name}
-          imageSource={user.imageSource}
-          setIsPostedQuestion={setIsPostedQuestion}
+          userName={data.name}
+          imageSource={data.imageSource}
         />
       )}
     </Layout>

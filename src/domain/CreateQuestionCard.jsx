@@ -1,9 +1,6 @@
 import { useState, useCallback } from "react";
+import { useQueryClient } from '@tanstack/react-query';
 import { useNavigate } from "react-router-dom";
-
-import BASEURL from "../apis/axios";
-import getAllData from "../apis/getDataAll";
-import REQUEST from "../apis/request";
 
 import Button from "../components/buttons/ArrowIconButton";
 import ErrorMessage from "../components/error/ErrorMessage";
@@ -11,47 +8,58 @@ import MainForm from "../components/input/Form";
 import InputField from "../components/input/InputField";
 
 import ERROR_MESSAGE from "../constants/message";
+import { useSubjectsMutation } from "../hooks/api/useMutationWithAxios";
+import { useInfiniteSubjectsQuery } from "../hooks/api/useQueryWithAxios";
+import { useGetAllData } from "../hooks/useGetAllData";
 import validateInput from "../utils/validate/validateInput";
+
+const OFFSET = 8;
 
 function CreateQuestionCard() {
   const navigate = useNavigate();
   const [answerer, setAnswerer] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
 
+  //server state
+  const {data, fetchNextPage} = useInfiniteSubjectsQuery({limit: OFFSET});
+  useGetAllData({data, callback: fetchNextPage});
+  const queryClient = useQueryClient();
+  const {data:newData, isSuccess, mutateAsync} = useSubjectsMutation(answerer, queryClient);
+
   const handleChange = (e) => {
     setAnswerer(e.target.value);
     setErrorMessage("");
   };
 
-  const handleClick = useCallback(
-    async (e) => {
-      e.preventDefault();
+  const handleClick = useCallback(async (e) => {
+    e.preventDefault();
 
-      try {
-        const validate = validateInput(answerer);
-        if (validate) {
-          setErrorMessage(validate);
-          return;
-        }
-        const nicknameList = (await getAllData(REQUEST.SUBJECTS)).map((data) => data.name);
-        if (nicknameList.includes(answerer)) {
-          setErrorMessage(ERROR_MESSAGE.NAME_ALREADY_IN_USE);
-          return;
-        }
+    try {
+      const validate = validateInput(answerer);
+      if (validate) {
+        setErrorMessage(validate);
+        return;
+      } // 유효값 검사
 
-        const response = await BASEURL.post(REQUEST.SUBJECTS, {
-          name: answerer,
-        });
-        const { id } = response.data;
-        localStorage.setItem(answerer, id);
+      const nicknameList = data.results.map((result) => result.name);
+      if (nicknameList.includes(answerer)) {
+        setErrorMessage(ERROR_MESSAGE.NAME_ALREADY_IN_USE);
+        return;
+      } // 중복 검사
 
-        navigate(`/post/${id}/answer`);
-      } catch (error) {
-        console.error("에러 발생:", error);
-      }
-    },
-    [answerer]
-  );
+      await mutateAsync(answerer); // 뮤테이션
+
+    } catch (error) {
+      console.error("에러 발생:", error);
+    }
+  }, [answerer]);
+
+  if (isSuccess) { // 뮤테이션으로 최신화 -> isSuccess
+    const { id } = newData;
+
+    localStorage.setItem(answerer, id);
+    navigate(`/post/${id}/answer`);
+  }
 
   return (
     <MainForm>

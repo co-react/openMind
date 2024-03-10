@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { styled } from "styled-components";
+
 import axios from "../apis/axios";
 import requests from "../apis/request";
 import { ReactComponent as ArrowDoubleLeftIcon } from "../assets/svg/icons/arrow-double-left.svg";
@@ -13,8 +14,15 @@ import Dropdown from "../components/dropdown/Dropdown";
 import Pagination from "../components/pagination/Pagination";
 import UserCard from "../components/userCard/UserCard";
 import AnswerModal from "../domain/modal/AnswerModal";
+// import { useInfiniteSubjectsQuery } from "../hooks/api/useQueryWithAxios";
+// import { useGetAllData } from "../hooks/useGetAllData";
+
+// const OFFSET = 8;
 
 function ListPage() {
+  // const {data, fetchNextPage} = useInfiniteSubjectsQuery({limit: OFFSET});
+  // useGetAllData({data, callback: fetchNextPage});
+  
   const [cardList, setCardList] = useState([]);
   const [cards, setCards] = useState(0); //총 카드 수 28개
   const [pages, setPages] = useState(0); //총 페이지 수
@@ -32,7 +40,10 @@ function ListPage() {
   useEffect(() => {
     async function getCardList() {
       try {
-        const response = await axios.get(requests.SUBJECTS + offsetUrl + sortUrl);
+        const response = await axios.get(
+          requests.SUBJECTS + offsetUrl + sortUrl
+        );
+        
         setCardList(response.data);
         setCards(Number(response.data.count));
         setPages(Math.ceil(response.data.count / limit)); // 총 페이지 수 계산
@@ -73,7 +84,11 @@ function ListPage() {
     const pageNumbers = [];
     for (let i = startPage; i <= endPage; i++) {
       pageNumbers.push(
-        <Pagination isSelected={i === clickedPage} onClick={() => handleClickPage(i)} key={i}>
+        <Pagination
+          isSelected={i === clickedPage}
+          onClick={() => handleClickPage(i)}
+          key={i}
+        >
           {i}
         </Pagination>
       );
@@ -225,6 +240,12 @@ const TitleDiv = styled.div`
   justify-content: center;
   align-items: center;
   gap: 30px;
+  @media (max-width: 767px) {
+    width: 100%;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 0 24px;
+  }
 `;
 
 const CardListDiv = styled.div`
@@ -236,16 +257,17 @@ const CardListDiv = styled.div`
   gap: 2rem;
   margin-top: 3rem;
   @media (max-width: 1199px) {
+    grid-template-columns: repeat(4, 1fr);
     padding: 0 32px; /* 좌우 여백 조절 */
   }
 
-  @media (max-width: 1000px) {
-    grid-template-columns: repeat(3, 22rem);
+  @media (max-width: 909px) {
+    grid-template-columns: repeat(3, 1fr);
   }
 
   @media (max-width: 767px) {
-    grid-template-columns: repeat(2, 22rem);
-    grid-template-rows: 1fr 1fr 1fr;
+    grid-template-columns: repeat(2, 1fr);
+    padding: 0 24px;
   }
 `;
 
@@ -274,6 +296,12 @@ const Header = styled.div`
   justify-content: space-between;
   align-items: center;
   align-self: stretch;
+
+  @media (max-width: 767px) {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+  }
 `;
 
 const Logo = styled.img`
@@ -292,6 +320,9 @@ const Title = styled.p`
   font-size: 40px;
   font-weight: 400;
   line-height: normal;
+  @media (max-width: 767px) {
+    font-size: 24px;
+  }
 `;
 
 const StyledArrowLeftIcon = styled(ArrowLeftIcon)`
