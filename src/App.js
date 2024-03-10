@@ -6,7 +6,6 @@ import KDH from "./components/kdh/KDH";
 import CardPage from "./pages/CardPage";
 import ListPage from "./pages/ListPage";
 import Main from "./pages/Main";
-import MainTest from "./pages/MainTest";
 
 import NotFound from "./pages/NotFound";
 import { lightTheme, darkTheme } from "./style/darkStyle";
@@ -31,7 +30,6 @@ function App() {
         <GlobalStyles />
         <BrowserRouter>
           <Routes>
-            <Route path="/component" element={<MainTest />} />
             <Route path="/" element={<Main />} />
             <Route path="/list" element={<ListPage />} />
             <Route path="/post">
