@@ -18,6 +18,45 @@
 </table>
 <br/>
 
+<details>
+  <summary>개별 역할☝️</summary>
+<br/>
+ 
+- <b>김동현  </b> <br/>
+  - 컴포넌트 : FeedCard, Modal(Question, Answer), Skeleton
+  - 페이지 : AnswerPage (CardPage의 조건부 랜더링으로 구현)
+  - git flow 초기 설정, 레포지토리 관리
+  - 무중단 배포 및 도메인 연결
+  - 다크모드
+  - CSS 초기값 설정
+  - Router 작성
+- <b>김영은  </b> <br/>
+  - 컴포넌트: buttons,input
+  - 페이지 : MainPage
+  - 에러 객체
+  - 로컬 스토리지 객체 선언 및 관리
+  - svg 파일 전역으로 관리
+  - global style
+  - constant 전역으로 관리
+- <b>노은수  </b> <br/>
+  - 컴포넌트 : floatingButton, dropdown, reactions(좋아요, 싫어요), toast, avator
+  - 페이지 : CardPage
+  - date utils 함수
+  - 커스텀 훅 : 무한 스크롤, mutation(api 최신 업데이트), Query
+  - facebook, 카카오 공유 기능
+  - api 연결 리팩토링 → react Query 적용
+  - 라우터 연결
+  - 컴포넌트 성능 개선
+- <b>박기범  </b> <br/>
+  - 컴포넌트 : Badge, Pagination, User card
+  - 페이지 : ListPage
+  - 버튼 컴포넌트 css 수정
+  - 추가 모달 구현
+  - 페이지네이션 기능 개선
+  - 메타태그 수정
+
+</details>
+
 ## 🎞 Duration
 
 2024.02.26(월) ~ 03.12(화)
@@ -202,5 +241,3 @@ npm install --save-dev @babel/eslint-parser @babel/core
 <br/>
 
 # 🙏QnA
-
-![종이질감템플릿-002](https://github.com/SiWooJinSeok/OpenMind6team/assets/59861974/5fcd4e1e-3d1c-4559-b36a-30797132417d)
