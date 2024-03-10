@@ -25,7 +25,6 @@ export default UserCard;
 const CardContainer = styled.div`
   display: flex;
   height: 18.7rem;
-  min-width: 18.6rem;
   padding: 2rem;
   flex-direction: column;
   justify-content: space-between;
@@ -39,6 +38,10 @@ const CardContainer = styled.div`
     ${BoxShadow2};
     transform: translate(0px, -10%);
     transition: 0.3s;
+  }
+
+  @media (max-width: 1199px) and (min-width: 769px) {
+    min-width: 18.6rem;
   }
 
   @media (max-width: 768px) {
