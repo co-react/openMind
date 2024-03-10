@@ -22,8 +22,7 @@ function QuestionModal({ onClose, id, userName, imageSource }) {
   const handleClick = async () => {
     try {
       await mutateAsync(id, inputValue, {
-        onSuccess: () => {
-        }
+        onSuccess: () => {}
       });
 
       onClose();

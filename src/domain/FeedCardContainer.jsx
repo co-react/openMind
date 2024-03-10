@@ -12,7 +12,7 @@ const OFFSET = 8;
 function FeedCardContainer({ id }) {
   const {data, isSuccess, isPending, fetchNextPage} = useInfiniteQuestionsQuery({id, limit: OFFSET});
   const bottomRef = useIntersectionObserver({callback: fetchNextPage});
-
+  console.log(data);
   return (
     <Container >
       <QuestionContainer>

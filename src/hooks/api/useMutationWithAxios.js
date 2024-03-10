@@ -4,10 +4,12 @@ import requests from '../../apis/request'
 
 export function useSubjectsMutation(answerer, queryClient) {
   const query = useMutation({
-    mutationFn: async () => await requests.postSubjects(answerer),
+    mutationFn: async () => {
+      await requests.postSubjects(answerer)
+    },
     onSuccess: () => {
       // Invalidate and refetch
-      queryClient.invalidateQueries({ queryKey: ['subjects'] })
+      queryClient.invalidateQueries({ queryKey: ['subjects']})
     },
   });
 

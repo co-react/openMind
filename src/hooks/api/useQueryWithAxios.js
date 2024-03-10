@@ -2,15 +2,6 @@ import { useQuery, useInfiniteQuery } from '@tanstack/react-query'
 
 import requests from '../../apis/request'
 
-export function useSubjectsQuery() {
-  const {isSuccess, isLoading, isError, data} = useQuery({
-    queryKey: ["subjects"],
-    queryFn: async () => await requests.getSubjects()}
-  );
-
-  return {isSuccess, isLoading, isError, data};
-}
-
 export function useInfiniteSubjectsQuery({limit}) {
   const {data, isSuccess , isPending, hasNextPage, fetchNextPage} = useInfiniteQuery({
     queryKey: ["subjects"],

@@ -1,4 +1,5 @@
 import { useState, useCallback } from "react";
+//import { useQueryClient } from '@tanstack/react-query';
 import { useNavigate } from "react-router-dom";
 
 import BASEURL from "../apis/axios";
@@ -10,6 +11,7 @@ import MainForm from "../components/input/Form";
 import InputField from "../components/input/InputField";
 
 import ERROR_MESSAGE from "../constants/message";
+//import { useSubjectsMutation } from "../hooks/api/useMutationWithAxios";
 import { useInfiniteSubjectsQuery } from "../hooks/api/useQueryWithAxios";
 import { useGetAllData } from "../hooks/useGetAllData";
 import validateInput from "../utils/validate/validateInput";
@@ -18,11 +20,14 @@ const OFFSET = 8;
 
 function CreateQuestionCard() {
   const navigate = useNavigate();
-  const {data, fetchNextPage} = useInfiniteSubjectsQuery({limit: OFFSET});
-  useGetAllData({data, callback: fetchNextPage});
   const [answerer, setAnswerer] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
 
+  //server state
+  const {data, fetchNextPage} = useInfiniteSubjectsQuery({limit: OFFSET});
+  useGetAllData({data, callback: fetchNextPage});
+  //const queryClient = useQueryClient();
+  //const { mutateAsync } = useSubjectsMutation(answerer, queryClient);
 
   const handleChange = (e) => {
     setAnswerer(e.target.value);
@@ -44,7 +49,7 @@ function CreateQuestionCard() {
           setErrorMessage(ERROR_MESSAGE.NAME_ALREADY_IN_USE);
           return;
         }
-
+        //await mutateAsync(answerer);
         const response = await BASEURL.post(REQUEST.SUBJECTS, {
           name: answerer,
         });
