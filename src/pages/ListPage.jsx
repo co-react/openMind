@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { styled } from "styled-components";
+
 import axios from "../apis/axios";
 import requests from "../apis/request";
 import { ReactComponent as ArrowDoubleLeftIcon } from "../assets/svg/icons/arrow-double-left.svg";
@@ -13,8 +14,15 @@ import Dropdown from "../components/dropdown/Dropdown";
 import Pagination from "../components/pagination/Pagination";
 import UserCard from "../components/userCard/UserCard";
 import AnswerModal from "../domain/modal/AnswerModal";
+// import { useInfiniteSubjectsQuery } from "../hooks/api/useQueryWithAxios";
+// import { useGetAllData } from "../hooks/useGetAllData";
+
+// const OFFSET = 8;
 
 function ListPage() {
+  // const {data, fetchNextPage} = useInfiniteSubjectsQuery({limit: OFFSET});
+  // useGetAllData({data, callback: fetchNextPage});
+  
   const [cardList, setCardList] = useState([]);
   const [cards, setCards] = useState(0); //총 카드 수 28개
   const [pages, setPages] = useState(0); //총 페이지 수
@@ -35,6 +43,7 @@ function ListPage() {
         const response = await axios.get(
           requests.SUBJECTS + offsetUrl + sortUrl
         );
+        
         setCardList(response.data);
         setCards(Number(response.data.count));
         setPages(Math.ceil(response.data.count / limit)); // 총 페이지 수 계산
