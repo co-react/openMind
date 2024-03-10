@@ -1,3 +1,5 @@
+import { useEffect, useState } from "react";
+import { useLocation } from "react-router-dom";
 import styled from "styled-components";
 
 import emptyCard from "../assets/png/letter.png";
@@ -9,9 +11,24 @@ import { useIntersectionObserver } from "../hooks/useIntersectionObserver";
 
 const OFFSET = 8;
 
-function FeedCardContainer({ id }) {
+function FeedCardContainer({ id, userName }) {
+  const [hasAnswerCondition, setHasAnswerCondition] = useState(false);
+  const location = useLocation();
+
+  //sever State
   const {data, isSuccess, isPending, fetchNextPage} = useInfiniteQuestionsQuery({id, limit: OFFSET});
   const bottomRef = useIntersectionObserver({callback: fetchNextPage});
+
+  useEffect(() => {
+    const postId = location.pathname.split("/")[2];
+    const isKeyInLocalStorage = localStorage.getItem(userName) == postId;
+
+    if (isKeyInLocalStorage) {
+      setHasAnswerCondition(true);
+    } else {
+      setHasAnswerCondition(false);
+    }
+  }, [location.pathname]);
 
   return (
     <Container >
@@ -42,6 +59,7 @@ function FeedCardContainer({ id }) {
                 content={content}
                 createdAt={createdAt}
                 subjectId={subjectId}
+                hasAnswerCondition={hasAnswerCondition}
               />
             )
           )}

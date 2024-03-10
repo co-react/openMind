@@ -39,7 +39,9 @@ function CardPage() {
         </>
       }
       <ShareButton />
-      <FeedCardContainer id={id} />
+      {isSuccess && 
+        <FeedCardContainer id={id} userName={data.name}/>
+      }
       <FloatingButtonLayout>
         <FloatingButton isMobile={isMobile} onClick={handleClick}>
           {isMobile ? "질문 작성" : "질문 작성하기"}

@@ -14,13 +14,15 @@ import Dropdown from "../components/dropdown/Dropdown";
 import Pagination from "../components/pagination/Pagination";
 import UserCard from "../components/userCard/UserCard";
 import AnswerModal from "../domain/modal/AnswerModal";
-//import { useInfiniteSubjectsQuery } from "../hooks/api/useQueryWithAxios";
+// import { useInfiniteSubjectsQuery } from "../hooks/api/useQueryWithAxios";
+// import { useGetAllData } from "../hooks/useGetAllData";
 
-//const OFFSET = 8;
+// const OFFSET = 8;
 
 function ListPage() {
-  //const {data, fetchNextPage} = useInfiniteSubjectsQuery({limit: OFFSET});
-  //useGetAllData({data, callback: fetchNextPage});
+  // const {data, fetchNextPage} = useInfiniteSubjectsQuery({limit: OFFSET});
+  // useGetAllData({data, callback: fetchNextPage});
+  
   const [cardList, setCardList] = useState([]);
   const [cards, setCards] = useState(0); //총 카드 수 28개
   const [pages, setPages] = useState(0); //총 페이지 수
@@ -34,7 +36,7 @@ function ListPage() {
 
   //오프셋 리미트를 위한 코드
   const offsetUrl = `?limit=${limit}&offset=${offset}`;
-  //console.log(data);
+
   useEffect(() => {
     async function getCardList() {
       try {
