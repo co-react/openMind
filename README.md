@@ -36,12 +36,11 @@
 
 ## 💬 Community
 
-![Jira](https://img.shields.io/badge/jira-%230A0FFF.svg?style=for-the-badge&logo=jira&logoColor=white) <a href=https://deeply-tibia-5e9.notion.site/Codeit-FE-Sprint-6-8382f5e32f444c4288d134dbd1df64dd(https://whispering-sassafras-4ac.notion.site/528ae5a35f3e4736925fc93c812f853f?pvs=4)><img src="https://img.shields.io/badge/notion-000000?style=for-the-badge&logo=notion&logoColor=white"></a> ![Discord](https://img.shields.io/badge/Discord-%235865F2.svg?style=for-the-badge&logo=discord&logoColor=white)
+![Jira](https://img.shields.io/badge/jira-%230A0FFF.svg?style=for-the-badge&logo=jira&logoColor=white) <a href="https://whispering-sassafras-4ac.notion.site/528ae5a35f3e4736925fc93c812f853f?pvs=4"><img src="https://img.shields.io/badge/notion-000000?style=for-the-badge&logo=notion&logoColor=white"></a> ![Discord](https://img.shields.io/badge/Discord-%235865F2.svg?style=for-the-badge&logo=discord&logoColor=white)
 
 ## 🚢 Deploy
 
-<a href='https://tourmaline-lebkuchen-4fc027.netlify.app'><img src="https://img.shields.io/badge/Netlify-00C7B7?style=for-the-badge&logo=Netlify&logoColor=white"></a> <a href='https://65b8ddb9cef6e3d48fbf66d9-filttgsnsz.chromatic.com/?path=/docs/atoms-button-disabledaskquestionbutton--docs'><img src="https://img.shields.io/badge/storybook-FF4785?style=for-the-badge&logo=storybook&logoColor=white"></a>
-
+<a href='https://www.openmind-coreact.store/'>![Vercel](https://img.shields.io/badge/vercel-%23000000.svg?style=for-the-badge&logo=vercel&logoColor=white)</a>
 <br/>
 
 ---
@@ -61,13 +60,7 @@ cd OpenMind6team
 npm install
 ```
 
-## 3. Create `.env` file
-
-```
-REACT_APP_API_KEY = 'YOUR_SECRET_KAKAO_API_KEY'
-```
-
-## 4. Run development server
+## 3. Run development server
 
 ```bash
 npm run start
@@ -79,19 +72,19 @@ npm run start
 
 # ✨ Feature
 
-## 1. 메인 페이지
+## 1. 메인 페이지 (컴포넌트 명: pages/Main.jsx)
 
 - 이름을 입력해서 질문을 받을 수 있는 피드 생성
 - 질문을 위한 질문 목록 페이지로 이동
 
-## 2. 질문 목록 페이지
+## 2. 질문 목록 페이지 (컴포넌트 명: pages/ListPage.jsx)
 
 - 생성된 피드들을 카드 형태로 페이지별로 표시
 - 피드들을 ‘이름순’ , ’최신순’ 기준으로 선택해서 정렬
 - 원하는 피드를 선택하여 질문 피드 페이지로 이동
 - 질문할 피드를 랜덤으로 골라주는 랜덤선택 기능
 
-## 3. 질문 피드 페이지
+## 3. 질문 피드 페이지 (컴포넌트 명: pages/CardPage.jsx)
 
 - 질문 생성
 - 질문에 대한 답변 여부, 답변 표시
@@ -99,7 +92,7 @@ npm run start
 - 링크 복사, 카카오, 페이스북 공유
 - 무한 스크롤 방식
 
-## 4. 답변 페이지
+## 4. 답변 페이지 (컴포넌트 명: pages/CardPage.jsx)
 
 - 피드 삭제
 - 답변하기 및 수정하기
