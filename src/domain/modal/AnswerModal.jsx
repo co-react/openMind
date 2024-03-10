@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
-import ModalBackground from "./ModalBackground";
+import AnsModalBackground from "./AnsModalBackground";
 import close from "../../assets/svg/icons/close.svg";
 import Button from "../../components/buttons/Button";
 import InputField from "../../components/input/InputField";
@@ -32,7 +32,7 @@ function AnswerModal({ onClose }) {
   };
 
   return (
-    <ModalBackground onClick={onClose}>
+    <AnsModalBackground onClick={onClose}>
       <ModalTop onClick={handleModalClick}>
         <Title>계정이 있으신가요? </Title>
         <CloseIcon src={close} onClick={onClose} />
@@ -49,7 +49,7 @@ function AnswerModal({ onClose }) {
       >
         답변하러 가기
       </Button>
-    </ModalBackground>
+    </AnsModalBackground>
   );
 }
 
@@ -85,7 +85,6 @@ const CloseIcon = styled.img`
 `;
 
 const ErrorMsg = styled.p`
-  color: red;
-  font-size: 13px;
-  font-weight: 600;
+  color: var(--Red-50);
+  font-size: small;
 `;

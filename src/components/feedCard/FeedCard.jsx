@@ -89,17 +89,19 @@ function FeedCard({ questionId, answer, content, createdAt, subjectId, hasAnswer
       </CardTopContainer>
       <FeedCardQuestion createdAt={calculateDateDifference(createdAt)} content={content} />
 
-      <FeedCardAnswer
-        questionId={questionId}
-        subjectId={subjectId}
-        answer={answer}
-        isClickEdit={isClickEdit}
-        isClickDelete={isClickDelete}
-        toggleIsPost={toggleIsPost}
-        toggleIsEdit={toggleIsEdit}
-        toggleIsDelete={toggleIsDelete}
-        hasAnswerCondition={hasAnswerCondition}
-      />
+      {(hasAnswer || hasAnswerCondition) && (
+        <FeedCardAnswer
+          questionId={questionId}
+          subjectId={subjectId}
+          answer={answer}
+          isClickEdit={isClickEdit}
+          isClickDelete={isClickDelete}
+          toggleIsPost={toggleIsPost}
+          toggleIsEdit={toggleIsEdit}
+          toggleIsDelete={toggleIsDelete}
+          hasAnswerCondition={hasAnswerCondition}
+        />
+      )}
 
       <CardFooter>
         <CardFooterContainer>

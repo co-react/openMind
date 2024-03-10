@@ -39,7 +39,7 @@ const PaginationData = styled.p`
   font-style: normal;
   font-weight: 400;
   line-height: 2.5rem; /* 125% */
-
+  cursor: pointer;
   @media (max-width: 768px) {
     font-size: 1.6rem;
   }
