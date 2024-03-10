@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
+import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { ThemeProvider } from "styled-components";
 import KDH from "./components/kdh/KDH";
@@ -43,14 +43,6 @@ function App() {
               <Route path=":id/answer" element={<CardPage />} />
             </Route>
             <Route path="/*" element={<NotFound />} />
-            {/* 이하 테스트용 Route */}
-            <Route
-              path="/kdh"
-              element={<KDH themeMode={themeMode} toggleTheme={toggleTheme} />}
-            />
-            <Route path="/nes" element={<NES />} />
-            <Route path="/kye" element={<KYE />} />
-            <Route path="/pgb" element={<PGB />} />
           </Routes>
         </BrowserRouter>
       </ThemeProvider>
