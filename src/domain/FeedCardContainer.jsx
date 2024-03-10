@@ -1,5 +1,3 @@
-import { useEffect, useState } from "react";
-import { useLocation } from "react-router-dom";
 import styled from "styled-components";
 
 import emptyCard from "../assets/png/letter.png";
@@ -8,27 +6,16 @@ import { ReactComponent as MessageIcon } from "../assets/svg/icons/messages.svg"
 import FeedCard from "../components/feedCard/FeedCard";
 import { useInfiniteQuestionsQuery } from "../hooks/api/useQueryWithAxios";
 import { useIntersectionObserver } from "../hooks/useIntersectionObserver";
+import { useValidateUserInLocalStorage } from "../hooks/useValidateUserInLocalStorage";
 
 const OFFSET = 8;
 
 function FeedCardContainer({ id, userName }) {
-  const [hasAnswerCondition, setHasAnswerCondition] = useState(false);
-  const location = useLocation();
+  const hasAnswerCondition = useValidateUserInLocalStorage(userName);
 
   //sever State
   const {data, isSuccess, isPending, fetchNextPage} = useInfiniteQuestionsQuery({id, limit: OFFSET});
   const bottomRef = useIntersectionObserver({callback: fetchNextPage});
-
-  useEffect(() => {
-    const postId = location.pathname.split("/")[2];
-    const isKeyInLocalStorage = localStorage.getItem(userName) == postId;
-
-    if (isKeyInLocalStorage) {
-      setHasAnswerCondition(true);
-    } else {
-      setHasAnswerCondition(false);
-    }
-  }, [location.pathname]);
 
   return (
     <Container >
