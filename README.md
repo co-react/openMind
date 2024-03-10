@@ -50,8 +50,8 @@
 ## 1. Getting the sources
 
 ```bash
-git clone https://github.com/SiWooJinSeok/OpenMind6team
-cd OpenMind6team
+git clone https://github.com/co-react/openMind.git
+cd openMind
 ```
 
 ## 2. Install packages
