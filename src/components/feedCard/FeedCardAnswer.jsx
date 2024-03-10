@@ -192,11 +192,13 @@ const AnswerName = styled.div`
 const AnswerDate = styled.div`
   font-size: 1.4rem;
   line-height: 128.571%;
+  color: ${(props) => props.theme.colors.colorMainFont};
 `;
 
 const AnswerDescription = styled.div`
   font-size: 1.6rem;
   line-height: 137.5%;
+  color: ${(props) => props.theme.colors.colorMainFont};
 `;
 
 const AnswerResection = styled.div`
