@@ -2,15 +2,10 @@ import { useState } from "react";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { ThemeProvider } from "styled-components";
-import KDH from "./components/kdh/KDH";
-import KYE from "./components/kye/KYE";
-import NES from "./components/nes/NES";
-import PGB from "./components/pgb/PGB";
 
 import CardPage from "./pages/CardPage";
 import ListPage from "./pages/ListPage";
 import Main from "./pages/Main";
-import MainTest from "./pages/MainTest";
 
 import NotFound from "./pages/NotFound";
 import { lightTheme, darkTheme } from "./style/darkStyle";
@@ -35,7 +30,6 @@ function App() {
         <GlobalStyles />
         <BrowserRouter>
           <Routes>
-            <Route path="/component" element={<MainTest />} />
             <Route path="/" element={<Main />} />
             <Route path="/list" element={<ListPage />} />
             <Route path="/post">
