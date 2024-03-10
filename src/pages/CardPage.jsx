@@ -39,6 +39,9 @@ function CardPage() {
         </>
       }
       <ShareButton />
+      {isLoading &&
+        <FeedCardContainer id={id}/>
+      }
       {isSuccess && 
         <FeedCardContainer id={id} userName={data.name}/>
       }
