@@ -24,8 +24,8 @@ export default UserCard;
 
 const CardContainer = styled.div`
   display: flex;
-  width: 22rem;
   height: 18.7rem;
+  min-width: 18.6rem;
   padding: 2rem;
   flex-direction: column;
   justify-content: space-between;

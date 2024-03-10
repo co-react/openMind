@@ -246,16 +246,16 @@ const CardListDiv = styled.div`
   gap: 2rem;
   margin-top: 3rem;
   @media (max-width: 1199px) {
+    grid-template-columns: repeat(4, 1fr);
     padding: 0 32px; /* 좌우 여백 조절 */
   }
 
-  @media (max-width: 1000px) {
-    grid-template-columns: repeat(3, 22rem);
+  @media (max-width: 909px) {
+    grid-template-columns: repeat(3, 1fr);
   }
 
   @media (max-width: 767px) {
-    grid-template-columns: repeat(2, 22rem);
-    grid-template-rows: 1fr 1fr 1fr;
+    grid-template-columns: repeat(2, 1fr);
     padding: 0 24px;
   }
 `;
