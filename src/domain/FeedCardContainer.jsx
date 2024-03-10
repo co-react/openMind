@@ -1,63 +1,61 @@
-import { useEffect, useState } from "react";
-import { useLocation } from "react-router-dom";
-import styled, { css } from "styled-components";
+import styled from "styled-components";
 
 import emptyCard from "../assets/png/letter.png";
 import { ReactComponent as MessageIcon } from "../assets/svg/icons/messages.svg";
 
 import FeedCard from "../components/feedCard/FeedCard";
-import { useFetchNextWithInfiniteScroll } from "../hooks/useFetchNextWithInfiniteScroll";
-import { useFetchQuestions } from "../hooks/useFetchQuestions";
+import { useInfiniteQuestionsQuery } from "../hooks/api/useQueryWithAxios";
+import { useIntersectionObserver } from "../hooks/useIntersectionObserver";
+import { useValidateUserInLocalStorage } from "../hooks/useValidateUserInLocalStorage";
 
-function FeedCardContainer({ id, questionCount, userName }) {
-  if (!questionCount) {
-    return (
-      <Container $isQuestion={questionCount}>
-        <QuestionContainer>
-          <MessageIcon />
-          <QuestionsCountText>아직 질문이 없습니다</QuestionsCountText>
-        </QuestionContainer>
-        <StyledEmptyCard src={emptyCard} />
-      </Container>
-    );
-  }
+const OFFSET = 8;
 
-  const [questions, next, setQuestions, setNext] = useFetchQuestions(id, questionCount);
-  useFetchNextWithInfiniteScroll(next, setQuestions, setNext);
+function FeedCardContainer({ id, userName }) {
+  const hasAnswerCondition = useValidateUserInLocalStorage(userName);
 
-  const [hasAnswerCondition, setHasAnswerCondition] = useState(false);
-  const location = useLocation();
-
-  useEffect(() => {
-    const postId = location.pathname.split("/")[2];
-    const isKeyInLocalStorage = localStorage.getItem(userName) == postId;
-
-    if (isKeyInLocalStorage) {
-      setHasAnswerCondition(true);
-    } else {
-      setHasAnswerCondition(false);
-    }
-  }, [location.pathname]);
+  //sever State
+  const {data, isSuccess, isPending, fetchNextPage} = useInfiniteQuestionsQuery({id, limit: OFFSET});
+  const bottomRef = useIntersectionObserver({callback: fetchNextPage});
 
   return (
-    <Container $questionCount={questionCount}>
+    <Container >
       <QuestionContainer>
         <MessageIcon />
-        <QuestionsCountText>{questionCount}개의 질문이 있습니다</QuestionsCountText>
+        {isPending && 
+          <QuestionsCountText>
+            질문을 불러오고 있습니다
+          </QuestionsCountText>
+        }
+        {isSuccess && data.count !== 0 &&
+          <QuestionsCountText>
+            {data.count}개의 질문이 있습니다
+          </QuestionsCountText>
+        }
+        {isSuccess && data.count === 0 && 
+          <QuestionsCountText>아직 질문이 없습니다</QuestionsCountText>
+        }
       </QuestionContainer>
-      <FeedCardList>
-        {questions.map(({ id, answer, content, createdAt, subjectId }) => (
-          <FeedCard
-            key={id}
-            questionId={id}
-            answer={answer}
-            content={content}
-            createdAt={createdAt}
-            subjectId={subjectId}
-            hasAnswerCondition={hasAnswerCondition}
-          />
-        ))}
-      </FeedCardList>
+      {isSuccess && data.count !== 0 &&
+        <FeedCardList>
+          {data.result.map(
+            ({ id, answer, content, createdAt, subjectId }) => (
+              <FeedCard
+                key={id}
+                questionId={id}
+                answer={answer}
+                content={content}
+                createdAt={createdAt}
+                subjectId={subjectId}
+                hasAnswerCondition={hasAnswerCondition}
+              />
+            )
+          )}
+        </FeedCardList>
+      }
+      {isSuccess && data.count === 0 && 
+        <StyledEmptyCard src={emptyCard} />
+      }
+      <div ref={bottomRef} />
     </Container>
   );
 }
@@ -76,13 +74,6 @@ const Container = styled.div`
   border-radius: 1.6rem;
   border: 1px solid var(--Brown-20, #e4d5c9);
   background: var(--Brown-10, #f5f1ee);
-
-  ${(props) =>
-    !props.$questionCount &&
-    css`
-      height: 33rem;
-      gap: 8rem;
-    `}
 
   @media (min-width: 768px) {
     width: 70.4rem;
