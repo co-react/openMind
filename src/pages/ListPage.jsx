@@ -43,7 +43,7 @@ function ListPage() {
         const response = await axios.get(
           requests.SUBJECTS + offsetUrl + sortUrl
         );
-
+        
         setCardList(response.data);
         setCards(Number(response.data.count));
         setPages(Math.ceil(response.data.count / limit)); // 총 페이지 수 계산
@@ -84,7 +84,11 @@ function ListPage() {
     const pageNumbers = [];
     for (let i = startPage; i <= endPage; i++) {
       pageNumbers.push(
-        <Pagination isSelected={i === clickedPage} onClick={() => handleClickPage(i)} key={i}>
+        <Pagination
+          isSelected={i === clickedPage}
+          onClick={() => handleClickPage(i)}
+          key={i}
+        >
           {i}
         </Pagination>
       );
@@ -234,6 +238,12 @@ const TitleDiv = styled.div`
   justify-content: center;
   align-items: center;
   gap: 30px;
+  @media (max-width: 767px) {
+    width: 100%;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 0 24px;
+  }
 `;
 
 const CardListDiv = styled.div`
@@ -255,6 +265,7 @@ const CardListDiv = styled.div`
   @media (max-width: 767px) {
     grid-template-columns: repeat(2, 22rem);
     grid-template-rows: 1fr 1fr 1fr;
+    padding: 0 24px;
   }
 `;
 
@@ -283,6 +294,12 @@ const Header = styled.div`
   justify-content: space-between;
   align-items: center;
   align-self: stretch;
+
+  @media (max-width: 767px) {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+  }
 `;
 
 const Logo = styled.img`
@@ -300,6 +317,9 @@ const Title = styled.p`
   font-style: normal;
   font-weight: 400;
   line-height: normal;
+  @media (max-width: 767px) {
+    font-size: 24px;
+  }
 `;
 
 const StyledArrowLeftIcon = styled(ArrowLeftIcon)`
