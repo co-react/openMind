@@ -7,9 +7,14 @@ const requests = Object.freeze({
   QUESTIONS: "/questions/",
   ANSWERS: "/answers/",
 
-  getSubjects: async function() {
+  getSubjects: async function({limit, offset}) {
     try {
-      const { data } = await axios.get("/subjects/");
+      const { data } = await axios.get("/subjects/", {
+        params: {
+          limit,
+          offset
+        },
+      });
 
       return data;
     } catch (error) {

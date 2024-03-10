@@ -2,7 +2,6 @@ import { useState, useCallback } from "react";
 import { useNavigate } from "react-router-dom";
 
 import BASEURL from "../apis/axios";
-import getAllData from "../apis/getDataAll";
 import REQUEST from "../apis/request";
 
 import Button from "../components/buttons/ArrowIconButton";
@@ -11,12 +10,19 @@ import MainForm from "../components/input/Form";
 import InputField from "../components/input/InputField";
 
 import ERROR_MESSAGE from "../constants/message";
+import { useInfiniteSubjectsQuery } from "../hooks/api/useQueryWithAxios";
+import { useGetAllData } from "../hooks/useGetAllData";
 import validateInput from "../utils/validate/validateInput";
+
+const OFFSET = 8;
 
 function CreateQuestionCard() {
   const navigate = useNavigate();
+  const {data, fetchNextPage} = useInfiniteSubjectsQuery({limit: OFFSET});
+  useGetAllData({data, callback: fetchNextPage});
   const [answerer, setAnswerer] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
+
 
   const handleChange = (e) => {
     setAnswerer(e.target.value);
@@ -33,7 +39,7 @@ function CreateQuestionCard() {
           setErrorMessage(validate);
           return;
         }
-        const nicknameList = (await getAllData(REQUEST.SUBJECTS)).map((data) => data.name);
+        const nicknameList = data.results.map((result) => result.name);
         if (nicknameList.includes(answerer)) {
           setErrorMessage(ERROR_MESSAGE.NAME_ALREADY_IN_USE);
           return;
