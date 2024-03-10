@@ -72,6 +72,7 @@ const Title = styled.div`
   font-style: normal;
   font-weight: 400;
   line-height: 125%;
+  color: ${(props) => props.theme.colors.colorMainFont};
 
   @media screen and (min-width: 768px) {
     font-size: 2.4rem;
@@ -82,6 +83,10 @@ const CloseIcon = styled.img`
   width: 2.2rem;
   height: 2.2rem;
   cursor: pointer;
+  filter: ${(props) =>
+    props.theme.mode.now === "dark"
+      ? "invert(100%) sepia(100%) saturate(22%) hue-rotate(318deg) brightness(104%) contrast(107%)"
+      : "none"};
 
   @media screen and (min-width: 768px) {
     width: 2.8rem;
@@ -92,6 +97,10 @@ const CloseIcon = styled.img`
 const MessageIcon = styled.img`
   width: 2.2rem;
   height: 2.2rem;
+  filter: ${(props) =>
+    props.theme.mode.now === "dark"
+      ? "invert(100%) sepia(100%) saturate(22%) hue-rotate(318deg) brightness(104%) contrast(107%)"
+      : "none"};
 
   @media screen and (min-width: 768px) {
     width: 2.8rem;
@@ -112,6 +121,7 @@ const Profile = styled.div`
   font-weight: 400;
   line-height: 133%;
   align-items: center;
+  color: ${(props) => props.theme.colors.colorMainFont};
 `;
 
 const ProfileImg = styled.img`

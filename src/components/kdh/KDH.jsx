@@ -4,10 +4,9 @@ import styled from "styled-components";
 import AnswerModal from "../../domain/modal/AnswerModal";
 import QuestionModal from "../../domain/modal/QuestionModal";
 import CardPage from "../../pages/CardPage";
-import ThemeModeButton from "../buttons/ThemeModeButton";
 import FeedCard from "../feedCard/FeedCard";
 
-function KDH({ themeMode, toggleTheme }) {
+function KDH() {
   const [isQuestionModalOpen, setIsQuestionModalOpen] = useState(false);
   const [isAnswerModalOpen, setIsAnswerModalOpen] = useState(false);
 
@@ -31,7 +30,6 @@ function KDH({ themeMode, toggleTheme }) {
         {isAnswerModalOpen && <AnswerModal onClose={handleClickAnswer} />}
         <Button onClick={handleClick}>질문 모달 클릭</Button>
         <Button onClick={handleClickAnswer}>질문 모달 클릭</Button>
-        <ThemeModeButton themeMode={themeMode} toggleTheme={toggleTheme}></ThemeModeButton>
       </KDHBackground>
       <CardPage />
     </>

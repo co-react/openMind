@@ -211,7 +211,9 @@ export default ListPage;
 const Container = styled.div`
   width: 100%;
   height: 100vh;
-  background: var(--Grayscale-20, #f9f9f9);
+  /* background: var(--Grayscale-20, #f9f9f9); */
+  background: ${(props) => props.theme.colors.colorBg};
+
   @media (min-width: 1200px) {
     padding: 0 100px; /* 좌우 여백 조절 */
   }
@@ -278,63 +280,48 @@ const Logo = styled.img`
   width: 145.768px;
   height: 72.878px;
   flex-shrink: 0;
+  filter: ${(props) =>
+    props.theme.mode.now === "dark"
+      ? "invert(100%) sepia(100%) saturate(22%) hue-rotate(318deg) brightness(104%) contrast(107%)"
+      : "none"};
 `;
 
 const Title = styled.p`
-  color: var(--Grayscale-60, #000);
+  color: ${(props) => props.theme.colors.colorMainFont};
   text-align: center;
-  font-feature-settings: "clig" off, "liga" off;
-  font-family: Pretendard;
   font-size: 40px;
-  font-style: normal;
   font-weight: 400;
   line-height: normal;
 `;
 
 const StyledArrowLeftIcon = styled(ArrowLeftIcon)`
-  color: var(--Grayscale-40, #818181);
-  text-align: center;
-  font-feature-settings: "clig" off, "liga" off;
-  font-family: Actor;
-  font-size: 20px;
-  font-style: normal;
-  font-weight: 400;
-  line-height: 25px; /* 125% */
   cursor: pointer;
+  filter: ${(props) =>
+    props.theme.mode.now === "dark"
+      ? "invert(100%) sepia(100%) saturate(22%) hue-rotate(318deg) brightness(104%) contrast(107%)"
+      : "none"};
 `;
 
 const StyledArrowRightIcon = styled(ArrowRightIcon)`
-  color: var(--Grayscale-40, #818181);
-  text-align: center;
-  font-feature-settings: "clig" off, "liga" off;
-  font-family: Actor;
-  font-size: 20px;
-  font-style: normal;
-  font-weight: 400;
-  line-height: 25px; /* 125% */
   cursor: pointer;
+  filter: ${(props) =>
+    props.theme.mode.now === "dark"
+      ? "invert(100%) sepia(100%) saturate(22%) hue-rotate(318deg) brightness(104%) contrast(107%)"
+      : "none"};
 `;
 
 const StyledDoubleArrowLeftIcon = styled(ArrowDoubleLeftIcon)`
-  color: var(--Grayscale-40, #818181);
-  text-align: center;
-  font-feature-settings: "clig" off, "liga" off;
-  font-family: Actor;
-  font-size: 20px;
-  font-style: normal;
-  font-weight: 400;
-  line-height: 25px; /* 125% */
   cursor: pointer;
+  filter: ${(props) =>
+    props.theme.mode.now === "dark"
+      ? "invert(100%) sepia(100%) saturate(22%) hue-rotate(318deg) brightness(104%) contrast(107%)"
+      : "none"};
 `;
 
 const StyledDoubleArrowRightIcon = styled(ArrowDoubleRightIcon)`
-  color: var(--Grayscale-40, #818181);
-  text-align: center;
-  font-feature-settings: "clig" off, "liga" off;
-  font-family: Actor;
-  font-size: 20px;
-  font-style: normal;
-  font-weight: 400;
-  line-height: 25px; /* 125% */
   cursor: pointer;
+  filter: ${(props) =>
+    props.theme.mode.now === "dark"
+      ? "invert(100%) sepia(100%) saturate(22%) hue-rotate(318deg) brightness(104%) contrast(107%)"
+      : "none"};
 `;

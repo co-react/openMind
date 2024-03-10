@@ -9,10 +9,11 @@ const Form = styled.form`
   padding: 2.4rem;
   flex-direction: column;
   border-radius: 2.4rem;
-  background: var(--Grayscale-10, #fff);
+  background: ${(props) => props.theme.colors.colorCard};
   gap: 10px;
+
   &:focus {
-    border-color: var(--Brown-40, #542f1a);
+    border-color: ${(props) => props.theme.colors.colorBrown_40};
   }
 
   @media (min-width: 768px) {

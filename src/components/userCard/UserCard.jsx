@@ -32,8 +32,8 @@ const CardContainer = styled.div`
   align-items: flex-start;
   flex-shrink: 0;
   border-radius: 1.6rem;
-  border: 0.1rem solid var(--Grayscale-40, #818181);
-  background: var(--Grayscale-10, #fff);
+  border: 0.1rem solid ${(props) => props.theme.colors.colorGray_40};
+  background: ${(props) => props.theme.colors.colorCard};
 
   &:hover {
     ${BoxShadow2};
@@ -69,11 +69,10 @@ const ProfileImg = styled.img`
 
 const ProfileName = styled.p`
   align-self: stretch;
-  color: var(--Grayscale-60, #000);
+  color: ${(props) => props.theme.colors.colorMainFont};
   font-feature-settings: "clig" off, "liga" off;
   font-family: Actor;
   font-size: 2rem;
-  font-style: normal;
   font-weight: 400;
   line-height: 2.5rem; /* 125% */
 
@@ -102,24 +101,22 @@ const QuestionDiv = styled.div`
 const MessageIcon = styled.img`
   width: 1.8rem;
   height: 1.8rem;
+  filter: ${(props) =>
+    props.theme.mode.now === "dark"
+      ? "invert(100%) sepia(100%) saturate(22%) hue-rotate(318deg) brightness(104%) contrast(107%)"
+      : "none"};
 `;
 
 const QuestionReceived = styled.p`
-  color: var(--Grayscale-40, #818181);
-  font-feature-settings: "clig" off, "liga" off;
-  font-family: Pretendard;
+  color: ${(props) => props.theme.colors.colorGray_40};
   font-size: 1.6rem;
-  font-style: normal;
   font-weight: 400;
   line-height: 2.2rem; /* 137.5% */
 `;
 
 const QuestionCount = styled.span`
-  color: var(--Grayscale-40, #818181);
-  font-feature-settings: "clig" off, "liga" off;
-  font-family: Pretendard;
+  color: ${(props) => props.theme.colors.colorGray_40};
   font-size: 1.6rem;
-  font-style: normal;
   font-weight: 400;
   line-height: 2.2rem; /* 137.5% */
 `;

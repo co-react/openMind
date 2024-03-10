@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
-import AnsModalBackground from "./AnsModalBackground";
+import ModalBackground from "./ModalBackground";
 import close from "../../assets/svg/icons/close.svg";
 import Button from "../../components/buttons/Button";
 import InputField from "../../components/input/InputField";
@@ -32,28 +32,28 @@ function AnswerModal({ onClose }) {
   };
 
   return (
-    <AnsModalBackground onClick={onClose}>
+    <AnswerModalBackground onClick={onClose} className={AnswerModalBackground}>
       <ModalTop onClick={handleModalClick}>
         <Title>계정이 있으신가요? </Title>
         <CloseIcon src={close} onClick={onClose} />
       </ModalTop>
-      <InputField
-        placeholder="닉네임을 입력하세요"
-        onChange={handleInputChange}
-      ></InputField>
+      <InputField placeholder="닉네임을 입력하세요" onChange={handleInputChange}></InputField>
       {errorMsg && <ErrorMsg>{errorMsg}</ErrorMsg>}
-      <Button
-        variant="fill"
-        disabled={inputValue.trim() === ""}
-        onClick={handlePageChange}
-      >
+      <Button variant="fill" disabled={inputValue.trim() === ""} onClick={handlePageChange}>
         답변하러 가기
       </Button>
-    </AnsModalBackground>
+    </AnswerModalBackground>
   );
 }
 
 export default AnswerModal;
+
+const AnswerModalBackground = styled(ModalBackground)`
+  height: 28rem;
+  @media screen and (min-width: 768px) {
+    height: 29rem;
+  }
+`;
 
 const ModalTop = styled.div`
   display: flex;
@@ -67,6 +67,7 @@ const Title = styled.div`
   font-style: normal;
   font-weight: 400;
   line-height: 125%;
+  color: ${(props) => props.theme.colors.colorMainFont};
 
   @media screen and (min-width: 768px) {
     font-size: 2.4rem;
@@ -85,6 +86,6 @@ const CloseIcon = styled.img`
 `;
 
 const ErrorMsg = styled.p`
-  color: var(--Red-50);
+  color: ${(props) => props.theme.colors.colorRed};
   font-size: small;
 `;

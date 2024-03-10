@@ -41,6 +41,11 @@ const Container = styled(Stack)`
 const MainLogo = styled(Logo)`
   width: 24.8rem;
   height: 9.8rem;
+  filter: ${(props) =>
+    props.theme.mode.now === "dark"
+      ? "invert(100%) sepia(100%) saturate(22%) hue-rotate(318deg) brightness(104%) contrast(107%)"
+      : "none"};
+
   @media (min-width: 768px) {
     width: 45.6rem;
     height: 18rem;
@@ -65,6 +70,10 @@ const ImgContainer = styled.div`
   transform: scale(1.2);
   overflow: hidden;
   z-index: -1;
+  filter: ${(props) =>
+    props.theme.mode.now === "dark"
+      ? "invert(100%) sepia(100%) saturate(22%) hue-rotate(318deg) brightness(104%) contrast(107%)"
+      : "none"};
 
   @media (min-width: 768px) {
     top: 38rem;

@@ -14,15 +14,10 @@ import { useMediaQueryForMobile } from "../hooks/useMediaQueryForMobile";
 
 function CardPage() {
   const { id } = useParams();
-  // 현재 id는 하드 코딩
   const [isPostedQuestion, setIsPostedQuestion] = useState(false);
   const isMobile = useMediaQueryForMobile();
   const [isOpenModal, setIsOpenModal] = useState(false);
-  const user = useFetchQuestionSubject(
-    id,
-    isPostedQuestion,
-    setIsPostedQuestion
-  );
+  const user = useFetchQuestionSubject(id, isPostedQuestion, setIsPostedQuestion);
 
   const handleClick = () => {
     setIsOpenModal((isOpenModal) => !isOpenModal);
@@ -36,11 +31,7 @@ function CardPage() {
       <ProfileImg src={user.imageSource} />
       <NameTitle>{user.name}</NameTitle>
       <ShareButton />
-      <FeedCardContainer
-        id={id}
-        questionCount={user.questionCount}
-        userName={user.name}
-      />
+      <FeedCardContainer id={id} questionCount={user.questionCount} userName={user.name} />
       <FloatingButtonLayout>
         <FloatingButton isMobile={isMobile} onClick={handleClick}>
           {isMobile ? "질문 작성" : "질문 작성하기"}
@@ -77,6 +68,10 @@ const SmallStyledLogo = styled(LogoIcon)`
   justify-content: center;
   align-items: center;
   flex-shrink: 0;
+  filter: ${(props) =>
+    props.theme.mode.now === "dark"
+      ? "invert(100%) sepia(100%) saturate(22%) hue-rotate(318deg) brightness(104%) contrast(107%)"
+      : "none"};
 
   @media (min-width: 768px) {
     width: 17rem;
@@ -91,11 +86,8 @@ const FloatingButtonLayout = styled.div`
 `;
 
 const NameTitle = styled.span`
-  color: var(--Grayscale-60, #000);
-  font-feature-settings: "clig" off, "liga" off;
-  font-family: Actor;
+  color: ${(props) => props.theme.colors.colorMainFont};
   font-size: 2.4rem;
-  font-style: normal;
   font-weight: 400;
   line-height: 3rem;
 

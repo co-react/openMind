@@ -123,7 +123,7 @@ const FeedCardContainer = styled.div`
   align-items: flex-start;
   gap: 2.4rem;
   border-radius: 1.6rem;
-  background: var(--Grayscale-10, #fff);
+  background: ${(props) => props.theme.colors.colorFeedCard};
   box-shadow: 0px 4px 4px 0px rgba(140, 140, 140, 0.25);
 
   @media (min-width: 768px) {

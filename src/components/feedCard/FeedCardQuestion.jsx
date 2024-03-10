@@ -31,6 +31,8 @@ const QuestionDescription = styled.div`
   word-wrap: break-word;
   font-size: 1.6rem;
   line-height: 133.333%;
+  color: ${(props) => props.theme.colors.colorMainFont};
+
   @media (min-width: 768px) {
     font-size: 1.8rem;
   }

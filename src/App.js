@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { ThemeProvider } from "styled-components";
+import ThemeModeButton from "./components/buttons/ThemeModeButton";
 import KDH from "./components/kdh/KDH";
 import KYE from "./components/kye/KYE";
 import NES from "./components/nes/NES";
@@ -35,17 +36,18 @@ function App() {
             <Route path="/component" element={<MainTest />} />
             <Route path="/" element={<Main />} />
             <Route path="/list" element={<ListPage />} />
-            <Route path="/post" >
-              <Route path=":id" element={<CardPage />}/>
-              <Route path=":id/answer" element={<CardPage />}/>
+            <Route path="/post">
+              <Route path=":id" element={<CardPage />} />
+              <Route path=":id/answer" element={<CardPage />} />
             </Route>
             {/* 이하 테스트용 Route */}
-            <Route path="/kdh" element={<KDH themeMode={themeMode} toggleTheme={toggleTheme} />} />
+            <Route path="/kdh" element={<KDH />} />
             <Route path="/nes" element={<NES />} />
             <Route path="/kye" element={<KYE />} />
             <Route path="/pgb" element={<PGB />} />
           </Routes>
         </BrowserRouter>
+        <ThemeModeButton themeMode={themeMode} toggleTheme={toggleTheme}></ThemeModeButton>
       </ThemeProvider>
     </>
   );

@@ -182,6 +182,8 @@ const AnswerName = styled.div`
   color: var(--Grayscale-60);
   font-size: 1.4rem;
   line-height: 133.333%;
+  color: ${(props) => props.theme.colors.colorMainFont};
+
   @media (min-width: 768px) {
     font-size: 1.8rem;
   }

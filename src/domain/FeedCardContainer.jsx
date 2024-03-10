@@ -14,7 +14,7 @@ function FeedCardContainer({ id, questionCount, userName }) {
     return (
       <Container $isQuestion={questionCount}>
         <QuestionContainer>
-          <MessageIcon />
+          <MessageIcons />
           <QuestionsCountText>아직 질문이 없습니다</QuestionsCountText>
         </QuestionContainer>
         <StyledEmptyCard src={emptyCard} />
@@ -42,7 +42,7 @@ function FeedCardContainer({ id, questionCount, userName }) {
   return (
     <Container $questionCount={questionCount}>
       <QuestionContainer>
-        <MessageIcon />
+        <MessageIcons />
         <QuestionsCountText>{questionCount}개의 질문이 있습니다</QuestionsCountText>
       </QuestionContainer>
       <FeedCardList>
@@ -74,8 +74,8 @@ const Container = styled.div`
   gap: 1.6rem;
   flex-shrink: 0;
   border-radius: 1.6rem;
-  border: 1px solid var(--Brown-20, #e4d5c9);
-  background: var(--Brown-10, #f5f1ee);
+  border: 1px solid ${(props) => props.theme.colors.colorBrown_20};
+  background: ${(props) => props.theme.colors.colorQuestion};
 
   ${(props) =>
     !props.$questionCount &&
@@ -87,6 +87,13 @@ const Container = styled.div`
   @media (min-width: 768px) {
     width: 70.4rem;
   }
+`;
+
+const MessageIcons = styled(MessageIcon)`
+  filter: ${(props) =>
+    props.theme.mode.now === "dark"
+      ? "invert(100%) sepia(100%) saturate(22%) hue-rotate(318deg) brightness(104%) contrast(107%)"
+      : "none"};
 `;
 
 const StyledEmptyCard = styled.img`
@@ -102,11 +109,8 @@ const QuestionContainer = styled.div`
 `;
 
 const QuestionsCountText = styled.span`
-  color: var(--Brown-40, #542f1a);
-  font-feature-settings: "clig" off, "liga" off;
-  font-family: Actor;
+  color: ${(props) => props.theme.colors.colorBrown_40};
   font-size: 1.8rem;
-  font-style: normal;
   font-weight: 400;
   line-height: 2.4rem;
 `;

@@ -1,9 +1,11 @@
 import styled from "styled-components";
 
-function ModalBackground({ onClick, children }) {
+function ModalBackground({ onClick, children, className }) {
   return (
     <Background onClick={onClick}>
-      <ModalContainer onClick={(e) => e.stopPropagation()}>{children}</ModalContainer>
+      <ModalContainer onClick={(e) => e.stopPropagation()} className={className}>
+        {children}
+      </ModalContainer>
     </Background>
   );
 }
@@ -30,7 +32,7 @@ const ModalContainer = styled.div`
   padding: 4rem;
   flex-shrink: 0;
   border-radius: 2.4rem;
-  background: var(--Grayscale-10, #fff);
+  background: ${(props) => props.theme.colors.colorModal};
   box-shadow: 0rem 1.6rem 2rem 0rem rgba(48, 48, 48, 0.62);
   cursor: default;
   display: flex;
