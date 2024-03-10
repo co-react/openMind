@@ -2,6 +2,11 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 
+import styled from "styled-components";
+import { ReactComponent as NotFoundImage } from "../assets/svg/error-page.svg";
+import Button from "../components/buttons/ArrowIconButton";
+import Stack from "../components/common/Stack";
+
 const NotFound = () => {
   const navigate = useNavigate();
 
@@ -9,13 +14,37 @@ const NotFound = () => {
     navigate(-1);
   };
   return (
-    <div>
-      <h1>죄송합니다. 요청하신 페이지를 찾을 수 없습니다.</h1>
-      <p>뭘 넣을지 고민중.</p>
-      <Link to="/">메인 페이지로 이동</Link>
-      <button onClick={goBack}>이전 페이지로 돌아가기</button>
-    </div>
+    <Container gap={50}>
+      <NotFoundImage />
+      <FlexBox>
+        <Link to="/">
+          <Button hasIcon>메인 페이지</Button>
+        </Link>
+        <Button onClick={goBack} hasIcon>
+          이전 페이지
+        </Button>
+      </FlexBox>
+    </Container>
   );
 };
 
 export default NotFound;
+
+const Container = styled(Stack)`
+  height: 100vh;
+  padding: 10rem 3rem;
+  @media (min-width: 768px) {
+    padding: 10rem 15rem;
+  }
+`;
+
+const FlexBox = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1.2rem;
+  padding-bottom: 150px;
+  @media (min-width: 768px) {
+    padding-bottom: 100px;
+  }
+`;
