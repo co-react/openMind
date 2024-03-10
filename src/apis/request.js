@@ -23,11 +23,11 @@ const requests = Object.freeze({
   },
   postSubjects : async function(answerer) {
     try {
-      await axios.post("/subjects/", {
+      const {data} = await axios.post("/subjects/", {
         name: answerer,
       });
 
-      return true;
+      return data;
     } catch (error) {
       console.error(ERROR_MESSAGE, error);
     }
