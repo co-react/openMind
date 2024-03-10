@@ -69,25 +69,6 @@ function LinkButton() {
 
 export default LinkButton;
 
-// map쓰는 방법
-// const socialLinks = [
-//   { icon: <LinkLogo fill="var(--Grayscale-10)" />, color: "var(--Brown-40)" },
-//   { icon: <KakaoLogo />, color: "var(--Yellow-50)" },
-//   { icon: <FacebookLogo fill="var(--Grayscale-10)" />, color: "var(--Blue-50)" },
-// ];
-
-// function LinkButton() {
-//   return (
-//     <LinkList>
-//       {socialLinks.map((link, index) => (
-//         <LinkItem key={index} color={link.color}>
-//           {link.icon}
-//         </LinkItem>
-//       ))}
-//     </LinkList>
-//   );
-// }
-
 const Button = styled.button`
   width: 4rem;
   height: 4rem;

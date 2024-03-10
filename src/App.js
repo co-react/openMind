@@ -3,10 +3,6 @@ import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { ThemeProvider } from "styled-components";
 import KDH from "./components/kdh/KDH";
-import KYE from "./components/kye/KYE";
-import NES from "./components/nes/NES";
-import PGB from "./components/pgb/PGB";
-
 import CardPage from "./pages/CardPage";
 import ListPage from "./pages/ListPage";
 import Main from "./pages/Main";
@@ -43,6 +39,11 @@ function App() {
               <Route path=":id/answer" element={<CardPage />} />
             </Route>
             <Route path="/*" element={<NotFound />} />
+            {/* 이하 에러발생 방지용 코드 */}
+            <Route
+              path="/kdh"
+              element={<KDH themeMode={themeMode} toggleTheme={toggleTheme} />}
+            />
           </Routes>
         </BrowserRouter>
       </ThemeProvider>
