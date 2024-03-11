@@ -8,7 +8,11 @@ const InputField = styled(Input)`
   background-repeat: no-repeat;
   background-size: 2rem;
   padding-left: 4rem;
-
+  background-color: ${(props) => props.theme.colors.colorInputField};
+  color: ${(props) => props.theme.colors.colorMainFont};
+  &::placeholder {
+    color: ${(props) => props.theme.colors.colorMainFont};
+  }
   ${(props) =>
     props.hasError &&
     css`
