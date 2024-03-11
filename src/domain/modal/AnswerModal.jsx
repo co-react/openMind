@@ -44,11 +44,7 @@ function AnswerModal({ onClose }) {
           error={errorMsg}
         ></StyledInput>
         {errorMsg && <ErrorMsg>{errorMsg}</ErrorMsg>}
-        <Button
-          variant="fill"
-          disabled={inputValue.trim() === ""}
-          onClick={handlePageChange}
-        >
+        <Button variant="fill" disabled={inputValue.trim() === ""} onClick={handlePageChange}>
           답변하러 가기
         </Button>
       </ModalBottom>
@@ -77,12 +73,10 @@ const ModalBottom = styled.div`
 `;
 
 const StyledInput = styled(InputField)`
-  border: 2px solid
-    ${(props) => (props.error ? props.theme.colors.colorRed : "initial")};
+  border: 2px solid ${(props) => (props.error ? props.theme.colors.colorRed : "initial")};
 
   &:focus {
-    border-color: ${(props) =>
-      props.error ? props.theme.colors.colorRed : "initial"};
+    border-color: ${(props) => (props.error ? props.theme.colors.colorRed : "initial")};
     outline: none;
   }
 `;
@@ -105,6 +99,10 @@ const CloseIcon = styled.img`
   width: 2.2rem;
   height: 2.2rem;
   cursor: pointer;
+  filter: ${(props) =>
+    props.theme.mode.now === "dark"
+      ? "invert(100%) sepia(100%) saturate(22%) hue-rotate(318deg) brightness(104%) contrast(107%)"
+      : "none"};
 
   @media screen and (min-width: 768px) {
     width: 2.8rem;
