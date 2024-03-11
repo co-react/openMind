@@ -23,3 +23,13 @@ export function useQuestionsMutation(id, inputValue, queryClient) {
     },
   });
 }
+
+export function useReactionsMutation(questionId, type, queryClient) {
+  return useMutation({
+    mutationFn: async () => await requests.postReactions(questionId, type),
+    onSuccess: () => {
+      // Invalidate and refetch
+      queryClient.invalidateQueries({ queryKey: [`question_${questionId}`] })
+    },
+  });
+}

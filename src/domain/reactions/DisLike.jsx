@@ -1,30 +1,40 @@
-import { useState } from "react";
+import { useQueryClient } from '@tanstack/react-query';
 import styled, { css } from "styled-components";
 
-import axios from "../../apis/axios";
 import { ReactComponent as hateIcon } from "../../assets/svg/icons/thumbs-down.svg";
+import { useReactionsMutation } from "../../hooks/api/useMutationWithAxios";
+import { useGetQuestionQuery } from "../../hooks/api/useQueryWithAxios";
+
+const REACTION_TYPE = "dislike";
 
 function DisLike({ questionId }) {
-  const [isReacted, setIsReacted] = useState(false);
+  let dataInLocalStorage = JSON.parse(localStorage.getItem(`${questionId}_${REACTION_TYPE}`));
+
+  const queryClient = useQueryClient();
+  const {isSuccess, data} = useGetQuestionQuery(questionId);
+  const {isSuccess: isPostSuccess, mutateAsync} = useReactionsMutation(questionId, REACTION_TYPE, queryClient);
 
   const handleClick = async () => {
-    try {
-      await axios.post(`/questions/${questionId}/reaction/`, {
-        type: "dislike",
-      });
+    if (dataInLocalStorage) {
+      return;
+    }
 
-      await axios.get(`/questions/${questionId}/`);
+    try {
+      await mutateAsync(questionId, REACTION_TYPE);
+
     } catch (error) {
       console.error("에러 발생:", error);
     }
-
-    setIsReacted(true); // 싫어요 취소 역시 api delete 기능이 없음.
   };
 
+  if(isPostSuccess) {
+    localStorage.setItem(`${questionId}_${REACTION_TYPE}`, isPostSuccess);
+  }
+
   return (
-    <Button $isClicked={isReacted} onClick={handleClick}>
+    <Button $isClicked={dataInLocalStorage} onClick={handleClick}>
       <ThumbsDown />
-      <ButtonText>싫어요</ButtonText>
+      {isSuccess && dataInLocalStorage ? <ButtonText>싫어요 {data.dislike}</ButtonText> : <ButtonText>싫어요</ButtonText>}
     </Button>
   );
 }

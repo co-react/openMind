@@ -1,34 +1,41 @@
-import { useState } from "react";
+import { useQueryClient } from '@tanstack/react-query';
 import styled, { css } from "styled-components";
 
-import axios from "../../apis/axios";
 import { ReactComponent as likeIcon } from "../../assets/svg/icons/thumbs-up.svg";
+import { useReactionsMutation } from "../../hooks/api/useMutationWithAxios";
+import { useGetQuestionQuery } from "../../hooks/api/useQueryWithAxios";
+
+const REACTION_TYPE = "like";
 
 function Like({ questionId }) {
-  const [isReacted, setIsReacted] = useState(false);
-  const [countLike, setCountLike] = useState(0);
+  let dataInLocalStorage = JSON.parse(localStorage.getItem(questionId));
+  
+  // server state
+  const queryClient = useQueryClient();
+  const {isSuccess, data} = useGetQuestionQuery(questionId);
+  const {isSuccess: isPostSuccess, mutateAsync} = useReactionsMutation(questionId, REACTION_TYPE, queryClient);
 
   const handleClick = async () => {
+    if (dataInLocalStorage) {
+      return;
+    }
+
     try {
-      await axios.post(`/questions/${questionId}/reaction/`, {
-        type: "like",
-      });
+      await mutateAsync(questionId, REACTION_TYPE);
 
-      const response = await axios.get(`/questions/${questionId}/`);
-      const data = response.data;
-
-      setCountLike(data.like);
     } catch (error) {
       console.error("에러 발생:", error);
     }
-
-    setIsReacted(true); // 좋아요 취소는 api delete 기능이 없어서 불가능.
   };
 
+  if(isPostSuccess) {
+    localStorage.setItem(questionId, isPostSuccess);
+  }
+
   return (
-    <Button type="button" $isClicked={isReacted} onClick={handleClick}>
+    <Button type="button" $isClicked={dataInLocalStorage} onClick={handleClick}>
       <ThumbsUp />
-      {isReacted ? <ButtonText>좋아요 {countLike}</ButtonText> : <ButtonText>좋아요</ButtonText>}
+      {isSuccess && dataInLocalStorage ? <ButtonText>좋아요 {data.like}</ButtonText> : <ButtonText>좋아요</ButtonText>}
     </Button>
   );
 }

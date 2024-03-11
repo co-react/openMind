@@ -58,3 +58,12 @@ export function useInfiniteQuestionsQuery({id, limit}) {
 
   return {data, isSuccess ,isPending, hasNextPage, fetchNextPage}
 }
+
+export function useGetQuestionQuery(questionId) {
+  const {isSuccess, isLoading, isError, data} = useQuery({
+    queryKey: [`question_${questionId}`],
+    queryFn: async () => await requests.getQuestion(questionId)}
+  );
+  
+  return {isSuccess, isLoading, isError, data};
+}

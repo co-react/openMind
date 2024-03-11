@@ -74,6 +74,26 @@ const requests = Object.freeze({
     } catch (error) {
       console.error('에러 발생:', error);
     }
+  },
+  getQuestion: async function(questionId) {
+    try {
+      const { data } = await axios.get(`/questions/${questionId}/`);
+
+      return data;
+    } catch (error) {
+      console.error(ERROR_MESSAGE, error);
+    }
+  },
+  postReactions: async function(questionId, type) {
+    try {
+      await axios.post(`/questions/${questionId}/reaction/`, {
+        type: type,
+      });
+
+      return true;
+    } catch (error) {
+      console.error(ERROR_MESSAGE, error);
+    }
   }
 })
 
