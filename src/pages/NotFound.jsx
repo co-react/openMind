@@ -15,7 +15,7 @@ const NotFound = () => {
   };
   return (
     <Container gap={50}>
-      <NotFoundImage />
+      <ErrorImg />
       <FlexBox>
         <Link to="/">
           <Button hasIcon>메인 페이지</Button>
@@ -47,4 +47,11 @@ const FlexBox = styled.div`
   @media (min-width: 768px) {
     padding-bottom: 10rem;
   }
+`;
+
+const ErrorImg = styled(NotFoundImage)`
+  filter: ${(props) =>
+    props.theme.mode.now === "dark"
+      ? "invert(100%) sepia(100%) saturate(22%) hue-rotate(318deg) brightness(104%) contrast(107%)"
+      : "none"};
 `;
