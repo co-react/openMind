@@ -1,4 +1,4 @@
-<img src="https://capsule-render.vercel.app/api?type=waving&color=gradient&height=240&section=header&text=기초프로젝트%20오픈마인드%20&fontSize=50&fontAlignY=40" />
+![image](https://github.com/co-react/openMind/assets/98308702/2350aa59-2e32-4158-b6a4-8af844a4ef36)
 
 # ✨프로젝트 소개
 
@@ -151,7 +151,7 @@ npm run start
 
 ![UserFlow](https://github.com/SiWooJinSeok/OpenMind6team/assets/59861974/dc454b3a-4f0a-4fb1-9602-dde2bf6e42a3)
 
-## 💡 Git branch strategy : Github flow
+## 💡 Git branch strategy : Git flow
 
 ![GithubFlow](https://github.com/SiWooJinSeok/OpenMind6team/assets/59861974/9f4f5429-6f43-4e6a-82cd-c92dd65289a2)
 
@@ -163,52 +163,81 @@ npm run start
 
 ---
 
-# ✨ Problem & Solution
+# ✨ Problem & solution
 
-### ⚠️ 질문 목록 페이지 에서 8개씩 데이터를 불러 오는데 반응형으로 배치가 바뀌었을 때 마지막 칸이 비어 보이는 문제
+## 개발 환경 및 협업 관련
 
-✅ 배치가 바뀌었을 때 마지막 칸에 다음 페이지로 넘어갈 수 있는 버튼을 만듦.
+### ⚠️ pr에 대한 초기 셋팅의 미흡
 
-<br>
+✅  develop에서 메인 브랜치로 바로 pr을 진행해, 하나의 pr에 너무 많은 커밋이 누적.
 
-### ⚠️ Eslint, netlify 빌드 오류 및 conflict
-
-✅ 1. .eslintrc 파일에 설정 추가
-
-```json
-"parser": "@babel/eslint-parser",
-"parserOptions": {
-"ecmaVersion": 2020,
-"sourceType": "module",
-"requireConfigFile": false
-},
-```
-
-2. 필요한 패키지 설치
-
-```bash
-npm install --save-dev @babel/eslint-parser @babel/core
-```
-
-3. .babelrc 파일 생성 및 설정 추가하여 ES2020 문법을 쓸 수 있게 됨.
+<details>
+  <summary>해결 방안</summary>
+  <br/>
+  
+  - feature 단위로 pr 단위를 나눔.
+  - 다만, 초반부터 적용하지 않아 커밋, pr을 유연하게 적용하기 어려움
+</details>
 
 <br>
 
-### ⚠️ github 이용한 협업이 익숙하지 않아 브렌치를 헷갈리는 등의 문제
+### ⚠️ 대 소문자 폴더, 파일명 변경 시, git 충돌 에러
 
-✅ 프로젝트를 진행하면서 github에 익숙해지는 시간과 문제 해결 과정을 겪으면서 github 학습을 통해 해결. (ex. git revert)
+✅  git config core.ignorecase false를 적용하지 않고, push 했을 때, 다른 팀원들에게 문제가 발생.
+✅  로컬환경에서 develop 브랜치에서 pull 했을 때, feature 브랜치로 이동하지 못하는 현상.
+
+<details>
+  <summary>해결 방안</summary>
+  <br/>
+  
+  - 먼저 git 설정 점검.
+  - 원격 저장소에 대, 소문자 2개로 누적된 파일, 폴더는 삭제
+  - 만약, 개인 feature 브랜치로 이동이 어려운 경우 : 파일을 삭제 후, 이동 -> 이동 후 git flow finish -> 다시 pull
+</details>
 
 <br>
 
-### ⚠️ 기술적인 숙련도 부족과, 러닝커브 문제로 인한 스토리북 에러 문제
+## 기능 구현 요소 관련
 
-✅ 기본적인 StoryBook 에 대한 학습과, API 까지 관련해서 팀원과의 협업에 제대로 활용 하기 위해 공부하고 있음.
+### ⚠️ 화면 사이즈마다 페이지 수를 동적으로 변경하는 문제
+
+✅ ListPage에서 화면 사이즈마다 화면상에 보이는 카드 수가 다름. 
+
+<details>
+  <summary>해결 방안</summary>
+  <br/>
+  
+  - 원래는 8개를 고정으로 limit값을 지정해주었는데 사이즈 별로 동적으로 limit를 지정.
+  - limit값이 변함에 따라 전체 페이지 수도 계산해주었고 이를 테블릿 → PC / PC → 테블릿 사이즈로 변경할때 동적으로 페이지 수가 바뀌도록 해주어야하는데 구현하는데 어려움을 겪음.
+  - 조금 더 효율적인 방법이 있을지 고민.
+</details>
 
 <br>
 
-### ⚠️ 폴더 구조 및 컴포넌트의 단위 atom인지 organism인지의 기준이 애매했던 문제
+### ⚠️ 상태 관리에 대한 문제
 
-✅ 프로젝트 규모가 커짐에 따라 Atomic 디자인을 사용할 때 초기에 정확한 폴더 구조 결정이 필요하고, 파일이 어디에 속하는지 판단을 하는 연습이 필요함.
+✅ props의 단방향성으로 인해(부모 -> 자식), 생기는 문제
+- 만약 A 컴포넌트에서 상태를 정의하고, A의 자식 컴포넌트인 B 컴토넌트에서 A의 상태를 변경해야 할 때, 문제가 발생한다.
+- 상태를 변경할 수 있는 setter 함수 혹은 setter를 포함하는 핸들러 함수를 props로 전달해 상태를 바꿀 수 있다. 이를 drilling이라고 한다.
+✅ setter 함수를 넘기는 문제
+- 만약 컴포넌트 트리가 깊어지면 어떨까?
+  - 실제 동작을 수행하는 “아래 트리의 컴포넌트”뿐 만 아니라, 해당 컴포넌트를 건너기 위한 중간 컴포넌트들이 “모두” setter 함수를 접근할 권한을 얻게 된다.
+  - 또한, 그저 전달을 위한 props를 연쇄적으로 정의하게 되어 번거로움을 유발한다.
+- <b>결정적으로, props로 함수를 전달할 경우, 컴포넌트 렌더링 과정에서 함수가 새로이 정의된다. props가 변경되었다고 인식하여, 실제 변화가 없더라도 함수 props를 전달 받은 "무조건" 리렌더링이 발생한다.</b>
+  - 이를 방지 하기위해 useCallback을 감싸야하는 번거로움이 발생한다.
+
+- 예상 해결 방안: 전역 상태 도입, 전역 상태 라이브러리인 "Redux" 도입
+<br>
+
+### ⚠️ 서버로 받은 데이터 관리 문제
+
+✅ Post 요청 후에 상태 관리 문제
+- useEffect를 통해 서버에서 데이터를 받을 경우 : 보통 서버에서 받은 데이터를 useState로 관리할 것이다.
+  - 만약, 다른 컴포넌트에서 post를 보내면? → 데이터를 받았던 컴포넌트의 상태는 “상한(오래된) 상태”가 된다.
+  - 이를 해결하기 위해, post를 보냈다는 "또 다른 상태"를 컴포넌트 안에서 선언해, get을 요청하는 컴포넌트에 알려야 한다.
+  - 이는 "전역 상태" 문제와 동일한 문제를 발생시킨다.
+
+✅ Post 요청의 
 
 ---
 
