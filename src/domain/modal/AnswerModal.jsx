@@ -4,6 +4,7 @@ import styled from "styled-components";
 import ModalBackground from "./ModalBackground";
 import close from "../../assets/svg/icons/close.svg";
 import Button from "../../components/buttons/Button";
+import ErrorMessage from "../../components/error/ErrorMessage";
 import InputField from "../../components/input/InputField";
 import ERROR_MESSAGE from "../../constants/message";
 
@@ -38,13 +39,17 @@ function AnswerModal({ onClose }) {
         <CloseIcon src={close} onClick={onClose} />
       </ModalTop>
       <ModalBottom>
-        <StyledInput
+        <InputField
           placeholder="닉네임을 입력하세요"
           onChange={handleInputChange}
-          error={errorMsg}
-        ></StyledInput>
-        {errorMsg && <ErrorMsg>{errorMsg}</ErrorMsg>}
-        <Button variant="fill" disabled={inputValue.trim() === ""} onClick={handlePageChange}>
+          hasError={errorMsg}
+        ></InputField>
+        {errorMsg && <ErrorMessage error={errorMsg} />}
+        <Button
+          variant="fill"
+          disabled={inputValue.trim() === ""}
+          onClick={handlePageChange}
+        >
           답변하러 가기
         </Button>
       </ModalBottom>
@@ -70,15 +75,6 @@ const ModalBottom = styled.div`
   display: flex;
   flex-direction: column;
   gap: 1rem;
-`;
-
-const StyledInput = styled(InputField)`
-  border: 2px solid ${(props) => (props.error ? props.theme.colors.colorRed : "initial")};
-
-  &:focus {
-    border-color: ${(props) => (props.error ? props.theme.colors.colorRed : "initial")};
-    outline: none;
-  }
 `;
 
 const Title = styled.div`
@@ -108,9 +104,4 @@ const CloseIcon = styled.img`
     width: 2.8rem;
     height: 2.8rem;
   }
-`;
-
-const ErrorMsg = styled.p`
-  color: ${(props) => props.theme.colors.colorRed};
-  font-size: small;
 `;
