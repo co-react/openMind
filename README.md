@@ -155,9 +155,8 @@ npm run start
 
 ![GithubFlow](https://github.com/SiWooJinSeok/OpenMind6team/assets/59861974/9f4f5429-6f43-4e6a-82cd-c92dd65289a2)
 
-## 📁 Folder structure
-
-![Folders](https://github.com/SiWooJinSeok/OpenMind6team/assets/59861974/b9b21236-f349-48b6-a958-51f48231aeea)
+## Domain flow
+https://whispering-sassafras-4ac.notion.site/3e52bc153e4d4955962d907802f163ae?pvs=4
 
 <br/>
 
