@@ -104,4 +104,8 @@ const FeedCardList = styled.ul`
   display: flex;
   flex-direction: column;
   gap: 2rem;
+
+  @media (min-width: 768px) {
+    width: ;
+  }
 `;

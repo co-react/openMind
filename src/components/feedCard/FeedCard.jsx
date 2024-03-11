@@ -127,7 +127,7 @@ const FeedCardContainer = styled.div`
   box-shadow: 0px 4px 4px 0px rgba(140, 140, 140, 0.25);
 
   @media (min-width: 768px) {
-    width: 68.4rem;
+    width: 100%;
     padding: 3.2rem;
     gap: 3.2rem;
   }
