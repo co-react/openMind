@@ -22,7 +22,7 @@ import AnswerModal from "../domain/modal/AnswerModal";
 function ListPage() {
   // const {data, fetchNextPage} = useInfiniteSubjectsQuery({limit: OFFSET});
   // useGetAllData({data, callback: fetchNextPage});
-  
+
   const [cardList, setCardList] = useState([]);
   const [cards, setCards] = useState(0); //총 카드 수 28개
   const [pages, setPages] = useState(0); //총 페이지 수
@@ -43,7 +43,7 @@ function ListPage() {
         const response = await axios.get(
           requests.SUBJECTS + offsetUrl + sortUrl
         );
-        
+
         setCardList(response.data);
         setCards(Number(response.data.count));
         setPages(Math.ceil(response.data.count / limit)); // 총 페이지 수 계산
@@ -57,7 +57,7 @@ function ListPage() {
 
   useEffect(() => {
     function handleResize() {
-      setLimit(window.innerWidth < 1000 ? 6 : 8);
+      setLimit(window.innerWidth < 910 ? 6 : 8);
     }
     window.addEventListener("resize", handleResize);
     return () => window.removeEventListener("resize", handleResize);

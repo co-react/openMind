@@ -37,11 +37,21 @@ function AnswerModal({ onClose }) {
         <Title>계정이 있으신가요? </Title>
         <CloseIcon src={close} onClick={onClose} />
       </ModalTop>
-      <InputField placeholder="닉네임을 입력하세요" onChange={handleInputChange}></InputField>
-      {errorMsg && <ErrorMsg>{errorMsg}</ErrorMsg>}
-      <Button variant="fill" disabled={inputValue.trim() === ""} onClick={handlePageChange}>
-        답변하러 가기
-      </Button>
+      <ModalBottom>
+        <StyledInput
+          placeholder="닉네임을 입력하세요"
+          onChange={handleInputChange}
+          error={errorMsg}
+        ></StyledInput>
+        {errorMsg && <ErrorMsg>{errorMsg}</ErrorMsg>}
+        <Button
+          variant="fill"
+          disabled={inputValue.trim() === ""}
+          onClick={handlePageChange}
+        >
+          답변하러 가기
+        </Button>
+      </ModalBottom>
     </AnswerModalBackground>
   );
 }
@@ -49,15 +59,32 @@ function AnswerModal({ onClose }) {
 export default AnswerModal;
 
 const AnswerModalBackground = styled(ModalBackground)`
-  height: 28rem;
+  height: 24rem;
   @media screen and (min-width: 768px) {
-    height: 29rem;
+    height: 26rem;
   }
 `;
 
 const ModalTop = styled.div`
   display: flex;
   justify-content: space-between;
+`;
+
+const ModalBottom = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+`;
+
+const StyledInput = styled(InputField)`
+  border: 2px solid
+    ${(props) => (props.error ? props.theme.colors.colorRed : "initial")};
+
+  &:focus {
+    border-color: ${(props) =>
+      props.error ? props.theme.colors.colorRed : "initial"};
+    outline: none;
+  }
 `;
 
 const Title = styled.div`
