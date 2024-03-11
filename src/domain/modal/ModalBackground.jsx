@@ -19,6 +19,7 @@ const Background = styled.div`
   background: var(--Dim, rgba(0, 0, 0, 0.56));
   top: 0;
   left: 0;
+  z-index: 100;
   cursor: pointer;
 `;
 
