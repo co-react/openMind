@@ -150,6 +150,10 @@ const KebabIcon = styled.img`
   cursor: pointer;
   width: 26px;
   height: 26px;
+  filter: ${(props) =>
+    props.theme.mode.now === "dark"
+      ? "invert(100%) sepia(100%) saturate(22%) hue-rotate(318deg) brightness(104%) contrast(107%)"
+      : "none"};
 `;
 
 const DropdownMenu = styled(EditDropdownMenu)`
