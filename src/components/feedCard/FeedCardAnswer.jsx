@@ -116,7 +116,7 @@ function FeedCardAnswer({
         </AnswerTop>
         {state === "Empty" && hasAnswerCondition ? (
           <>
-            <InputTextArea
+            <InputArea
               placeholder="답변을 입력해주세요"
               value={inputValue}
               onChange={handleInputChange}
@@ -128,7 +128,7 @@ function FeedCardAnswer({
         ) : state === "Sent" ? (
           isClickEdit ? (
             <>
-              <InputTextArea value={content} onChange={(e) => setContent(e.target.value)} />
+              <InputArea value={content} onChange={(e) => setContent(e.target.value)} />
               <Button variant="fill" disabled={content.trim() === ""} onClick={handleClickEdit}>
                 수정하기
               </Button>
@@ -187,6 +187,10 @@ const AnswerName = styled.div`
   @media (min-width: 768px) {
     font-size: 1.8rem;
   }
+`;
+
+const InputArea = styled(InputTextArea)`
+  width: 100%;
 `;
 
 const AnswerDate = styled.div`
