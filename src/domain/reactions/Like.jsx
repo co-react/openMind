@@ -50,7 +50,7 @@ const ThumbsUp = styled(likeIcon)`
 const Button = styled.button`
   display: flex;
   align-items: center;
-  gap: 6px;
+  gap: 0.6rem;
   border: none;
   background-color: ${(props) => props.theme.colors.colorFeedCard};
   ${(props) =>

@@ -13,11 +13,11 @@ const StyledThemeModeButton = styled.button`
   top: 0;
   right: 0;
 
-  width: 80px;
-  height: 50px;
-  margin: 10px;
+  width: 8rem;
+  height: 5rem;
+  margin: 1rem;
   border: none;
-  border-radius: 10px;
+  border-radius: 1rem;
 
   ${({ theme }) => {
     return css`

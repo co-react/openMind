@@ -36,7 +36,7 @@ const CardContainer = styled.div`
 
   &:hover {
     ${BoxShadow2};
-    transform: translate(0px, -10%);
+    transform: translate(0rem, -10%);
     transition: 0.3s;
   }
 

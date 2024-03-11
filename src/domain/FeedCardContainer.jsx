@@ -65,7 +65,7 @@ const Container = styled.div`
   gap: 1.6rem;
   flex-shrink: 0;
   border-radius: 1.6rem;
-  border: 1px solid ${(props) => props.theme.colors.colorBrown_20};
+  border: 0.1rem solid ${(props) => props.theme.colors.colorBrown_20};
   background: ${(props) => props.theme.colors.colorQuestion};
 
   @media (min-width: 768px) {
@@ -89,7 +89,7 @@ const QuestionContainer = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 8px;
+  gap: 0.8rem;
 `;
 
 const QuestionsCountText = styled.span`

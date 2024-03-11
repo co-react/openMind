@@ -124,7 +124,7 @@ const FeedCardContainer = styled.div`
   gap: 2.4rem;
   border-radius: 1.6rem;
   background: ${(props) => props.theme.colors.colorFeedCard};
-  box-shadow: 0px 4px 4px 0px rgba(140, 140, 140, 0.25);
+  box-shadow: 0rem 0.4rem 0.4rem 0rem rgba(140, 140, 140, 0.25);
 
   @media (min-width: 768px) {
     width: 100%;
@@ -148,8 +148,8 @@ const KebabContainer = styled.div`
 
 const KebabIcon = styled.img`
   cursor: pointer;
-  width: 26px;
-  height: 26px;
+  width: 2.6rem;
+  height: 2.6rem;
   filter: ${(props) =>
     props.theme.mode.now === "dark"
       ? "invert(100%) sepia(100%) saturate(22%) hue-rotate(318deg) brightness(104%) contrast(107%)"
@@ -158,13 +158,13 @@ const KebabIcon = styled.img`
 
 const DropdownMenu = styled(EditDropdownMenu)`
   position: absolute;
-  top: 25px;
+  top: 2.5rem;
 `;
 
 const CardFooter = styled.div`
   width: 100%;
   padding-top: 2.4rem;
-  border-top: 1px solid var(--Grayscale-30);
+  border-top: 0.1rem solid var(--Grayscale-30);
 `;
 
 const CardFooterContainer = styled.div`

@@ -80,7 +80,7 @@ const DropdownMenuContainer = styled.div`
   background: ${(props) => props.theme.colors.colorBg};
 
   /* 1pt */
-  box-shadow: 0px 4px 4px 0px rgba(140, 140, 140, 0.25);
+  box-shadow: 0rem 0.4rem 0.4rem 0rem rgba(140, 140, 140, 0.25);
 
   position: absolute;
   bottom: -7.2rem;

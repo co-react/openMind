@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useQueryClient } from '@tanstack/react-query'
+import { useQueryClient } from "@tanstack/react-query";
 import styled from "styled-components";
 
 import ModalBackground from "./ModalBackground";
@@ -22,7 +22,7 @@ function QuestionModal({ onClose, id, userName, imageSource }) {
   const handleClick = async () => {
     try {
       await mutateAsync(id, inputValue, {
-        onSuccess: () => {}
+        onSuccess: () => {},
       });
 
       onClose();
@@ -113,7 +113,7 @@ const ModalContents = styled.div`
   display: flex;
   flex-direction: column;
   width: 100%;
-  gap: 8px;
+  gap: 0.8rem;
 `;
 
 const Profile = styled.div`
@@ -128,7 +128,7 @@ const Profile = styled.div`
 const ProfileImg = styled.img`
   width: 2.8rem;
   height: 2.8rem;
-  margin: 0 4px 0 4px;
+  margin: 0 0.4rem 0 0.4rem;
   border-radius: 10rem;
 `;
 

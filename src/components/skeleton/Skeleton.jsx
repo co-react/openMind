@@ -48,13 +48,13 @@ const ProfileImg = styled(Animation)`
 
 const ProfileName = styled(Animation)`
   width: 100%;
-  height: 30px;
+  height: 3rem;
   margin: 1.2rem 0 2.2rem 0;
   border-radius: 1.6rem;
 `;
 
 const QuestionDiv = styled(Animation)`
   width: 100%;
-  height: 20px;
+  height: 2rem;
   border-radius: 1.6rem;
 `;

@@ -10,7 +10,7 @@ const Form = styled.form`
   flex-direction: column;
   border-radius: 2.4rem;
   background: ${(props) => props.theme.colors.colorCard};
-  gap: 10px;
+  gap: 1rem;
 
   &:focus {
     border-color: ${(props) => props.theme.colors.colorBrown_40};

@@ -40,9 +40,7 @@ function ListPage() {
   useEffect(() => {
     async function getCardList() {
       try {
-        const response = await axios.get(
-          requests.SUBJECTS + offsetUrl + sortUrl
-        );
+        const response = await axios.get(requests.SUBJECTS + offsetUrl + sortUrl);
 
         setCardList(response.data);
         setCards(Number(response.data.count));
@@ -84,11 +82,7 @@ function ListPage() {
     const pageNumbers = [];
     for (let i = startPage; i <= endPage; i++) {
       pageNumbers.push(
-        <Pagination
-          isSelected={i === clickedPage}
-          onClick={() => handleClickPage(i)}
-          key={i}
-        >
+        <Pagination isSelected={i === clickedPage} onClick={() => handleClickPage(i)} key={i}>
           {i}
         </Pagination>
       );
@@ -230,7 +224,7 @@ const Container = styled.div`
   background: ${(props) => props.theme.colors.colorBg};
 
   @media (min-width: 1200px) {
-    padding: 0 100px; /* 좌우 여백 조절 */
+    padding: 0 10rem; /* 좌우 여백 조절 */
   }
 `;
 
@@ -239,12 +233,12 @@ const TitleDiv = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  gap: 30px;
+  gap: 3rem;
   @media (max-width: 767px) {
     width: 100%;
     flex-direction: row;
     justify-content: space-between;
-    padding: 0 24px;
+    padding: 0 2.4rem;
   }
 `;
 
@@ -258,7 +252,7 @@ const CardListDiv = styled.div`
   margin-top: 3rem;
   @media (max-width: 1199px) {
     grid-template-columns: repeat(4, 1fr);
-    padding: 0 32px; /* 좌우 여백 조절 */
+    padding: 0 3.2rem; /* 좌우 여백 조절 */
   }
 
   @media (max-width: 909px) {
@@ -267,12 +261,12 @@ const CardListDiv = styled.div`
 
   @media (max-width: 767px) {
     grid-template-columns: repeat(2, 1fr);
-    padding: 0 24px;
+    padding: 0 2.4rem;
   }
 `;
 
 const PaginationDiv = styled.div`
-  margin-top: 80px;
+  margin-top: 8rem;
   display: flex;
   flex-direction: row;
   justify-content: center;
@@ -281,13 +275,13 @@ const PaginationDiv = styled.div`
 
 const HeaderDiv = styled.div`
   display: flex;
-  padding: 40px 130px 45px 130px;
+  padding: 4rem 13rem 4.5rem 13rem;
   flex-direction: column;
   align-items: center;
-  gap: 8px;
+  gap: 0.8rem;
   align-self: stretch;
   @media (max-width: 1199px) {
-    padding: 40px 50px 45px 50px; /* 좌우 여백 조절 */
+    padding: 4rem 5rem 4.5rem 5rem; /* 좌우 여백 조절 */
   }
 `;
 
@@ -300,13 +294,13 @@ const Header = styled.div`
   @media (max-width: 767px) {
     display: flex;
     flex-direction: column;
-    gap: 15px;
+    gap: 1.5rem;
   }
 `;
 
 const Logo = styled.img`
-  width: 145.768px;
-  height: 72.878px;
+  width: 14.5768rem;
+  height: 7.2878rem;
   flex-shrink: 0;
   filter: ${(props) =>
     props.theme.mode.now === "dark"
@@ -317,11 +311,11 @@ const Logo = styled.img`
 const Title = styled.p`
   color: ${(props) => props.theme.colors.colorMainFont};
   text-align: center;
-  font-size: 40px;
+  font-size: 4rem;
   font-weight: 400;
   line-height: normal;
   @media (max-width: 767px) {
-    font-size: 24px;
+    font-size: 2.4rem;
   }
 `;
 

@@ -43,8 +43,8 @@ const FlexBox = styled.div`
   justify-content: center;
   align-items: center;
   gap: 1.2rem;
-  padding-bottom: 150px;
+  padding-bottom: 15rem;
   @media (min-width: 768px) {
-    padding-bottom: 100px;
+    padding-bottom: 10rem;
   }
 `;
