@@ -4,11 +4,7 @@ import { styled } from "styled-components";
 //isAnswered를 true로 아니면 false로 전달하면 될것 같습니다.
 
 function AnswerButton({ isAnswered }) {
-  return (
-    <StyledButton isAnswered={isAnswered}>
-      {isAnswered ? "답변 완료" : "미답변"}
-    </StyledButton>
-  );
+  return <StyledButton isAnswered={isAnswered}>{isAnswered ? "답변 완료" : "미답변"}</StyledButton>;
 }
 
 export default AnswerButton;
@@ -20,17 +16,16 @@ const StyledButton = styled.button`
   align-items: center;
   gap: 1rem;
   border-radius: 0.8rem;
-  background: var(--Grayscale-10, #fff);
-  font-feature-settings: "clig" off, "liga" off;
-  font-family: Pretendard;
+  background: ${(props) => props.theme.colors.colorBadge};
   font-size: 1.4rem;
   font-style: normal;
   font-weight: 500;
   line-height: 1.8rem; /* 128.571% */
-  border: ${({ isAnswered }) =>
+  border: ${({ isAnswered, theme }) =>
     isAnswered
-      ? ".1rem solid var(--Brown-40, #542f1a)"
+      ? `.1rem solid ${theme.colors.colorMainFont}`
       : ".1rem solid var(--Grayscale-40, #818181)"};
-  color: ${({ isAnswered }) =>
-    isAnswered ? "var(--Brown-40, #542f1a)" : "var(--Grayscale-40, #818181)"};
+  color: ${({ isAnswered, theme }) =>
+    isAnswered ? theme.colors.colorMainFont : theme.colors.colorMainFont};
+  cursor: auto;
 `;
