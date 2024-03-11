@@ -28,15 +28,9 @@ const PaginationBox = styled.div`
 `;
 
 const PaginationData = styled.p`
-  color: ${(props) =>
-    props.$isSelected
-      ? "var(--Brown-40, #542f1a)"
-      : "var(--Grayscale-40, #818181)"};
+  color: ${(props) => (props.$isSelected ? "var(--Red-50)" : "var(--Grayscale-40)")};
   text-align: center;
-  font-feature-settings: "clig" off, "liga" off;
-  font-family: Actor;
   font-size: 2rem;
-  font-style: normal;
   font-weight: 400;
   line-height: 2.5rem; /* 125% */
   cursor: pointer;
@@ -46,6 +40,6 @@ const PaginationData = styled.p`
 
   &:hover {
     // 호버 시 적용될 스타일
-    color: var(--Grayscale-60, #000);
+    color: ${(props) => props.theme.colors.colorPagination};
   }
 `;
