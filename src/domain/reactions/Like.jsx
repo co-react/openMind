@@ -9,7 +9,7 @@ const REACTION_TYPE = "like";
 
 function Like({ questionId }) {
   let dataInLocalStorage = JSON.parse(localStorage.getItem(questionId));
-  
+
   // server state
   const queryClient = useQueryClient();
   const {isSuccess, data} = useGetQuestionQuery(questionId);
@@ -35,7 +35,7 @@ function Like({ questionId }) {
   return (
     <Button type="button" $isClicked={dataInLocalStorage} onClick={handleClick}>
       <ThumbsUp />
-      {isSuccess && dataInLocalStorage ? <ButtonText>좋아요 {data.like}</ButtonText> : <ButtonText>좋아요</ButtonText>}
+      {isSuccess ? <ButtonText>좋아요 {data.like}</ButtonText> : <ButtonText>좋아요</ButtonText>}
     </Button>
   );
 }

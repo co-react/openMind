@@ -34,7 +34,7 @@ function DisLike({ questionId }) {
   return (
     <Button $isClicked={dataInLocalStorage} onClick={handleClick}>
       <ThumbsDown />
-      {isSuccess && dataInLocalStorage ? <ButtonText>싫어요 {data.dislike}</ButtonText> : <ButtonText>싫어요</ButtonText>}
+      {isSuccess ? <ButtonText>싫어요 {data.dislike}</ButtonText> : <ButtonText>싫어요</ButtonText>}
     </Button>
   );
 }
