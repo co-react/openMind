@@ -1,26 +1,19 @@
 import { useState } from "react";
+import { useQueryClient } from "@tanstack/react-query";
 import styled from "styled-components";
 
-import axios from "../../apis/axios";
-import requests from "../../apis/request";
+import ModalBackground from "./ModalBackground";
 
 import close from "../../assets/svg/icons/close.svg";
 import messages from "../../assets/svg/icons/messages.svg";
 import Button from "../../components/buttons/Button";
 import InputTextArea from "../../components/input/InputTextArea";
+import { useQuestionsMutation } from "../../hooks/api/useMutationWithAxios";
 
-function QuestionModal({
-  onClose,
-  id,
-  userName,
-  imageSource,
-  setIsPostedQuestion,
-}) {
+function QuestionModal({ onClose, id, userName, imageSource }) {
   const [inputValue, setInputValue] = useState("");
-
-  const handleBackgroundClick = () => {
-    onClose();
-  };
+  const queryClient = useQueryClient();
+  const { mutateAsync } = useQuestionsMutation(id, inputValue, queryClient);
 
   const handleInputChange = (event) => {
     setInputValue(event.target.value);
@@ -28,85 +21,45 @@ function QuestionModal({
 
   const handleClick = async () => {
     try {
-      await axios.post(`${requests.SUBJECTS}${id}/questions/`, {
-        content: inputValue,
+      await mutateAsync(id, inputValue, {
+        onSuccess: () => {},
       });
 
-      setIsPostedQuestion(true);
-      onClose(); // 완료되면 닫음.
+      onClose();
     } catch (error) {
       console.error("에러 발생:", error);
     }
   };
 
   return (
-    <Background onClick={handleBackgroundClick}>
-      <ModalContainer onClick={(e) => e.stopPropagation()}>
-        <ModalTop>
-          <Title>
-            <MessageIcon src={messages} />
-            질문을 작성하세요
-          </Title>
-          <CloseIcon src={close} onClick={handleBackgroundClick} />
-        </ModalTop>
-        <ModalContents>
-          <Profile>
-            To.
-            <ProfileImg src={imageSource} />
-            {userName}
-          </Profile>
-          <ModalInputTextArea
-            placeholder="질문을 입력해주세요"
-            value={inputValue}
-            onChange={handleInputChange}
-          />
-          <Button
-            variant="fill"
-            disabled={inputValue.trim() === ""}
-            onClick={handleClick}
-          >
-            질문 보내기
-          </Button>
-        </ModalContents>
-      </ModalContainer>
-    </Background>
+    <ModalBackground onClick={onClose}>
+      <ModalTop>
+        <Title>
+          <MessageIcon src={messages} />
+          질문을 작성하세요
+        </Title>
+        <CloseIcon src={close} onClick={onClose} />
+      </ModalTop>
+      <ModalContents>
+        <Profile>
+          To.
+          <ProfileImg src={imageSource} />
+          {userName}
+        </Profile>
+        <ModalInputTextArea
+          placeholder="질문을 입력해주세요"
+          value={inputValue}
+          onChange={handleInputChange}
+        />
+        <Button variant="fill" disabled={inputValue.trim() === ""} onClick={handleClick}>
+          질문 보내기
+        </Button>
+      </ModalContents>
+    </ModalBackground>
   );
 }
 
 export default QuestionModal;
-
-const Background = styled.div`
-  position: fixed;
-  width: 100%;
-  height: 100%;
-  background: var(--Dim, rgba(0, 0, 0, 0.56));
-  top: 0;
-  left: 0;
-  cursor: pointer;
-`;
-
-const ModalContainer = styled.div`
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 32.7rem;
-  height: 56.8rem;
-  padding: 4rem;
-  flex-shrink: 0;
-  border-radius: 2.4rem;
-  background: var(--Grayscale-10, #fff);
-  box-shadow: 0rem 1.6rem 2rem 0rem rgba(48, 48, 48, 0.62);
-  cursor: default;
-  display: flex;
-  flex-direction: column;
-  gap: 3.4rem;
-
-  @media screen and (min-width: 768px) {
-    width: 61.2rem;
-    height: 45.4rem;
-  }
-`;
 
 const ModalTop = styled.div`
   display: flex;
@@ -120,6 +73,7 @@ const Title = styled.div`
   font-style: normal;
   font-weight: 400;
   line-height: 125%;
+  color: ${(props) => props.theme.colors.colorMainFont};
 
   @media screen and (min-width: 768px) {
     font-size: 2.4rem;
@@ -130,6 +84,10 @@ const CloseIcon = styled.img`
   width: 2.2rem;
   height: 2.2rem;
   cursor: pointer;
+  filter: ${(props) =>
+    props.theme.mode.now === "dark"
+      ? "invert(100%) sepia(100%) saturate(22%) hue-rotate(318deg) brightness(104%) contrast(107%)"
+      : "none"};
 
   @media screen and (min-width: 768px) {
     width: 2.8rem;
@@ -140,6 +98,10 @@ const CloseIcon = styled.img`
 const MessageIcon = styled.img`
   width: 2.2rem;
   height: 2.2rem;
+  filter: ${(props) =>
+    props.theme.mode.now === "dark"
+      ? "invert(100%) sepia(100%) saturate(22%) hue-rotate(318deg) brightness(104%) contrast(107%)"
+      : "none"};
 
   @media screen and (min-width: 768px) {
     width: 2.8rem;
@@ -151,7 +113,7 @@ const ModalContents = styled.div`
   display: flex;
   flex-direction: column;
   width: 100%;
-  gap: 8px;
+  gap: 0.8rem;
 `;
 
 const Profile = styled.div`
@@ -160,12 +122,13 @@ const Profile = styled.div`
   font-weight: 400;
   line-height: 133%;
   align-items: center;
+  color: ${(props) => props.theme.colors.colorMainFont};
 `;
 
 const ProfileImg = styled.img`
   width: 2.8rem;
   height: 2.8rem;
-  margin: 0 4px 0 4px;
+  margin: 0 0.4rem 0 0.4rem;
   border-radius: 10rem;
 `;
 

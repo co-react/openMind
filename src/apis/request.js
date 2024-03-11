@@ -7,9 +7,14 @@ const requests = Object.freeze({
   QUESTIONS: "/questions/",
   ANSWERS: "/answers/",
 
-  getSubjects: async function() {
+  getSubjects: async function({limit, offset}) {
     try {
-      const { data } = await axios.get("/subjects/");
+      const { data } = await axios.get("/subjects/", {
+        params: {
+          limit,
+          offset
+        },
+      });
 
       return data;
     } catch (error) {
@@ -18,18 +23,32 @@ const requests = Object.freeze({
   },
   postSubjects : async function(answerer) {
     try {
-      await axios.post("/subjects/", {
+      const {data} = await axios.post("/subjects/", {
         name: answerer,
       });
 
-      return true;
+      return data;
     } catch (error) {
       console.error(ERROR_MESSAGE, error);
     }
   },
-  getQuestions: async function(id) {
+  getSubject: async function(id) {
     try {
-      const { data } = await axios.get(`/subjects/${id}/questions/`);
+      const { data } = await axios.get(`/subjects/${id}/`);
+
+      return data;
+    } catch (error) {
+      console.error(ERROR_MESSAGE, error);
+    }
+  },
+  getQuestions: async function({id, limit, offset}) {
+    try {
+      const { data } = await axios.get(`/subjects/${id}/questions/`, {
+        params: {
+          limit,
+          offset
+        },
+      });
 
       return data;
     } catch (error) {

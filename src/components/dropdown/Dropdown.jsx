@@ -55,17 +55,14 @@ const Container = styled.div`
   gap: 0.4rem;
   //align-self: stretch;
   border-radius: 0.8rem;
-  border: 0.1rem solid var(--Grayscale-60, #000);
-  background: var(--Grayscale-10, #fff);
+  border: 0.1rem solid ${(props) => props.theme.colors.colorBorder};
+  background: ${(props) => props.theme.colors.colorBg};
   position: relative;
 `;
 
 const Title = styled.span`
-  color: var(--Grayscale-40, #818181);
-  font-feature-settings: "clig" off, "liga" off;
-  font-family: Pretendard;
+  color: ${(props) => props.theme.colors.colorMainFont};
   font-size: 1.4rem;
-  font-style: normal;
   font-weight: 500;
   line-height: 1.8rem;
 `;
@@ -80,10 +77,10 @@ const DropdownMenuContainer = styled.div`
 
   border-radius: 0.8rem;
   border: 0.1rem solid var(--Grayscale-30, #cfcfcf);
-  background: var(--Grayscale-10, #fff);
+  background: ${(props) => props.theme.colors.colorBg};
 
   /* 1pt */
-  box-shadow: 0px 4px 4px 0px rgba(140, 140, 140, 0.25);
+  box-shadow: 0rem 0.4rem 0.4rem 0rem rgba(140, 140, 140, 0.25);
 
   position: absolute;
   bottom: -7.2rem;
@@ -107,8 +104,16 @@ const DropdownMenu = styled.div`
 
 const StyledArrowDownIcon = styled(ArrowDownIcon)`
   cursor: pointer;
+  filter: ${(props) =>
+    props.theme.mode.now === "dark"
+      ? "invert(100%) sepia(100%) saturate(22%) hue-rotate(318deg) brightness(104%) contrast(107%)"
+      : "none"};
 `;
 
 const StyledArrowUpIcon = styled(ArrowUpIcon)`
   cursor: pointer;
+  filter: ${(props) =>
+    props.theme.mode.now === "dark"
+      ? "invert(100%) sepia(100%) saturate(22%) hue-rotate(318deg) brightness(104%) contrast(107%)"
+      : "none"};
 `;

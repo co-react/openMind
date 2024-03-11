@@ -15,7 +15,7 @@ function DisLike({ questionId }) {
 
       await axios.get(`/questions/${questionId}/`);
     } catch (error) {
-      console.error('에러 발생:', error);
+      console.error("에러 발생:", error);
     }
 
     setIsReacted(true); // 싫어요 취소 역시 api delete 기능이 없음.
@@ -33,9 +33,7 @@ export default DisLike;
 
 const ButtonText = styled.span`
   color: var(--Grayscale-40, #818181);
-  font-feature-settings:
-    "clig" off,
-    "liga" off;
+  font-feature-settings: "clig" off, "liga" off;
   font-family: Pretendard;
   font-size: 1.4rem;
   font-style: normal;
@@ -50,9 +48,9 @@ const ThumbsDown = styled(hateIcon)`
 const Button = styled.button`
   display: flex;
   align-items: center;
-  gap: 6px;
+  gap: 0.6rem;
   border: none;
-  background-color: #ffffff;
+  background-color: ${(props) => props.theme.colors.colorFeedCard};
   ${(props) =>
     props.$isClicked &&
     css`

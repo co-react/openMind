@@ -1,25 +1,24 @@
 import { useState } from "react";
+import { Link, useParams } from "react-router-dom";
 import styled from "styled-components";
 
 import { ReactComponent as LogoIcon } from "../assets/svg/icons/logo.svg";
 
 import FloatingButton from "../components/buttons/FloatingButton";
 import ShareButton from "../components/buttons/ShareButton";
+import AvatarSkeleton from "../components/skeleton/AvatarSkeleton";
 import FeedCardContainer from "../domain/FeedCardContainer";
 import QuestionModal from "../domain/modal/QuestionModal";
-import { useFetchQuestionSubject } from "../hooks/useFetchQuestionSubject";
+import { useSubjectQuery } from "../hooks/api/useQueryWithAxios";
 import { useMediaQueryForMobile } from "../hooks/useMediaQueryForMobile";
 
-function CardPage({ id = 3856 }) {
-  // 현재 id는 하드 코딩
-  const [isPostedQuestion, setIsPostedQuestion] = useState(false);
+function CardPage() {
+  const { id } = useParams();
   const isMobile = useMediaQueryForMobile();
   const [isOpenModal, setIsOpenModal] = useState(false);
-  const user = useFetchQuestionSubject(
-    id,
-    isPostedQuestion,
-    setIsPostedQuestion
-  );
+
+  // server state
+  const { isSuccess, isLoading, data } = useSubjectQuery(id);
 
   const handleClick = () => {
     setIsOpenModal((isOpenModal) => !isOpenModal);
@@ -27,23 +26,30 @@ function CardPage({ id = 3856 }) {
 
   return (
     <Layout>
-      <SmallStyledLogo />
-      <ProfileImg src={user.imageSource} />
-      <NameTitle>{user.name}</NameTitle>
+      <Link to="/">
+        <SmallStyledLogo />
+      </Link>
+      {isLoading && <AvatarSkeleton />}
+      {isSuccess && (
+        <>
+          <ProfileImg src={data.imageSource} />
+          <NameTitle>{data.name}</NameTitle>
+        </>
+      )}
       <ShareButton />
-      <FeedCardContainer id={id} questionCount={user.questionCount} />
+      {isLoading && <FeedCardContainer id={id} />}
+      {isSuccess && <FeedCardContainer id={id} userName={data.name} />}
       <FloatingButtonLayout>
         <FloatingButton isMobile={isMobile} onClick={handleClick}>
           {isMobile ? "질문 작성" : "질문 작성하기"}
         </FloatingButton>
       </FloatingButtonLayout>
-      {isOpenModal && (
+      {isOpenModal && isSuccess && (
         <QuestionModal
           onClose={handleClick}
           id={id}
-          userName={user.name}
-          imageSource={user.imageSource}
-          setIsPostedQuestion={setIsPostedQuestion}
+          userName={data.name}
+          imageSource={data.imageSource}
         />
       )}
     </Layout>
@@ -68,6 +74,10 @@ const SmallStyledLogo = styled(LogoIcon)`
   justify-content: center;
   align-items: center;
   flex-shrink: 0;
+  filter: ${(props) =>
+    props.theme.mode.now === "dark"
+      ? "invert(100%) sepia(100%) saturate(22%) hue-rotate(318deg) brightness(104%) contrast(107%)"
+      : "none"};
 
   @media (min-width: 768px) {
     width: 17rem;
@@ -82,11 +92,8 @@ const FloatingButtonLayout = styled.div`
 `;
 
 const NameTitle = styled.span`
-  color: var(--Grayscale-60, #000);
-  font-feature-settings: "clig" off, "liga" off;
-  font-family: Actor;
+  color: ${(props) => props.theme.colors.colorMainFont};
   font-size: 2.4rem;
-  font-style: normal;
   font-weight: 400;
   line-height: 3rem;
 
@@ -106,12 +113,3 @@ const ProfileImg = styled.img`
     height: 13.6rem;
   }
 `;
-
-// const ToastLayout = styled.div`
-//   position: fixed;
-//   bottom: 10rem;
-
-//   @media (min-width: 768px) {
-//     bottom: 6rem;
-//   }
-// `

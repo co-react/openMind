@@ -104,7 +104,7 @@ const reset = css`
     display: block;
   }
   body {
-    background-color: var(--Grayscale-20);
+    background-color: ${(props) => props.theme.colors.colorGray_20};
     line-height: 1;
   }
   ol,

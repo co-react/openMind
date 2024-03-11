@@ -1,15 +1,15 @@
 import { css } from "styled-components";
 
 const BoxShadow1 = css`
-  box-shadow: 0px 4px 4px 0px rgba(140, 140, 140, 0.25);
+  box-shadow: 0rem 0.4rem 0.4rem 0rem rgba(140, 140, 140, 0.25);
 `;
 
 const BoxShadow2 = css`
-  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+  box-shadow: 0rem 0.4rem 0.4rem 0rem rgba(0, 0, 0, 0.25);
 `;
 
 const BoxShadow3 = css`
-  box-shadow: 0px 16px 20px 0px rgba(48, 48, 48, 0.62);
+  box-shadow: 0rem 1.6rem 2rem 0rem rgba(48, 48, 48, 0.62);
 `;
 
 const FlexCenter = css`
@@ -21,20 +21,20 @@ const FlexCenter = css`
 const BUTTON_STYLE = {
   fill: {
     defaultColor: "var(--Grayscale-10)",
-    backgroundColor: "var(--Brown-40)",
-    activeBackgroundColor: "var(--Brown-50)",
-    activeBoxShadowColor: "var(--Brown-50)",
-    hover: "var(--Brown-50)",
+    backgroundColor: (props) => `${props.theme.colors.colorBrownButton}`,
+    activeBackgroundColor: (props) => `${props.theme.colors.colorBrownActiveButton}`,
+    activeBoxShadowColor: (props) => `${props.theme.colors.colorBrownActiveButton}`,
+    hover: (props) => `${props.theme.colors.colorBrownActiveButton}`,
     disabledColor: "var(--Grayscale-10)",
-    disabledBackgroundColor: "var(--Brown-30)",
+    disabledBackgroundColor: (props) => `${props.theme.colors.colorBrownDisableButton}`,
     disabledBoxShadow: "var(--Brown-30)",
   },
   outline: {
-    defaultColor: "var(--Brown-40)",
-    backgroundColor: "var(--Brown-10)",
-    activeBackgroundColor: "var(--Brown-20)",
-    activeBoxShadowColor: "var(--Brown-40)",
-    hover: "var(--Brown-40)",
+    defaultColor: (props) => `${props.theme.colors.colorTextButton}`,
+    backgroundColor: (props) => `${props.theme.colors.colorBrownOutlineButton}`,
+    activeBackgroundColor: (props) => `${props.theme.colors.colorBrownOutlineActiveButton}`,
+    activeBoxShadowColor: (props) => `${props.theme.colors.colorBrownActiveButton}`,
+    hover: (props) => `${props.theme.colors.colorBrownActiveButton}`,
     disabledColor: "var(--Brown-30)",
     disabledBackgroundColor: "var(--Brown-10)",
     disabledBoxShadow: "var(--Brown-30)",

@@ -4,10 +4,9 @@ import styled, { css } from "styled-components";
 import axios from "../../apis/axios";
 import { ReactComponent as likeIcon } from "../../assets/svg/icons/thumbs-up.svg";
 
-
 function Like({ questionId }) {
   const [isReacted, setIsReacted] = useState(false);
-  const [countLike, setCountLike] =useState(0);
+  const [countLike, setCountLike] = useState(0);
 
   const handleClick = async () => {
     try {
@@ -20,7 +19,7 @@ function Like({ questionId }) {
 
       setCountLike(data.like);
     } catch (error) {
-      console.error('에러 발생:', error);
+      console.error("에러 발생:", error);
     }
 
     setIsReacted(true); // 좋아요 취소는 api delete 기능이 없어서 불가능.
@@ -38,10 +37,6 @@ export default Like;
 
 const ButtonText = styled.span`
   color: var(--Grayscale-40, #818181);
-  font-feature-settings:
-    "clig" off,
-    "liga" off;
-  font-family: Pretendard;
   font-size: 1.4rem;
   font-style: normal;
   font-weight: 500;
@@ -55,9 +50,9 @@ const ThumbsUp = styled(likeIcon)`
 const Button = styled.button`
   display: flex;
   align-items: center;
-  gap: 6px;
+  gap: 0.6rem;
   border: none;
-  background-color: #ffffff;
+  background-color: ${(props) => props.theme.colors.colorFeedCard};
   ${(props) =>
     props.$isClicked &&
     css`

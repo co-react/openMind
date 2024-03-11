@@ -1,9 +1,9 @@
-import { styled, css } from "styled-components";
+import { styled } from "styled-components";
 
 function Pagination({ isSelected, children, onClick }) {
   return (
     <PaginationBox>
-      <PaginationData onClick={onClick} isSelected={isSelected}>
+      <PaginationData onClick={onClick} $isSelected={isSelected}>
         {children}
       </PaginationData>
     </PaginationBox>
@@ -28,27 +28,18 @@ const PaginationBox = styled.div`
 `;
 
 const PaginationData = styled.p`
-  color: var(--Grayscale-40, #818181);
+  color: ${(props) => (props.$isSelected ? "var(--Red-50)" : "var(--Grayscale-40)")};
   text-align: center;
-  font-feature-settings: "clig" off, "liga" off;
-  font-family: Actor;
   font-size: 2rem;
-  font-style: normal;
   font-weight: 400;
   line-height: 2.5rem; /* 125% */
-
+  cursor: pointer;
   @media (max-width: 768px) {
     font-size: 1.6rem;
   }
 
   &:hover {
     // 호버 시 적용될 스타일
-    color: var(--Grayscale-60, #000);
+    color: ${(props) => props.theme.colors.colorPagination};
   }
-
-  ${({ isSelected }) =>
-    isSelected &&
-    css`
-      color: var(--Brown-40, #542f1a);
-    `}
 `;
