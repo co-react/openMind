@@ -29,7 +29,6 @@
   - 무중단 배포 및 도메인 연결
   - 다크모드
   - CSS 초기값 설정
-  - Router 작성
 - <b>김영은  </b> <br/>
   - 컴포넌트: buttons,input
   - 페이지 : MainPage
