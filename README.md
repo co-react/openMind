@@ -156,7 +156,7 @@ npm run start
 
 ## 💡 Git branch strategy : Git flow
 
-![GithubFlow](https://github.com/SiWooJinSeok/OpenMind6team/assets/59861974/9f4f5429-6f43-4e6a-82cd-c92dd65289a2)
+![프레젠테이션2](https://github.com/co-react/openMind/assets/132687752/dcc2ed65-d3da-4e3c-a080-f9ae8accbd18)
 
 ## Domain flow
 https://whispering-sassafras-4ac.notion.site/3e52bc153e4d4955962d907802f163ae?pvs=4
