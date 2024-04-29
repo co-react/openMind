@@ -64,7 +64,7 @@
 질문과 답변을 통해 의미 있는 대화를 할 수 있는 독특한 커뮤니케이션 플랫폼
 
 ## 💻 Site
-https://www.openmind-coreact.store/
+https://taskify-six-eta.vercel.app/
 
 ## 🛠️ Skills & Tools
 
