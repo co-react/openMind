@@ -2,7 +2,7 @@ import { Toaster, toast } from "sonner";
 import styled from "styled-components";
 
 import { shareToFacebook, shareToKakao } from "../../utils/shareToSns";
-import SVG from "../common/IconMapping";
+import { Link, Kakaotalk, Facebook } from "../common/IconMapping";
 
 function LinkButton() {
   const handleClickToCopyUrl = (text) => {
@@ -50,17 +50,17 @@ function LinkButton() {
           }}
           color="var(--Brown-40)"
         >
-          {<SVG.Link fill="white" width={18} />}
+          {<Link fill="white" width={18} />}
         </Button>
       </LinkItem>
       <LinkItem color="var(--Yellow-50)">
         <Button onClick={handleClickToShareKakao} color="var(--Yellow-50)">
-          {<SVG.Kakaotalk width={18} />}
+          {<Kakaotalk width={18} />}
         </Button>
       </LinkItem>
       <LinkItem color="var(--Blue-50)">
         <Button onClick={handleClickToShareFacebook} color="var(--Blue-50)">
-          {<SVG.Facebook fill="white" width={18} />}
+          {<Facebook fill="white" width={18} />}
         </Button>
       </LinkItem>
     </LinkList>
