@@ -51,6 +51,7 @@ function CreateQuestionCard() {
           if (localStorage.getItem(answerer)) {
             const userId = localStorage.getItem(answerer);
             navigate(`/post/${userId}/answer`);
+            return;
           }
           setErrorMessage(ERROR_MESSAGE.NAME_ALREADY_IN_USE);
           return;
