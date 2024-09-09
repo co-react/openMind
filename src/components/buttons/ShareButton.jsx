@@ -2,9 +2,11 @@ import { Toaster, toast } from "sonner";
 import styled from "styled-components";
 
 import { shareToFacebook, shareToKakao } from "../../utils/shareToSns";
-import { Link, Kakaotalk, Facebook } from "../common/IconMapping";
+import SVG from "../common/IconMapping";
 
 function LinkButton() {
+  const { Link, Kakaotalk, Facebook } = SVG;
+
   const handleClickToCopyUrl = (text) => {
     const $textarea = document.createElement("textarea");
 
