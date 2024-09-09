@@ -1,5 +1,5 @@
 import { useState, useCallback } from "react";
-import { useQueryClient } from '@tanstack/react-query';
+import { useQueryClient } from "@tanstack/react-query";
 import { useNavigate } from "react-router-dom";
 
 import Button from "../components/buttons/ArrowIconButton";
@@ -21,40 +21,51 @@ function CreateQuestionCard() {
   const [errorMessage, setErrorMessage] = useState("");
 
   //server state
-  const {data, fetchNextPage} = useInfiniteSubjectsQuery({limit: OFFSET});
-  useGetAllData({data, callback: fetchNextPage});
+  const { data, fetchNextPage } = useInfiniteSubjectsQuery({ limit: OFFSET });
+  useGetAllData({ data, callback: fetchNextPage });
   const queryClient = useQueryClient();
-  const {data:newData, isSuccess, mutateAsync} = useSubjectsMutation(answerer, queryClient);
+  const {
+    data: newData,
+    isSuccess,
+    mutateAsync,
+  } = useSubjectsMutation(answerer, queryClient);
 
   const handleChange = (e) => {
     setAnswerer(e.target.value);
     setErrorMessage("");
   };
 
-  const handleClick = useCallback(async (e) => {
-    e.preventDefault();
+  const handleClick = useCallback(
+    async (e) => {
+      e.preventDefault();
 
-    try {
-      const validate = validateInput(answerer);
-      if (validate) {
-        setErrorMessage(validate);
-        return;
-      } // 유효값 검사
+      try {
+        const validate = validateInput(answerer);
+        if (validate) {
+          setErrorMessage(validate);
+          return;
+        } // 유효값 검사
 
-      const nicknameList = data.results.map((result) => result.name);
-      if (nicknameList.includes(answerer)) {
-        setErrorMessage(ERROR_MESSAGE.NAME_ALREADY_IN_USE);
-        return;
-      } // 중복 검사
+        const nicknameList = data.results.map((result) => result.name);
+        if (nicknameList.includes(answerer)) {
+          if (localStorage.getItem(answerer)) {
+            const userId = localStorage.getItem(answerer);
+            navigate(`/post/${userId}/answer`);
+          }
+          setErrorMessage(ERROR_MESSAGE.NAME_ALREADY_IN_USE);
+          return;
+        } // 중복 검사
 
-      await mutateAsync(answerer); // 뮤테이션
+        await mutateAsync(answerer); // 뮤테이션
+      } catch (error) {
+        console.error("에러 발생:", error);
+      }
+    },
+    [answerer]
+  );
 
-    } catch (error) {
-      console.error("에러 발생:", error);
-    }
-  }, [answerer]);
-
-  if (isSuccess) { // 뮤테이션으로 최신화 -> isSuccess
+  if (isSuccess) {
+    // 뮤테이션으로 최신화 -> isSuccess
     const { id } = newData;
 
     localStorage.setItem(answerer, id);
@@ -63,7 +74,11 @@ function CreateQuestionCard() {
 
   return (
     <MainForm>
-      <InputField placeholder="이름을 입력하세요" onChange={handleChange} hasError={errorMessage} />
+      <InputField
+        placeholder="이름을 입력하세요"
+        onChange={handleChange}
+        hasError={errorMessage}
+      />
       {errorMessage && <ErrorMessage error={errorMessage} />}
 
       <Button variant="fill" onClick={handleClick}>
